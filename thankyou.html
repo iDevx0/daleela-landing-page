@@ -43,7 +43,7 @@
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '1084939266838453');
-  fbq('track', 'PageView');
+  fbq('track', 'Purchase');
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1084939266838453&ev=PageView&noscript=1"
@@ -161,16 +161,71 @@
       font-size: 18px;
       line-height: 1.8;
       color: var(--text-primary);
+      margin-bottom: 30px;
+    }
+
+    .thank-you-benefits {
+      background: var(--accent-light);
+      border-radius: 16px;
+      padding: 24px;
       margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .thank-you-benefits-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-pink);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .thank-you-benefits-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .thank-you-benefits-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      max-width: 100%;
+      text-align: right;
+    }
+
+    .thank-you-benefits-item strong {
+      color: var(--accent-pink);
+      font-weight: 700;
+    }
+
+    .thank-you-benefits-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .thank-you-benefits-icon {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      color: var(--accent-pink);
+      margin-top: 2px;
     }
 
     .footer-app-buttons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 10px;
       justify-content: center;
       align-items: center;
       margin-top: 0;
+      margin-bottom: 10px;
       width: 100%;
     }
 
@@ -233,6 +288,30 @@
       .thank-you-message {
         font-size: 16px;
       }
+
+      .thank-you-benefits {
+        padding: 20px;
+      }
+
+      .thank-you-benefits-title {
+        font-size: 15px;
+        margin-bottom: 14px;
+      }
+
+      .thank-you-benefits-item {
+        font-size: 13px;
+        gap: 10px;
+      }
+
+      .footer-app-buttons {
+        flex-direction: column;
+      }
+
+      .thank-you-benefits-icon {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+      }
     }
   </style>
 </head>
@@ -281,6 +360,35 @@
             <div class="footer-app-name">Google Play</div>
           </div>
         </a>
+      </div>
+      <div class="thank-you-benefits">
+        <div class="thank-you-benefits-title">ما الذي ستحصلين عليه:</div>
+        <ul class="thank-you-benefits-list">
+          <li class="thank-you-benefits-item">
+            <svg class="thank-you-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span><strong>البرامج:</strong> دليلك للعلاقة الزوجية، صحة جسمك ودورتك الشهرية، تنظيم الأسرة ووسائل منع الحمل، التعامل مع التشنج المهبلي، دليلكِ للتغذية والوزن الصحي</span>
+          </li>
+          <li class="thank-you-benefits-item">
+            <svg class="thank-you-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span><strong>الاستشارات:</strong> الصحة الجنسية، مشاكل الدورة الشهرية، الالتهابات والإفرازات المهبلية، الخصوبة والتبويض ووسائل منع الحمل، التغذية والوزن الصحي، مشاكل الشعر والجلدية</span>
+          </li>
+          <li class="thank-you-benefits-item">
+            <svg class="thank-you-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>محادثة ذكية غير محدودة مع مساعد دليلة</span>
+          </li>
+          <li class="thank-you-benefits-item">
+            <svg class="thank-you-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>حاسبة متقدمة للدورة الشهرية مع توقعات وتحليلات</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
