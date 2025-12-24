@@ -45,9 +45,6 @@
   fbq('init', '1084939266838453');
   fbq('track', 'Purchase');
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1084939266838453&ev=PageView&noscript=1"
-  /></noscript>
   <!-- End Meta Pixel Code -->
 
   <script type="text/javascript">
@@ -313,6 +310,38 @@
         min-width: 18px;
       }
     }
+
+    .thank-you-footer {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .thank-you-footer-link {
+      color: var(--accent-pink);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+
+    .thank-you-footer-link:hover {
+      color: var(--accent-pink-dark);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .thank-you-footer {
+        margin-top: 30px;
+        padding-top: 24px;
+      }
+
+      .thank-you-footer-link {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -390,8 +419,10 @@
           </li>
         </ul>
       </div>
+      <div class="thank-you-footer">
+        <a href="https://motherbeing.com" class="thank-you-footer-link">العودة الي موقع دليلة</a>
+      </div>
     </div>
   </div>
 </body>
 </html>
-
