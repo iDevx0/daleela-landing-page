@@ -2983,7 +2983,7 @@
     });
   </script>
   
-  <!-- Meta Pixel BeginCheckout Event -->
+  <!-- Meta Pixel InitiateCheckout Event -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Find all subscribe buttons
@@ -2992,9 +2992,9 @@
       // Add click event listener to each subscribe button
       subscribeButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-          // Track BeginCheckout event
+          // Track InitiateCheckout event
           if (typeof fbq !== 'undefined') {
-            fbq('track', 'BeginCheckout');
+            fbq('track', 'InitiateCheckout'); 
           }
         });
       });
