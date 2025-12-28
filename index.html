@@ -2915,7 +2915,7 @@
       const loadingText = document.getElementById('loadingText');
       const taglineText = 'جسمِك، قرارك — دليلة هنا عشان تدعّمكِ في الاتنين';
       const welcomeText = 'أهلاً بيكي في دليلة';
-      const showTagline = false; // Set to true to show the tagline
+      const showLoadingText = false; // Set to true to show both tagline and welcome text
       let taglineIndex = 0;
       let welcomeIndex = 0;
       let typingActive = true;
@@ -2925,10 +2925,10 @@
         typingActive = false;
         // Show complete text immediately
         let htmlContent = '';
-        if (showTagline) {
+        if (showLoadingText) {
           htmlContent += '<div class="tagline-line">' + taglineText + '</div>';
+          htmlContent += '<div class="welcome-line">' + welcomeText + '</div>';
         }
-        htmlContent += '<div class="welcome-line">' + welcomeText + '</div>';
         loadingText.innerHTML = htmlContent;
         // Wait a moment, then fade out
         setTimeout(function() {
@@ -2943,7 +2943,7 @@
       
       function typeTagline() {
         if (!typingActive) return;
-        if (showTagline && taglineIndex < taglineText.length) {
+        if (showLoadingText && taglineIndex < taglineText.length) {
           loadingText.innerHTML = 
             '<div class="tagline-line">' + taglineText.substring(0, taglineIndex + 1) + '<span class="typing-cursor"></span></div>';
           taglineIndex++;
@@ -2960,11 +2960,9 @@
       
       function typeWelcome() {
         if (!typingActive) return;
-        if (welcomeIndex < welcomeText.length) {
+        if (showLoadingText && welcomeIndex < welcomeText.length) {
           let htmlContent = '';
-          if (showTagline) {
-            htmlContent += '<div class="tagline-line">' + taglineText + '</div>';
-          }
+          htmlContent += '<div class="tagline-line">' + taglineText + '</div>';
           htmlContent += '<div class="welcome-line">' + welcomeText.substring(0, welcomeIndex + 1) + '<span class="typing-cursor"></span></div>';
           loadingText.innerHTML = htmlContent;
           welcomeIndex++;
@@ -2991,11 +2989,18 @@
         }
       }, true);
       
-      // Start typing animation with tagline first (if enabled), otherwise start with welcome
-      if (showTagline) {
+      // Start typing animation if enabled, otherwise hide loading screen immediately
+      if (showLoadingText) {
         setTimeout(typeTagline, 400);
       } else {
-        setTimeout(typeWelcome, 400);
+        // Hide loading screen immediately if text is disabled
+        setTimeout(function() {
+          loadingScreen.classList.add('hidden');
+          document.body.classList.remove('loading');
+          setTimeout(function() {
+            loadingScreen.remove();
+          }, 800);
+        }, 400);
       }
     });
   </script>
