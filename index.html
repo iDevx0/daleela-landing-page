@@ -2915,6 +2915,7 @@
       const loadingText = document.getElementById('loadingText');
       const taglineText = 'جسمِك، قرارك — دليلة هنا عشان تدعّمكِ في الاتنين';
       const welcomeText = 'أهلاً بيكي في دليلة';
+      const showTagline = false; // Set to true to show the tagline
       let taglineIndex = 0;
       let welcomeIndex = 0;
       let typingActive = true;
@@ -2923,9 +2924,12 @@
         if (!typingActive) return;
         typingActive = false;
         // Show complete text immediately
-        loadingText.innerHTML = 
-          '<div class="tagline-line">' + taglineText + '</div>' +
-          '<div class="welcome-line">' + welcomeText + '</div>';
+        let htmlContent = '';
+        if (showTagline) {
+          htmlContent += '<div class="tagline-line">' + taglineText + '</div>';
+        }
+        htmlContent += '<div class="welcome-line">' + welcomeText + '</div>';
+        loadingText.innerHTML = htmlContent;
         // Wait a moment, then fade out
         setTimeout(function() {
           loadingScreen.classList.add('hidden');
@@ -2939,7 +2943,7 @@
       
       function typeTagline() {
         if (!typingActive) return;
-        if (taglineIndex < taglineText.length) {
+        if (showTagline && taglineIndex < taglineText.length) {
           loadingText.innerHTML = 
             '<div class="tagline-line">' + taglineText.substring(0, taglineIndex + 1) + '<span class="typing-cursor"></span></div>';
           taglineIndex++;
@@ -2957,9 +2961,12 @@
       function typeWelcome() {
         if (!typingActive) return;
         if (welcomeIndex < welcomeText.length) {
-          loadingText.innerHTML = 
-            '<div class="tagline-line">' + taglineText + '</div>' +
-            '<div class="welcome-line">' + welcomeText.substring(0, welcomeIndex + 1) + '<span class="typing-cursor"></span></div>';
+          let htmlContent = '';
+          if (showTagline) {
+            htmlContent += '<div class="tagline-line">' + taglineText + '</div>';
+          }
+          htmlContent += '<div class="welcome-line">' + welcomeText.substring(0, welcomeIndex + 1) + '<span class="typing-cursor"></span></div>';
+          loadingText.innerHTML = htmlContent;
           welcomeIndex++;
           setTimeout(typeWelcome, 100);
         } else {
@@ -2984,8 +2991,12 @@
         }
       }, true);
       
-      // Start typing animation with tagline first
-      setTimeout(typeTagline, 400);
+      // Start typing animation with tagline first (if enabled), otherwise start with welcome
+      if (showTagline) {
+        setTimeout(typeTagline, 400);
+      } else {
+        setTimeout(typeWelcome, 400);
+      }
     });
   </script>
   
