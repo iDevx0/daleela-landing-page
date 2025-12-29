@@ -2911,11 +2911,23 @@
   <!-- Loading Screen Animation -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      const showLoadingScreen = false; // Set to true to enable the loading screen
+      const showLoadingText = false; // Set to true to show both tagline and welcome text (only works if showLoadingScreen is true)
+      
+      // If loading screen is disabled, remove it immediately and exit
+      if (!showLoadingScreen) {
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+          loadingScreen.remove();
+        }
+        document.body.classList.remove('loading');
+        return;
+      }
+      
       const loadingScreen = document.getElementById('loadingScreen');
       const loadingText = document.getElementById('loadingText');
       const taglineText = 'جسمِك، قرارك — دليلة هنا عشان تدعّمكِ في الاتنين';
       const welcomeText = 'أهلاً بيكي في دليلة';
-      const showLoadingText = false; // Set to true to show both tagline and welcome text
       let taglineIndex = 0;
       let welcomeIndex = 0;
       let typingActive = true;
