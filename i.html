@@ -1760,7 +1760,7 @@
         <!-- Facebook Video Player -->
         <iframe 
           id="fb-video-iframe"
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FDaleelaapp%2Fvideos%2F2906701216186925%2F%23&show_text=0&width=560&height=315&autoplay=true&muted=1&loop=1" 
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FDaleelaapp%2Fvideos%2F2906701216186925%2F%23&show_text=0&width=560&height=315&autoplay=true&muted=1&loop=1"
           width="100%" 
           height="100%" 
           style="border:none;overflow:hidden;display:block" 
@@ -1884,7 +1884,7 @@
         <p>برامج متكاملة مصممة من قِبل خبراء متخصصين لتزويدكِ بمعلومات عن الاستعداد للزواج والعلاقة الزوجية، صحة الدورة الشهرية، متلازمة تكيس المبايض، تنظيم الأسرة، التغذية وأكثر من ذلك بكثير</p>
       </div>
       <div class="programs-grid">
-        <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
+        <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
           <img class="program-thumb" src="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" alt="العلاقة الزوجية">
           <div class="program-body">
             <h3>دليلك للعلاقة الزوجية</h3>
@@ -1898,21 +1898,21 @@
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
-        <a href="https://motherbeing.com/ar/subscribe/product/program/program_menstrual?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
+        <a href="https://motherbeing.com/ar/programs/program_menstrual?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
           <img class="program-thumb" src="https://mediacdn.motherbeing.com//Heavy_Periods_20aaa846aa.png" alt="صحة جسمك ودورتك">
           <div class="program-body">
             <h3>صحة جسمك و دورتك الشهرية</h3>
             <p>برنامج صحة جسمك و دورتك الشهرية هيساعدك تفهمي جسمك بعمق و بطريقة بسيطة و واضحة</p>
             <ul class="program-features">
               <li>فهم الدورة الشهرية بالتفصيل</li>
-              <li>التعامل مع الدورة الثقيلة أو الغير منتظمة أو المؤلمة</li>
+              <li>التعامل مع الدورة الغزيرة أو الغير منتظمة أو المؤلمة</li>
               <li>متلازمة تكيّس المبايض (PCOS)</li>
               <li>الخريطة الكاملة لصحة إنجابية أحسن</li>
             </ul>
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
-        <a href="https://motherbeing.com/ar/subscribe/product/program/program_contraceptives?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
+        <a href="https://motherbeing.com/ar/programs/program_contraceptives?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
           <img class="program-thumb" src="https://mediacdn.motherbeing.com//104_From_Emergency_Pill_to_Getting_Pregnanct_Again_739877a318.png" alt="تنظيم الأسرة ووسائل منع الحمل">
           <div class="program-body">
             <h3>تنظيم الأسرة و وسائل منع الحمل</h3>
@@ -1926,7 +1926,7 @@
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
-        <a href="https://motherbeing.com/ar/subscribe/product/program/program_vaginismus?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
+        <a href="https://motherbeing.com/ar/programs/program_vaginismus?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
           <img class="program-thumb" src="https://mediacdn.motherbeing.com//The_impact_of_vaginismus_on_the_couple_4b67009b79.jpg" alt="التعامل مع التشنج المهبلي">
           <div class="program-body">
             <h3>التعامل مع التشنج المهبلي</h3>
@@ -1940,7 +1940,7 @@
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
-        <a href="https://motherbeing.com/ar/subscribe/product/program/program_nutrition?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
+        <a href="https://motherbeing.com/ar/programs/program_nutrition?utm_source=daleela_landing&utm_medium=web&utm_campaign=programs" target="_blank" class="program-card">
           <img class="program-thumb" src="https://mediacdn.motherbeing.com//NUTRITION_COURSE_IMAGE_final_2_1_afc89ed66e.png" alt="التغذية والوزن الصحي">
           <div class="program-body">
             <h3>دليلكِ للتغذية والوزن الصحي</h3>
@@ -2467,6 +2467,30 @@
   </div>
 
   <script>
+    // Feature flag: Enable/Disable "Try Daleela" functionality
+    const ENABLE_TRY_DALEELA = false; // Set to true to enable, false to disable
+    
+    // Hide/show "Try Daleela" elements based on flag
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!ENABLE_TRY_DALEELA) {
+        // Hide navigation link
+        const navLink = document.querySelector('a[href="#try-it"].nav-link');
+        if (navLink) navLink.style.display = 'none';
+        
+        // Hide hero button
+        const heroButton = document.querySelector('a[href="#try-it"].btn-secondary');
+        if (heroButton) heroButton.style.display = 'none';
+        
+        // Hide Try It Section
+        const tryItSection = document.getElementById('try-it');
+        if (tryItSection) tryItSection.style.display = 'none';
+        
+        // Hide sticky CTA button
+        const stickyButton = document.querySelector('.sticky-cta-buttons a[href="#try-it"]');
+        if (stickyButton) stickyButton.style.display = 'none';
+      }
+    });
+    
     // Countdown timer
     const target = Date.now() + 24 * 60 * 60 * 1000;
     const elements = {
@@ -3127,6 +3151,10 @@
   <!-- Smooth Scroll to Try It Section - Centers iframe -->
   <script>
     function scrollToTryIt(event) {
+      if (!ENABLE_TRY_DALEELA) {
+        event.preventDefault();
+        return false;
+      }
       event.preventDefault();
       
       // Close mobile menu if open
