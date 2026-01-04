@@ -2473,6 +2473,9 @@
       // Base URL for external links
       externalBaseUrl: 'https://motherbeing.com/ar',
       
+      // Base URL for internal links (promotion site)
+      internalBaseUrl: 'https://promotion.daleela.app',
+      
       // UTM parameters for external links
       utmSource: 'daleela_landing',
       utmMedium: 'web',
@@ -2481,7 +2484,7 @@
       // Module route mappings - each module has its own useExternal boolean
       modules: {
         prewedding: {
-          useExternal: true, // true = external link, false = hash-based internal link
+          useExternal: false, // true = external link, false = hash-based internal link
           external: '/programs/program_prewedding',
           internal: '#prewedding'
         },
@@ -2521,7 +2524,7 @@
         });
         return `${MODULE_ROUTING_CONFIG.externalBaseUrl}${module.external}?${params.toString()}`;
       } else {
-        return module.internal;
+        return `${MODULE_ROUTING_CONFIG.internalBaseUrl}${module.internal}`;
       }
     }
     
