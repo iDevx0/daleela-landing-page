@@ -386,7 +386,6 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      cursor: pointer;
     }
     
     .module-image {
@@ -405,13 +404,84 @@
       background: #000;
     }
     
-    .module-video-wrapper img {
+    .module-video-wrapper iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      border: none;
+      transition: filter 0.5s ease;
+      pointer-events: auto;
+    }
+    
+    .module-video-wrapper.blurred iframe {
+      filter: blur(10px);
+      pointer-events: none;
+    }
+    
+    .module-video-blocker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      pointer-events: none;
+      background: transparent;
+    }
+    
+    .module-video-wrapper.blurred .module-video-blocker {
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    
+    .module-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      flex-direction: column;
+      gap: 20px;
+      color: white;
+      pointer-events: auto;
+    }
+    
+    .module-video-overlay.show {
+      display: flex;
+    }
+    
+    .module-video-overlay h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .module-video-overlay .btn {
+      background: var(--accent-pink);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .module-video-overlay .btn:hover {
+      background: var(--accent-pink-dark);
+      transform: translateY(-2px);
     }
     
     .module-content {
@@ -1165,9 +1235,24 @@
     <p>برنامج شامل يغطي كل ما تحتاجين معرفته للاستعداد للمتعة الزوجية</p>
   </div>
   <div class="modules-grid">
-    <div class="module-card" onclick="window.open('https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_card_click', '_blank')">
-      <div class="module-video-wrapper">
-        <img src="https://vumbnail.com/1128393746.jpg" alt="الاستعداد للمتعة الزوجية" loading="lazy">
+    <div class="module-card">
+      <div class="module-video-wrapper" data-video-id="1128393746">
+        <iframe 
+          src="https://player.vimeo.com/video/1128393746?title=0&byline=0&portrait=0&dnt=1&transparent=0" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture" 
+          allowfullscreen
+          loading="lazy"
+          title="الاستعداد للمتعة الزوجية"
+          referrerpolicy="no-referrer">
+        </iframe>
+        <div class="module-video-blocker"></div>
+        <div class="module-video-overlay">
+          <h3>اشتركي لمشاهده البرنامج كاملا</h3>
+          <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
+            اشتركي الآن
+          </a>
+        </div>
     </div>
       <div class="module-content">
         <!-- <span class="module-number">١٠١</span> -->
@@ -1213,9 +1298,24 @@
         </div>
     </div>
     </div>
-    <div class="module-card" onclick="window.open('https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_card_click', '_blank')">
-      <div class="module-video-wrapper">
-        <img src="https://vumbnail.com/1149824349.jpg" alt="أساسيات العلاقة الجنسية" loading="lazy">
+    <div class="module-card">
+      <div class="module-video-wrapper" data-video-id="1149824349">
+        <iframe 
+          src="https://player.vimeo.com/video/1149824349?title=0&byline=0&portrait=0&dnt=1&transparent=0" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture" 
+          allowfullscreen
+          loading="lazy"
+          title="أساسيات العلاقة الجنسية"
+          referrerpolicy="no-referrer">
+        </iframe>
+        <div class="module-video-blocker"></div>
+        <div class="module-video-overlay">
+          <h3>اشتركي لمشاهده البرنامج كاملا</h3>
+          <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
+            اشتركي الآن
+          </a>
+        </div>
       </div>
       <div class="module-content">
         <!-- <span class="module-number">١٠٢</span> -->
@@ -1262,9 +1362,24 @@
       </div>
     </div>
 
-    <div class="module-card" onclick="window.open('https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_card_click', '_blank')">
-      <div class="module-video-wrapper">
-        <img src="https://vumbnail.com/1149824553.jpg" alt="مواجهة الخرافات حول الحياة الجنسية للمرأة" loading="lazy">
+    <div class="module-card">
+      <div class="module-video-wrapper" data-video-id="1149824553">
+        <iframe 
+          src="https://player.vimeo.com/video/1149824553?title=0&byline=0&portrait=0&dnt=1&transparent=0" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture" 
+          allowfullscreen
+          loading="lazy"
+          title="مواجهة الخرافات حول الحياة الجنسية للمرأة"
+          referrerpolicy="no-referrer">
+        </iframe>
+        <div class="module-video-blocker"></div>
+        <div class="module-video-overlay">
+          <h3>اشتركي لمشاهده البرنامج كاملا</h3>
+          <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
+            اشتركي الآن
+          </a>
+        </div>
       </div>
       <div class="module-content">
         <!-- <span class="module-number">١٠٥</span> -->
@@ -1541,6 +1656,117 @@
         </a>
       </div>
     </div>
+
+    <!-- Vimeo Player API -->
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <!-- Module Video Time Tracking -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const videoWrappers = document.querySelectorAll('.module-video-wrapper[data-video-id]');
+        
+        videoWrappers.forEach(function(wrapper) {
+          const iframe = wrapper.querySelector('iframe');
+          const overlay = wrapper.querySelector('.module-video-overlay');
+          
+          if (!iframe || !overlay) return;
+          
+          try {
+            const player = new Vimeo.Player(iframe);
+            let hasBlurred = false;
+            
+            player.on('play', function() {
+              if (hasBlurred) return;
+              
+              // Start tracking time after video starts playing
+              player.getCurrentTime().then(function(seconds) {
+                const remainingTime = 60 - seconds;
+                
+                if (remainingTime <= 0) {
+                  // Already past 60 seconds, blur immediately
+                  blurVideo(wrapper, overlay);
+                  hasBlurred = true;
+                } else {
+                  // Set timeout for remaining time
+                  setTimeout(function() {
+                    if (!hasBlurred) {
+                      blurVideo(wrapper, overlay);
+                      hasBlurred = true;
+                      player.pause();
+                    }
+                  }, remainingTime * 1000);
+                }
+              });
+            });
+            
+            // Also check periodically in case user seeks
+            setInterval(function() {
+              if (hasBlurred) return;
+              
+              player.getCurrentTime().then(function(seconds) {
+                if (seconds >= 60 && !hasBlurred) {
+                  blurVideo(wrapper, overlay);
+                  hasBlurred = true;
+                  player.pause();
+                }
+              }).catch(function() {
+                // Player not ready or error
+              });
+            }, 1000);
+            
+          } catch (error) {
+            console.error('Error initializing Vimeo player:', error);
+          }
+        });
+        
+        function blurVideo(wrapper, overlay) {
+          wrapper.classList.add('blurred');
+          overlay.classList.add('show');
+          // Disable pointer events on iframe to prevent Vimeo interactions
+          const iframe = wrapper.querySelector('iframe');
+          if (iframe) {
+            iframe.style.pointerEvents = 'none';
+          }
+        }
+        
+        // Prevent right-click and other interactions on module videos
+        videoWrappers.forEach(function(wrapper) {
+          const iframe = wrapper.querySelector('iframe');
+          if (!iframe) return;
+          
+          // Prevent right-click context menu
+          wrapper.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+          });
+          
+          // Block iframe interactions when blurred
+          const blocker = wrapper.querySelector('.module-video-blocker');
+          if (blocker) {
+            blocker.addEventListener('click', function(e) {
+              if (wrapper.classList.contains('blurred')) {
+                e.preventDefault();
+                e.stopPropagation();
+                // Redirect to subscribe instead
+                const subscribeUrl = 'https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay';
+                window.open(subscribeUrl, '_blank');
+              }
+            });
+          }
+          
+          // Intercept clicks on iframe to prevent Vimeo logo clicks
+          // But allow play button clicks
+          iframe.addEventListener('load', function() {
+            try {
+              // Try to disable Vimeo branding via postMessage
+              iframe.contentWindow.postMessage('{"method":"setVolume","value":1}', '*');
+            } catch(e) {
+              // Cross-origin restrictions, but that's okay
+            }
+          });
+        });
+      });
+    </script>
 
     <!-- Meta Pixel InitiateCheckout Event -->
     <script>
