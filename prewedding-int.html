@@ -1793,8 +1793,13 @@ snaptr('track', 'PAGE_VIEW');
         
         subscribeButtons.forEach(function(button) {
           button.addEventListener('click', function() {
+            // Meta Pixel tracking
             if (typeof fbq !== 'undefined') {
               fbq('track', 'InitiateCheckout');
+            }
+            // Snapchat Pixel tracking
+            if (typeof snaptr !== 'undefined') {
+              snaptr('track', 'CHECKOUT_START');
             }
           });
         });
