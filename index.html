@@ -51,7 +51,7 @@
   <!-- End Meta Pixel Code -->
 
 <!-- Snap Pixel Code -->
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
 (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
 {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
 a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
@@ -65,7 +65,7 @@ snaptr('init', '682e3038-8d55-4e3f-9f89-0f3865b94cf6', {
 
 snaptr('track', 'PAGE_VIEW');
 
-</script>
+</script> -->
 <!-- End Snap Pixel Code -->
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -3432,9 +3432,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             fbq('track', 'InitiateCheckout');
           }
           // Snapchat Pixel tracking
-          if (typeof snaptr !== 'undefined') {
-            snaptr('track', 'CHECKOUT_START');
-          }
+          // if (typeof snaptr !== 'undefined') {
+          //   snaptr('track', 'CHECKOUT_START');
+          // }
           // Google Tag Manager - Push event to dataLayer
           dataLayer.push({
             'event': 'initiate_checkout',
