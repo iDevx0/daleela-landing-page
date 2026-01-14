@@ -3403,9 +3403,13 @@ snaptr('track', 'PAGE_VIEW');
       // Add click event listener to each subscribe button
       subscribeButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-          // Track InitiateCheckout event
+          // Meta Pixel tracking
           if (typeof fbq !== 'undefined') {
             fbq('track', 'InitiateCheckout');
+          }
+          // Snapchat Pixel tracking
+          if (typeof snaptr !== 'undefined') {
+            snaptr('track', 'CHECKOUT_START');
           }
         });
       });
