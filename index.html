@@ -3404,13 +3404,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <!-- Meta Pixel InitiateCheckout Event -->
   <script>
+    // Initialize dataLayer if it doesn't exist (GTM should create it, but this is a safety measure)
+    window.dataLayer = window.dataLayer || [];
+    
     document.addEventListener('DOMContentLoaded', function() {
       // Find all subscribe buttons
       const subscribeButtons = document.querySelectorAll('a[href*="motherbeing.com/ar/subscribe"]');
       
       // Add click event listener to each subscribe button
       subscribeButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+          // Get button location/context
+          let buttonLocation = 'unknown';
+          if (button.closest('.hero-cta')) {
+            buttonLocation = 'hero_section';
+          } else if (button.closest('.sticky-cta')) {
+            buttonLocation = 'sticky_cta';
+          } else if (button.closest('section')) {
+            const section = button.closest('section');
+            buttonLocation = section.id || section.className || 'section';
+          }
+          
           // Meta Pixel tracking
           if (typeof fbq !== 'undefined') {
             fbq('track', 'InitiateCheckout');
@@ -3419,6 +3433,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           if (typeof snaptr !== 'undefined') {
             snaptr('track', 'CHECKOUT_START');
           }
+          // Google Tag Manager - Push event to dataLayer
+          dataLayer.push({
+            'event': 'initiate_checkout',
+            'event_category': 'engagement',
+            'event_label': 'subscribe_button_click',
+            'button_text': button.textContent.trim() || 'اشتركي الآن',
+            'button_location': buttonLocation,
+            'button_href': button.href || ''
+          });
         });
       });
     });
