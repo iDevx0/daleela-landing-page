@@ -104,20 +104,55 @@ snaptr('track', 'PAGE_VIEW');
       line-height: 24px;
       overflow-x: hidden;
     }
-    /* Show grid by default, hide carousel */
-.testimonials-carousel {
-  display: none;
+
+    .testimonials-carousel-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 24px;
+  padding: 16px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* On mobile, hide grid and show carousel */
-@media (max-width: 768px) {
-  .testimonials-grid {
-    display: none;
-  }
-  
-  .testimonials-carousel {
-    display: block;
-  }
+.testimonials-carousel-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.testimonial-card {
+  flex: 0 0 calc(100% - 48px); /* Show one card at a time */
+  scroll-snap-align: start;
+}
+
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.carousel-arrow {
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-dots::before {
+  content: '•••';
+  letter-spacing: 4px;
+  color: var(--accent-pink);
 }
     img {
       max-width: 100%;
