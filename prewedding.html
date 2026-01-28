@@ -104,7 +104,21 @@ snaptr('track', 'PAGE_VIEW');
       line-height: 24px;
       overflow-x: hidden;
     }
-    
+    /* Show grid by default, hide carousel */
+.testimonials-carousel {
+  display: none;
+}
+
+/* On mobile, hide grid and show carousel */
+@media (max-width: 768px) {
+  .testimonials-grid {
+    display: none;
+  }
+  
+  .testimonials-carousel {
+    display: block;
+  }
+}
     img {
       max-width: 100%;
       height: auto;
