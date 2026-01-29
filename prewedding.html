@@ -105,55 +105,182 @@ snaptr('track', 'PAGE_VIEW');
       overflow-x: hidden;
     }
 
+
+    /* Testimonials */
+    .testimonials-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
+      padding: 40px 32px;
+      background: linear-gradient(135deg, var(--accent-light) 0%, rgba(243, 230, 234, 0.5) 100%);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .testimonials-stat-item {
+      text-align: center;
+    }
+    
+    .testimonials-stats h3 {
+      font-size: clamp(22px, 3.5vw, 28px);
+      font-weight: 800;
+      color: var(--accent-pink);
+      margin-bottom: 8px;
+    }
+    
+    .testimonials-stats p {
+      font-size: 15px;
+      color: var(--text-primary);
+      opacity: 0.9;
+      margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .testimonials-stats {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 32px 24px;
+      }
+    }
+    
+    .testimonials-container {
+      position: relative;
+      margin-top: 48px;
+    }
+    
+    .testimonials-grid {
+      display: none;
+    }
+    
+    .testimonials-carousel {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    
     .testimonials-carousel-wrapper {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 24px;
-  padding: 16px 0;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
+      display: flex;
+      transition: transform 0.4s ease;
+      will-change: transform;
+    }
+    
+    .testimonial-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .testimonials-carousel .testimonial-card {
+      margin: 0 12px;
+      flex-shrink: 0;
+      width: calc(33.333% - 24px);
+      max-width: none;
+    }
+    
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-color);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    
+    .carousel-dot.active {
+      background: var(--accent-pink);
+      width: 24px;
+      border-radius: 5px;
+    }
+    
+    .carousel-arrow {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-primary);
+    }
+    
+    .carousel-arrow:hover {
+      background: var(--accent-pink);
+      color: white;
+      border-color: var(--accent-pink);
+    }
+    
+    .carousel-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--accent-pink);
+    }
+    
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 18px;
+    }
+    
+    .testimonial-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+    
+    @media (max-width: 768px) {
+      .testimonials-carousel .testimonial-card {
+        margin: 0 8px;
+        width: calc(100% - 16px);
+        max-width: none;
+        flex-shrink: 0;
+      }
+      
+      .testimonials-carousel {
+        margin: 0 -24px;
+        padding: 0 24px;
+      }
+    }
 
-.testimonials-carousel-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-.testimonial-card {
-  flex: 0 0 calc(100% - 48px); /* Show one card at a time */
-  scroll-snap-align: start;
-}
-
-.carousel-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.carousel-arrow {
-  background: var(--bg-white);
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.carousel-dots {
-  display: flex;
-  gap: 8px;
-}
-
-.carousel-dots::before {
-  content: '•••';
-  letter-spacing: 4px;
-  color: var(--accent-pink);
-}
     img {
       max-width: 100%;
       height: auto;
@@ -319,6 +446,19 @@ snaptr('track', 'PAGE_VIEW');
       background: var(--accent-pink-dark);
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(97, 49, 63, 0.4);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-white);
+      color: var(--accent-pink);
+      border: 2px solid var(--accent-pink);
+      box-shadow: 0 2px 8px rgba(97, 49, 63, 0.1);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(97, 49, 63, 0.2);
     }
     
     /* Main Content */
@@ -631,11 +771,35 @@ snaptr('track', 'PAGE_VIEW');
       margin: 0;
     }
     
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+    @media (max-width: 768px) {
+      .testimonials-stats {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 32px 24px;
+      }
+    }
+    
+    .testimonials-container {
+      position: relative;
       margin-top: 48px;
+    }
+    
+    .testimonials-grid {
+      display: none;
+    }
+    
+    .testimonials-carousel {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 0 24px; /* For partial visibility of next/prev cards */
+      margin: 0 -24px; /* Offset padding for full width */
+    }
+    
+    .testimonials-carousel-wrapper {
+      display: flex;
+      transition: transform 0.4s ease;
+      will-change: transform;
     }
     
     .testimonial-card {
@@ -644,6 +808,69 @@ snaptr('track', 'PAGE_VIEW');
       border-radius: 16px;
       padding: 32px;
       box-shadow: var(--shadow-sm);
+    }
+    
+    .testimonials-carousel .testimonial-card[data-carousel-item] {
+      margin: 0 12px;
+      flex-shrink: 0;
+      width: calc(33.333% - 24px); /* Show three cards at a time on desktop */
+      max-width: none;
+    }
+    
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-color);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    
+    .carousel-dot.active {
+      background: var(--accent-pink);
+      width: 24px;
+      border-radius: 5px;
+    }
+    
+    .carousel-arrow {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-primary);
+    }
+    
+    .carousel-arrow:hover {
+      background: var(--accent-pink);
+      color: white;
+      border-color: var(--accent-pink);
+    }
+    
+    .carousel-arrow svg {
+      width: 20px;
+      height: 20px;
     }
     
     .testimonial-header {
@@ -677,7 +904,6 @@ snaptr('track', 'PAGE_VIEW');
       font-style: italic;
     }
     
-    /* FAQ */
     .faq-list {
       max-width: 800px;
       margin: 0 auto;
@@ -1095,7 +1321,11 @@ snaptr('track', 'PAGE_VIEW');
       }
       
       .section {
-        margin-bottom: 80px;
+        margin-bottom: 64px;
+      }
+      
+      #faq.section {
+        margin-bottom: 24px;
       }
       
       .modules-grid {
@@ -1107,9 +1337,10 @@ snaptr('track', 'PAGE_VIEW');
         padding: 24px 20px;
       }
       
-      .testimonials-grid {
-        grid-template-columns: 1fr;
+      #faq.section {
+        margin-bottom: 24px;
       }
+      
       
       .cta-section {
         padding: 48px 24px;
@@ -1214,6 +1445,9 @@ snaptr('track', 'PAGE_VIEW');
       <div class="hero-cta">
         <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=hero_cta" target="_blank" class="btn btn-primary">
           اشتركي الآن
+        </a>
+        <a href="#testimonials" class="btn btn-secondary">
+          آراء المشتركات
         </a>
       </div>
     </div>
@@ -1541,19 +1775,19 @@ snaptr('track', 'PAGE_VIEW');
 </section>
 
     <!-- Testimonials Section -->
-    <section class="section">
+    <section id="testimonials" class="section">
       <div class="section-header">
         <h2>آراء المشتركات</h2>
-        <p>نساء مثلِك استفدن من البرنامج</p>
+        <p>نتائج حقيقية من نساء مثلِك</p>
       </div>
       <div class="testimonials-stats">
         <div class="testimonials-stat-item">
-          <h3>أكثر من 250,000 امرأة</h3>
-          <p>وثقن في دليلة</p>
+          <h3>أكثر من ٢٥٠ ألف امرأة تثق بدليلة</h3>
+          <p>انضمي إلى مجتمع من النساء اللواتي يثقن بدليلة في رحلتهن الصحية</p>
         </div>
         <div class="testimonials-stat-item">
-          <h3>تقييم 4.9/5</h3>
-          <p>من المشتركات في البرنامج</p>
+          <h3>أكثر من ٢,٥ مليون متابع</h3>
+          <p>كوني جزءاً من مجتمعنا الكبير على وسائل التواصل الاجتماعي</p>
         </div>
       </div>
 <div class="testimonials-container">
@@ -1880,6 +2114,9 @@ snaptr('track', 'PAGE_VIEW');
 
     <!-- Vimeo Player API -->
     <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <!-- Testimonials Carousel Script -->
+    <script src="testimonials.js"></script>
 
     <!-- Module Video Time Tracking -->
     <script>
