@@ -2116,7 +2116,6 @@ snaptr('track', 'PAGE_VIEW');
     <script src="https://player.vimeo.com/api/player.js"></script>
 
     <!-- Testimonials Carousel Script -->
-    <script src="testimonials.js"></script>
 
     <!-- Module Video Time Tracking -->
     <script>
@@ -2333,6 +2332,436 @@ snaptr('track', 'PAGE_VIEW');
         // Initial check
         checkScroll();
       })();
+    </script>
+    <script>
+    // Testimonials Carousel
+    const carousel = document.querySelector('.testimonials-carousel');
+    const carouselWrapper = document.querySelector('.testimonials-carousel-wrapper');
+    const carouselCards = document.querySelectorAll('.testimonials-carousel .testimonial-card');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    
+    if (carousel && carouselWrapper && carouselCards && carouselCards.length > 0) {
+      let currentIndex = 0;
+      const totalCards = carouselCards.length;
+      let isLooping = false;
+      
+      // Get cards per view based on screen size
+      const getCardsPerView = () => {
+        return window.innerWidth <= 768 ? 1 : 3;
+      };
+      
+      // Create dots based on total cards
+      const createDots = () => {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalCards; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('carousel-dot');
+          if (i === 0) dot.classList.add('active');
+          dot.setAttribute('aria-label', `Go to card ${i + 1}`);
+          dot.addEventListener('click', () => {
+            goToCard(i);
+            pauseOnInteraction();
+          });
+          dotsContainer.appendChild(dot);
+        }
+      };
+      
+      // Update carousel position - scroll one card at a time
+      const updateCarousel = (skipTransition = false) => {
+        // Verify elements exist
+        if (!carouselWrapper || !carouselCards || carouselCards.length === 0) {
+          return;
+        }
+        
+        // Ensure currentIndex is within bounds
+        currentIndex = Math.max(0, Math.min(currentIndex, carouselCards.length - 1));
+        
+        // Verify current card exists
+        if (!carouselCards[currentIndex]) {
+          currentIndex = 0;
+        }
+        
+        // Get the first card to calculate step size
+        const firstCard = carouselCards[0];
+        if (!firstCard) {
+          setTimeout(() => updateCarousel(skipTransition), 50);
+          return;
+        }
+        
+        // Wait for card to have dimensions
+        const cardWidth = firstCard.offsetWidth;
+        if (!cardWidth || cardWidth === 0) {
+          setTimeout(() => updateCarousel(skipTransition), 50);
+          return;
+        }
+        
+        // Calculate card width including margin
+        const cardStyle = window.getComputedStyle(firstCard);
+        const marginLeft = Math.abs(parseInt(cardStyle.marginLeft) || 0);
+        const marginRight = Math.abs(parseInt(cardStyle.marginRight) || 0);
+        const totalCardWidth = cardWidth + marginLeft + marginRight;
+        
+        // Calculate translateX: move right (positive) by currentIndex cards
+        // In RTL, positive translateX moves the wrapper right, showing next cards
+        const translateX = currentIndex * totalCardWidth;
+        
+        // Apply transform
+        if (skipTransition) {
+          carouselWrapper.style.transition = 'none';
+        }
+        carouselWrapper.style.transform = `translateX(${translateX}px)`;
+        
+        if (!skipTransition) {
+          carouselWrapper.style.transition = 'transform 0.4s ease';
+        }
+        
+        // Update dots
+        const dots = document.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+          if (dot) {
+            dot.classList.toggle('active', index === currentIndex);
+          }
+        });
+      };
+      
+      // Go to specific card
+      const goToCard = (index) => {
+        currentIndex = Math.max(0, Math.min(index, totalCards - 1));
+        updateCarousel();
+        pauseOnInteraction();
+      };
+      
+      // Next card - with loop
+      const nextCard = () => {
+        if (!carouselCards || carouselCards.length === 0 || isLooping) {
+          return;
+        }
+        const previousIndex = currentIndex;
+        const willLoop = previousIndex === carouselCards.length - 1;
+        
+        // If looping, handle it immediately without any transition
+        if (willLoop) {
+          isLooping = true;
+          
+          // Cancel any ongoing transition immediately with !important
+          carouselWrapper.style.setProperty('transition', 'none', 'important');
+          
+          // Update index
+          currentIndex = 0;
+          
+          // Get card dimensions
+          const firstCard = carouselCards[0];
+          if (firstCard && firstCard.offsetWidth > 0) {
+            // Set position to 0 instantly - use setProperty to ensure it applies
+            carouselWrapper.style.setProperty('transform', 'translateX(0px)', 'important');
+            
+            // Update dots immediately
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+              if (dot) {
+                dot.classList.toggle('active', index === 0);
+              }
+            });
+            
+            // Force multiple reflows to ensure the change is applied
+            void carouselWrapper.offsetHeight;
+            void carouselWrapper.offsetWidth;
+            
+            // Wait a frame, then re-enable transition
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                carouselWrapper.style.removeProperty('transition');
+                // Keep the transform, just remove the !important flag
+                carouselWrapper.style.transform = 'translateX(0px)';
+                carouselWrapper.style.transition = 'transform 0.4s ease';
+                isLooping = false;
+              });
+            });
+          } else {
+            currentIndex = 0;
+            updateCarousel(true);
+            setTimeout(() => {
+              isLooping = false;
+            }, 50);
+          }
+        } else {
+          // Normal transition
+          currentIndex = (currentIndex + 1) % carouselCards.length;
+          updateCarousel(false);
+        }
+      };
+      
+      // Previous card - with loop
+      const prevCard = () => {
+        if (!carouselCards || carouselCards.length === 0 || isLooping) {
+          return;
+        }
+        const previousIndex = currentIndex;
+        const willLoop = previousIndex === 0;
+        
+        // If looping, handle it immediately without any transition
+        if (willLoop) {
+          isLooping = true;
+          
+          // Cancel any ongoing transition immediately with !important
+          carouselWrapper.style.setProperty('transition', 'none', 'important');
+          
+          // Update index
+          currentIndex = carouselCards.length - 1;
+          
+          // Get card dimensions
+          const firstCard = carouselCards[0];
+          if (firstCard && firstCard.offsetWidth > 0) {
+            const cardStyle = window.getComputedStyle(firstCard);
+            const marginLeft = Math.abs(parseInt(cardStyle.marginLeft) || 0);
+            const marginRight = Math.abs(parseInt(cardStyle.marginRight) || 0);
+            const totalCardWidth = firstCard.offsetWidth + marginLeft + marginRight;
+            const lastIndex = carouselCards.length - 1;
+            const translateX = lastIndex * totalCardWidth;
+            
+            // Set position to last card instantly - use setProperty to ensure it applies
+            carouselWrapper.style.setProperty('transform', `translateX(${translateX}px)`, 'important');
+            
+            // Update dots immediately
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+              if (dot) {
+                dot.classList.toggle('active', index === lastIndex);
+              }
+            });
+            
+            // Force multiple reflows to ensure the change is applied
+            void carouselWrapper.offsetHeight;
+            void carouselWrapper.offsetWidth;
+            
+            // Wait a frame, then re-enable transition
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                carouselWrapper.style.removeProperty('transition');
+                // Keep the transform, just remove the !important flag
+                carouselWrapper.style.transform = 'translateX(0px)';
+                carouselWrapper.style.transition = 'transform 0.4s ease';
+                isLooping = false;
+              });
+            });
+          } else {
+            currentIndex = carouselCards.length - 1;
+            updateCarousel(true);
+            setTimeout(() => {
+              isLooping = false;
+            }, 50);
+          }
+        } else {
+          // Normal transition
+          currentIndex = (currentIndex - 1 + carouselCards.length) % carouselCards.length;
+          updateCarousel(false);
+        }
+      };
+      
+      // Auto-play functionality
+      let autoPlayInterval = null;
+      const autoPlayDelay = 2000; // 2 seconds
+      let isPaused = false;
+      
+      const startAutoPlay = () => {
+        // Don't start if already running
+        if (autoPlayInterval) {
+          return;
+        }
+        
+        // Verify elements exist
+        if (!carouselWrapper || !carouselCards || carouselCards.length === 0) {
+          return;
+        }
+        
+        autoPlayInterval = setInterval(() => {
+          if (!isPaused && !isLooping) {
+            // If we're at the last card, handle loop before transition
+            if (currentIndex === carouselCards.length - 1) {
+              // Stop any ongoing transition
+              carouselWrapper.style.transition = 'none';
+              carouselWrapper.style.transform = 'translateX(0px)';
+              currentIndex = 0;
+              
+              // Update dots
+              const dots = document.querySelectorAll('.carousel-dot');
+              dots.forEach((dot, index) => {
+                if (dot) {
+                  dot.classList.toggle('active', index === 0);
+                }
+              });
+              
+              // Force reflow
+              void carouselWrapper.offsetHeight;
+              
+              // Re-enable transition after a moment
+              setTimeout(() => {
+                carouselWrapper.style.transition = 'transform 0.4s ease';
+              }, 100);
+            } else {
+              nextCard();
+            }
+          }
+        }, autoPlayDelay);
+      };
+      
+      const stopAutoPlay = () => {
+        if (autoPlayInterval) {
+          clearInterval(autoPlayInterval);
+          autoPlayInterval = null;
+        }
+      };
+      
+      const pauseAutoPlay = () => {
+        isPaused = true;
+      };
+      
+      const resumeAutoPlay = () => {
+        isPaused = false;
+      };
+      
+      // Pause on touch/interaction helper
+      let touchPauseTimeout;
+      const pauseOnInteraction = () => {
+        pauseAutoPlay();
+        clearTimeout(touchPauseTimeout);
+        touchPauseTimeout = setTimeout(() => {
+          resumeAutoPlay();
+        }, autoPlayDelay * 2);
+      };
+      
+      // Event listeners
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          nextCard();
+          pauseOnInteraction();
+        });
+      }
+      
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          prevCard();
+          pauseOnInteraction();
+        });
+      }
+      
+      // Pause on hover (desktop)
+      carousel.addEventListener('mouseenter', pauseAutoPlay);
+      carousel.addEventListener('mouseleave', resumeAutoPlay);
+      
+      // Touch/swipe support
+      let startX = 0;
+      let isDragging = false;
+      let startTranslateX = 0;
+      
+      carouselWrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        pauseOnInteraction();
+        const style = window.getComputedStyle(carouselWrapper);
+        const matrix = new DOMMatrix(style.transform);
+        startTranslateX = matrix.m41;
+      });
+      
+      carouselWrapper.addEventListener('touchmove', (e) => {
+        if (!isDragging || !carouselCards || carouselCards.length === 0) return;
+        e.preventDefault();
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        const firstCard = carouselCards[0];
+        if (!firstCard || firstCard.offsetWidth === 0) return;
+        
+        const cardStyle = window.getComputedStyle(firstCard);
+        const cardWidth = firstCard.offsetWidth;
+        const marginLeft = Math.abs(parseInt(cardStyle.marginLeft) || 0);
+        const marginRight = Math.abs(parseInt(cardStyle.marginRight) || 0);
+        const totalCardWidth = cardWidth + marginLeft + marginRight;
+        const maxTranslate = (carouselCards.length - 1) * totalCardWidth;
+        
+        // Swipe right moves right (next), swipe left moves left (previous)
+        let newTranslateX = startTranslateX - diff;
+        newTranslateX = Math.max(0, Math.min(newTranslateX, maxTranslate));
+        carouselWrapper.style.transform = `translateX(${newTranslateX}px)`;
+        carouselWrapper.style.transition = 'none';
+      });
+      
+      carouselWrapper.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        carouselWrapper.style.transition = 'transform 0.4s ease';
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) { // Minimum swipe distance
+          // Swipe right (diff > 0) = go to next card
+          // Swipe left (diff < 0) = go to previous card
+          if (diff > 0) {
+            nextCard();
+          } else {
+            prevCard();
+          }
+          pauseOnInteraction();
+        } else {
+          updateCarousel(); // Snap back
+        }
+      });
+      
+      // Auto-update on resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          stopAutoPlay();
+          createDots();
+          if (carouselCards && carouselCards.length > 0) {
+            currentIndex = Math.min(currentIndex, carouselCards.length - 1);
+            updateCarousel();
+            startAutoPlay();
+          }
+        }, 250);
+      });
+      
+      // Initialize
+      const initCarousel = () => {
+        // Verify elements still exist
+        if (!carousel || !carouselWrapper || !carouselCards || carouselCards.length === 0) {
+          return;
+        }
+        
+        stopAutoPlay();
+        createDots();
+        currentIndex = 0;
+        updateCarousel(true); // Initial display without transition
+        startAutoPlay();
+      };
+      
+      // Run on DOMContentLoaded and on subsequent checks if elements were not ready
+      if (!carousel || !carouselWrapper || !carouselCards || carouselCards.length === 0) {
+        const retryInterval = setInterval(() => {
+          if (document.querySelector('.testimonials-carousel') && document.querySelector('.testimonials-carousel-wrapper') && document.querySelectorAll('.testimonials-carousel .testimonial-card').length > 0) {
+            clearInterval(retryInterval);
+            initCarousel();
+          }
+        }, 100);
+      } else {
+        initCarousel();
+      }
+    }
+
+    // Smooth scroll for "آراء المشتركات" button
+    const testimonialsButton = document.querySelector('.hero-cta .btn-secondary');
+    if (testimonialsButton) {
+      testimonialsButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const testimonialsSection = document.getElementById('testimonials');
+        if (testimonialsSection) {
+          testimonialsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
     </script>
   </body>
 </html>
