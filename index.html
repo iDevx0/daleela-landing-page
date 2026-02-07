@@ -117,7 +117,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     
     /* Loading Screen */
-    .loading-screen {
+    /* .loading-screen {
       position: fixed;
       top: 0;
       left: 0;
@@ -167,7 +167,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight: 500;
       color: var(--accent-pink-dark);
       opacity: 0.9;
-    }
+    } */
     
     .typing-cursor {
       display: inline-block;
@@ -411,6 +411,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin-bottom: 40px;
     }
     
+    .hero-subscribe {
+      text-align: center;
+      margin-top: 32px;
+    }
+    
+    .hero-subscribe .btn {
+      min-width: 200px;
+    }
+    
     .btn {
       padding: 14px 32px;
       border-radius: 12px;
@@ -621,6 +630,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       letter-spacing: 0.5px;
     }
     
+    .benefit-demo-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-pink);
+      cursor: pointer;
+    }
+    
+    .benefit-demo-hint::before {
+      content: '▶';
+      font-size: 10px;
+    }
+    
+    .benefit-item.demo-launch:hover .benefit-demo-hint {
+      text-decoration: underline;
+    }
+    
+    .benefits-demo-note {
+      font-size: 15px !important;
+      color: var(--accent-pink) !important;
+      font-weight: 600;
+      margin-top: 8px !important;
+      opacity: 1;
+    }
+    
     /* Programs Grid */
     .programs-grid {
       display: grid;
@@ -666,6 +703,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .program-body {
       padding: 24px 24px 8px;
     }
+    
+    .program-media-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      justify-content: flex-start;
+      direction: ltr;
+    }
+    
+    .program-media-tags .media-tag {
+      display: inline-block;
+      background: rgba(224,75,128,0.08);
+      color: var(--accent-pink);
+      border: 1px solid rgba(224,75,128,0.12);
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    
+    .program-media-tags .media-tag svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    
     
     .program-card h3 {
       font-size: 18px;
@@ -815,7 +880,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       line-height: 1.5;
     }
     
-    /* Testimonials */
+    /* Testimonials - aligned with rest of page */
+    #testimonials.section {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
     .testimonials-stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -825,6 +895,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: linear-gradient(135deg, var(--accent-light) 0%, rgba(243, 230, 234, 0.5) 100%);
       border-radius: 20px;
       border: 1px solid var(--border-color);
+      max-width: 100%;
+      box-sizing: border-box;
     }
     
     .testimonials-stat-item {
@@ -849,13 +921,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .testimonials-stats {
         grid-template-columns: 1fr;
         gap: 24px;
-        padding: 32px 24px;
+        padding: 24px 20px;
       }
     }
     
     .testimonials-container {
       position: relative;
       margin-top: 48px;
+      max-width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
     }
     
     .testimonials-grid {
@@ -866,6 +941,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display: block;
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
     
     .testimonials-carousel-wrapper {
@@ -880,13 +956,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius: 16px;
       padding: 32px;
       box-shadow: var(--shadow-sm);
+      box-sizing: border-box;
     }
     
     .testimonials-carousel .testimonial-card {
       margin: 0 12px;
       flex-shrink: 0;
       width: calc(33.333% - 24px);
+      min-width: calc(33.333% - 24px);
       max-width: none;
+    }
+    
+    @media (max-width: 900px) {
+      .testimonials-carousel .testimonial-card {
+        width: calc(50% - 20px);
+        min-width: calc(50% - 20px);
+        margin: 0 10px;
+      }
     }
     
     .carousel-nav {
@@ -1617,13 +1703,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .testimonials-carousel .testimonial-card {
         margin: 0 8px;
         width: calc(100% - 16px);
+        min-width: calc(100% - 16px);
         max-width: none;
         flex-shrink: 0;
+        padding: 24px 20px;
       }
       
       .testimonials-carousel {
-        margin: 0 -24px;
-        padding: 0 24px;
+        margin: 0;
+        padding: 0;
       }
       
       .hero-cta {
@@ -1707,14 +1795,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </style>
 </head>
 <body class="loading">
+  <!-- SVG sprite for program media icons -->
+  <svg style="display:none;" aria-hidden="true">
+    <symbol id="icon-video" viewBox="0 0 24 24">
+      <path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path>
+      <path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path>
+    </symbol>
+    <symbol id="icon-article" viewBox="0 0 24 24">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.17157 3.17157C3 4.34315 3 6.22876 3 10V14C3 17.7712 3 19.6569 4.17157 20.8284C5.34315 22 7.22876 22 11 22H13C16.7712 22 18.6569 22 19.8284 20.8284C21 19.6569 21 17.7712 21 14V10C21 6.22876 21 4.34315 19.8284 3.17157C18.6569 2 16.7712 2 13 2H11C7.22876 2 5.34315 2 4.17157 3.17157ZM7.25 8C7.25 7.58579 7.58579 7.25 8 7.25H16C16.4142 7.25 16.75 7.58579 16.75 8C16.75 8.41421 16.4142 8.75 16 8.75H8C7.58579 8.75 7.25 8.41421 7.25 8ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H8C7.58579 12.75 7.25 12.4142 7.25 12ZM8 15.25C7.58579 15.25 7.25 15.5858 7.25 16C7.25 16.4142 7.58579 16.75 8 16.75H13C13.4142 16.75 13.75 16.4142 13.75 16C13.75 15.5858 13.4142 15.25 13 15.25H8Z"></path>
+    </symbol>
+    <symbol id="icon-audio" viewBox="0 0 24 24">
+      <path d="M2 12.124C2 6.53269 6.47713 2 11.9999 2C17.5228 2 21.9999 6.53269 21.9999 12.124L21.9999 17.3675C22.0002 18.1844 22.0004 18.7446 21.8568 19.2364C21.576 20.1982 20.9046 20.9937 20.01 21.4245C19.5525 21.6449 19.0059 21.732 18.2088 21.8591L18.0789 21.8799C17.7954 21.9252 17.5532 21.9639 17.3522 21.9839C17.1431 22.0047 16.9299 22.0111 16.7118 21.9676C15.9942 21.8245 15.4024 21.3126 15.1508 20.6172C15.0744 20.4059 15.0474 20.1916 15.035 19.9793C15.0232 19.7753 15.0232 19.527 15.0232 19.2365L15.0231 15.0641C15.0226 14.6386 15.0222 14.2725 15.1195 13.959C15.3422 13.2416 15.9238 12.6975 16.6477 12.5292C16.9641 12.4556 17.3246 12.4849 17.7435 12.5189L17.8367 12.5264L17.9465 12.5352C18.7302 12.5975 19.2664 12.6402 19.7216 12.8106C20.0415 12.9304 20.3381 13.0953 20.6046 13.2976V12.124C20.6046 7.31288 16.7521 3.41266 11.9999 3.41266C7.24776 3.41266 3.39534 7.31288 3.39534 12.124V13.2976C3.66176 13.0953 3.95843 12.9304 4.27829 12.8106C4.73345 12.6402 5.26965 12.5975 6.05335 12.5352L6.16318 12.5264L6.25641 12.5189C6.67534 12.4849 7.03581 12.4556 7.35224 12.5292C8.07612 12.6975 8.65766 13.2416 8.88039 13.959C8.97774 14.2725 8.9773 14.6386 8.97678 15.0641L8.97671 19.2365C8.97671 19.527 8.97672 19.7753 8.96487 19.9793C8.95254 20.1916 8.9255 20.4059 8.84906 20.6172C8.59754 21.3126 8.00574 21.8245 7.28812 21.9676C7.07001 22.0111 6.85675 22.0047 6.64768 21.9839C6.44671 21.9639 6.20449 21.9252 5.92102 21.8799L5.79106 21.8591C4.99399 21.732 4.44737 21.6449 3.98991 21.4245C3.09534 20.9937 2.42388 20.1982 2.14308 19.2364C2.02467 18.8309 2.00404 18.3788 2.0006 17.7747L2 17.5803V12.124Z"></path>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9999 5.75C12.4142 5.75 12.7499 6.08579 12.7499 6.5L12.7499 11.5C12.7499 11.9142 12.4142 12.25 11.9999 12.25C11.5857 12.25 11.2499 11.9142 11.2499 11.5L11.2499 6.5C11.2499 6.08579 11.5857 5.75 11.9999 5.75Z"></path>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M14.9999 7.25C15.4142 7.25 15.7499 7.58579 15.7499 8V10C15.7499 10.4142 15.4142 10.75 14.9999 10.75C14.5857 10.75 14.2499 10.4142 14.2499 10V8C14.2499 7.58579 14.5857 7.25 14.9999 7.25Z"></path>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.99995 7.25C9.41416 7.25 9.74995 7.58579 9.74995 8L9.74995 10C9.74995 10.4142 9.41416 10.75 8.99995 10.75C8.58573 10.75 8.24995 10.4142 8.24995 10L8.24995 8C8.24995 7.58579 8.58573 7.25 8.99995 7.25Z"></path>
+    </symbol>
+  </svg>
   <!-- Loading Screen -->
-  <div class="loading-screen" id="loadingScreen">
+  <!-- <div class="loading-screen" id="loadingScreen">
     <div class="loading-content">
       <div class="loading-text" id="loadingText">
         <span class="typing-cursor"></span>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Header -->
   <header class="header">
@@ -1734,6 +1839,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="#try-it" class="nav-link" onclick="scrollToTryIt(event)">جربي دليلة</a>
         <a href="#benefits" class="nav-link">المزايا</a>
         <a href="#programs" class="nav-link">البرامج</a>
+        <a href="#doctors" class="nav-link">متخصصين دليلة</a>
         <a href="#consultation" class="nav-link">الاستشارة</a>
         <a href="#faq" class="nav-link">الاسئلة الشائعة</a>
       </nav>
@@ -1743,14 +1849,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- Hero Section -->
   <section id="hero" class="hero">
     <div class="hero-content">
-      <h1>اشتراك دليلة — خليكي صاحبة جسمك وصحتك</h1>
+      <h1>خليكي صاحبة جسمك وصحتك</h1>
       <p>دليلة هي المساعدة الصحية المثلى للمرأة العربية، حيث توفّر لكِ كل ما تحتاجينه عن صحة المرأة، مع إمكانية الوصول الفوري إلى الأطباء بسهولة، وخصوصية، وبطريقة مصممة خصيصًا لكِ.</p>
       <div class="hero-cta">
-  <a href="https://motherbeing.com/ar/subscribe?utm_source=daleela_landing&utm_medium=web&utm_campaign=subscribe" target="_blank" class="btn btn-primary">
-    اشتركي الآن
-  </a>
-  <a href="#try-it" class="btn btn-secondary" onclick="scrollToTryIt(event)">
+  <!-- <a href="#try-it" class="btn btn-secondary" onclick="scrollToTryIt(event)">
     جربي دليلة
+  </a> -->
+  <a href="#testimonials" class="btn btn-secondary" onclick="scrollToTestimonials(event)">
+    آراء المشتركات
+  </a>
+  <a href="https://daleela.go.link/bsN7f" target="_blank" rel="noopener" class="btn btn-secondary">
+    تحميل التطبيق
   </a>
 </div>
 
@@ -1820,6 +1929,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         -->
       </div>
     </div>
+    <div class="hero-subscribe">
+      <a href="https://motherbeing.com/ar/subscribe?utm_source=daleela_landing&utm_medium=web&utm_campaign=subscribe" target="_blank" class="btn btn-primary">
+        اشتركي الآن
+      </a>
+    </div>
   </section>
 
   <!-- Main Content -->
@@ -1829,9 +1943,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="section-header">
         <h2>لماذا تختاري اشتراك دليلة؟</h2>
         <p>اشتراك واحد يقدم لكِ كل الدعم الصحي اللي تحتاجيه</p>
+        <p class="benefits-demo-note">اضغطي على أي ميزة أدناه لمشاهدة ديمو التطبيق</p>
       </div>
       <div class="benefits-list">
-        <div class="benefit-item">
+        <div class="benefit-item demo-launch" data-demo-url="https://motherbeing.com/ar/demos/chat">
           <div class="benefit-icon">
             <!-- Gemini AI Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">
@@ -1843,9 +1958,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="benefit-badge">مجانا</span>
             <h3>مساعدة صحية بالذكاء الاصطناعي</h3>
             <p>احصلي على إجابات دقيقة ومبنية على خبرة طبية لأسئلتكِ الصحية في أي وقت ومن أي مكان، وباللغتين العربية والإنجليزية.</p>
+            <span class="benefit-demo-hint">اضغطي لمشاهدة ديمو التطبيق</span>
           </div>
         </div>
-        <div class="benefit-item">
+        <div class="benefit-item demo-launch" data-demo-url="https://motherbeing.com/ar/demos/tracker">
           <div class="benefit-icon">
             <!-- Period Tracker Icon -->
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
@@ -1860,9 +1976,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="benefit-badge">مجانا</span>
             <h3>حاسبة الدورة الشهرية</h3>
             <p>حاسبة متقدمة وسهلة الاستخدام لتتبعي دورتك الشهرية بدقة واحصلي على تنبؤات لفتراتك القادمة.</p>
+            <span class="benefit-demo-hint">اضغطي لمشاهدة ديمو التطبيق</span>
           </div>
         </div>
-        <div class="benefit-item">
+        <div class="benefit-item demo-launch" data-demo-url="https://motherbeing.com/ar/demos/consultation">
           <div class="benefit-icon">
             <!-- Stethoscope Icon -->
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -1874,18 +1991,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <p>تواصلي مع أطباء حقيقيين - استشارة شهرية مع أخصائيين موثوقين في مجالات أمراض النساء، الجلدية، والتغذية.</p>
           </div>
         </div>
-        <div class="benefit-item">
+        <div class="benefit-item demo-launch" data-demo-url="https://motherbeing.com/ar/demos/programs">
           <div class="benefit-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-              <path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke-width="1.5"/>
-              <path d="M9 13H15" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M9 9H15" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M9 17H12" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <svg class="w-5 md:w-6 h-5 md:h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg>
           </div>
           <div class="benefit-content">
             <h3>برامج تعليمية متكاملة</h3>
             <p>تعلّمي من أفضل المتخصصين - استفيدي من مكتبة دليلة للبرامج التعليمية؛ برامج مُصممة من خبراء لمساعدتك على فهم دورتك وهرموناتك وصحتك.</p>
+            <span class="benefit-demo-hint">اضغطي لمشاهدة ديمو التطبيق</span>
           </div>
         </div>
         <div class="benefit-item">
@@ -1898,11 +2011,123 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <div class="benefit-content">
             <h3>احصلي على إجاباتك بسرعة</h3>
-            <p>تلقّي إجابات من أطباء دليلة خلال ٢٤ ساعة. طُمأنينة، خطوات واضحة، وخطط علاج في أسرع وقت.</p>
+            <p>تلقّي إجابات من أطباء ومتخصصين دليلة خلال ٢٤ ساعة. طُمأنينة، خطوات واضحة، وخطط علاج في أسرع وقت.</p>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Demo iframe modal (opens when clicking benefit items) -->
+    <div id="demo-iframe-modal" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:10000;background:transparent;align-items:stretch;justify-content:center;padding:0;">
+      <div class="modal-inner" style="width:100%;height:100%;max-width:none;max-height:none;position:relative;background:#000;border-radius:0;overflow:hidden;">
+        <button id="demo-iframe-close" aria-label="إغلاق العرض" style="position:absolute;left:12px;top:12px;z-index:12;background:#fff;border:0;border-radius:6px;padding:8px 10px;cursor:pointer;font-weight:700;">X</button>
+        <iframe id="demo-iframe" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;"></iframe>
+      </div>
+    </div>
+
+    <style>
+      /* Responsive modal tweaks */
+      #demo-iframe-modal { display: none; }
+      #demo-iframe-modal .modal-inner { box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+      @media (max-width: 768px) {
+        #demo-iframe-modal { padding: 0; align-items: stretch; justify-content: flex-start; }
+        #demo-iframe-modal .modal-inner { width:100%; height:100%; max-width:none; max-height:none; border-radius:0; }
+        #demo-iframe-modal #demo-iframe { height:100vh; }
+        #demo-iframe-modal #demo-iframe-close { left:12px; top:12px; padding:12px 14px; font-size:16px; border-radius:8px; }
+      }
+      @media (min-width: 769px) {
+        #demo-iframe-modal .modal-inner { height: calc(100vh - 80px); }
+      }
+
+      /* Make doctors section static responsive (disable carousel behavior visually) - 3 per row */
+      .doctors-carousel { overflow: visible !important; padding: 0 !important; }
+      .doctors-carousel-wrapper {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 18px !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .doctors-carousel .doctor-card {
+        margin: 0 !important;
+        width: auto !important;
+        flex: none !important;
+      }
+      /* Hide carousel controls/dots */
+      .carousel-nav, .doctors-dots, .carousel-arrow, .carousel-dot, .doctors-prev, .doctors-next { display: none !important; }
+
+      @media (max-width: 768px) {
+        .doctors-carousel-wrapper { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+        .doctors-carousel .doctor-card { padding: 12px; }
+      }
+      @media (max-width: 480px) {
+        .doctors-carousel-wrapper { grid-template-columns: 1fr !important; }
+      }
+
+      /* Modal stretch behavior (ensure inner container fills viewport when 'stretch' requested) */
+      #demo-iframe-modal { background: transparent !important; padding: 0 !important; align-items: stretch !important; }
+      #demo-iframe-modal .modal-inner { width:100% !important; height:100% !important; max-width:none !important; max-height:none !important; border-radius:0 !important; box-shadow:none !important; }
+      #demo-iframe-modal #demo-iframe { height:100% !important; }
+    </style>
+
+    <script>
+      (function(){
+        const launches = document.querySelectorAll('.benefit-item.demo-launch');
+        const modal = document.getElementById('demo-iframe-modal');
+        const iframe = document.getElementById('demo-iframe');
+        const closeBtn = document.getElementById('demo-iframe-close');
+
+        launches.forEach(el => {
+          el.style.cursor = 'pointer';
+          el.addEventListener('click', function(e){
+            const url = el.getAttribute('data-demo-url');
+            if (!url) return;
+            // Use the provided URL directly - ensure it allows embedding
+            iframe.src = url;
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        function closeModal() {
+          iframe.src = '';
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden','true');
+          document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e){
+          if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function(e){
+          if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+        });
+      })();
+    </script>
+
+  <script>
+    // Replace existing program media tags with icon <use> markup (no labels, reusable via SVG symbols)
+    (function() {
+      const mediaMarkup = '\
+        <span class="media-tag" title="فيديو">\
+          <svg class="w-5 md:w-6 h-5 md:h-6" aria-hidden="true"><use xlink:href="#icon-video"></use></svg>\
+        </span>\
+        <span class="media-tag" title="صوتيات">\
+          <svg class="w-5 md:w-6 h-5 md:h-6" aria-hidden="true"><use xlink:href="#icon-audio"></use></svg>\
+        </span>\
+        <span class="media-tag" title="مقالات">\
+          <svg class="w-5 md:w-6 h-5 md:h-6" aria-hidden="true"><use xlink:href="#icon-article"></use></svg>\
+        </span>';
+
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.program-media-tags').forEach(el => {
+          el.innerHTML = mediaMarkup;
+        });
+      });
+    })();
+  </script>
 
     <!-- Programs Section -->
     <section id="programs" class="section">
@@ -1916,12 +2141,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="program-body">
             <h3>دليلك للعلاقة الزوجية</h3>
             <p>فرحك قرب؟ طبيعي تحسي بتوتر وأسئلة عن اللي هايحصل</p>
+            <div class="program-media-tags" aria-hidden="false">
+              <span class="media-tag" aria-label="فيديو" title="فيديو">
+                <svg class="w-5 md:w-6 h-5 md:h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.39910 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.7810 6.70013 20.7730 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.51570 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.44880 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg>
+              </span>
+              <span class="media-tag" aria-label="صوتيات" title="صوتيات">
+                <svg class="w-5 md:w-6 h-5 md:h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12.124C2 6.53269 6.47713 2 11.9999 2C17.5228 2 21.9999 6.53269 21.9999 12.124L21.9999 17.3675C22.0002 18.1844 22.0004 18.7446 21.8568 19.2364C21.576 20.1982 20.9046 20.9937 20.01 21.4245C19.5525 21.6449 19.0059 21.732 18.2088 21.8591L18.0789 21.8799C17.7954 21.9252 17.5532 21.9639 17.3522 21.9839C17.1431 22.0047 16.9299 22.0111 16.7118 21.9676C15.9942 21.8245 15.4024 21.3126 15.1508 20.6172C15.0744 20.4059 15.0474 20.1916 15.035 19.9793C15.0232 19.7753 15.0232 19.527 15.0232 19.2365L15.0231 15.0641C15.0226 14.6386 15.0222 14.2725 15.1195 13.959C15.3422 13.2416 15.9238 12.6975 16.6477 12.5292C16.9641 12.4556 17.3246 12.4849 17.7435 12.5189L17.8367 12.5264L17.9465 12.5352C18.7302 12.5975 19.2664 12.6402 19.7216 12.8106C20.0415 12.9304 20.3381 13.0953 20.6046 13.2976V12.124C20.6046 7.31288 16.7521 3.41266 11.9999 3.41266C7.24776 3.41266 3.39534 7.31288 3.39534 12.124V13.2976C3.66176 13.0953 3.95843 12.9304 4.27829 12.8106C4.73345 12.6402 5.26965 12.5975 6.05335 12.5352L6.16318 12.5264L6.25641 12.5189C6.67534 12.4849 7.03581 12.4556 7.35224 12.5292C8.07612 12.6975 8.65766 13.2416 8.88039 13.959C8.97774 14.2725 8.9773 14.6386 8.97678 15.0641L8.97671 19.2365C8.97671 19.527 8.97672 19.7753 8.96487 19.9793C8.95254 20.1916 8.9255 20.4059 8.84906 20.6172C8.59754 21.3126 8.00574 21.8245 7.28812 21.9676C7.07001 22.0111 6.85675 22.0047 6.64768 21.9839C6.44671 21.9639 6.20449 21.9252 5.92102 21.8799L5.79106 21.8591C4.99399 21.732 4.44737 21.6449 3.98991 21.4245C3.09534 20.9937 2.42388 20.1982 2.14308 19.2364C2.02467 18.8309 2.00404 18.3788 2.0006 17.7747L2 17.5803V12.124Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M11.9999 5.75C12.4142 5.75 12.7499 6.08579 12.7499 6.5L12.7499 11.5C12.7499 11.9142 12.4142 12.25 11.9999 12.25C11.5857 12.25 11.2499 11.9142 11.2499 11.5L11.2499 6.5C11.2499 6.08579 11.5857 5.75 11.9999 5.75Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.9999 7.25C15.4142 7.25 15.7499 7.58579 15.7499 8V10C15.7499 10.4142 15.4142 10.75 14.9999 10.75C14.5857 10.75 14.2499 10.4142 14.2499 10V8C14.2499 7.58579 14.5857 7.25 14.9999 7.25Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M8.99995 7.25C9.41416 7.25 9.74995 7.58579 9.74995 8L9.74995 10C9.74995 10.4142 9.41416 10.75 8.99995 10.75C8.58573 10.75 8.24995 10.4142 8.24995 10L8.24995 8C8.24995 7.58579 8.58573 7.25 8.99995 7.25Z"></path></svg>
+              </span>
+              <span class="media-tag" aria-label="مقالات" title="مقالات">
+                <svg class="w-5 md:w-6 h-5 md:h6" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.17157 3.17157C3 4.34315 3 6.22876 3 10V14C3 17.7712 3 19.6569 4.17157 20.8284C5.34315 22 7.22876 22 11 22H13C16.7712 22 18.6569 22 19.8284 20.8284C21 19.6569 21 17.7712 21 14V10C21 6.22876 21 4.34315 19.8284 3.17157C18.6569 2 16.7712 2 13 2H11C7.22876 2 5.34315 2 4.17157 3.17157ZM7.25 8C7.25 7.58579 7.58579 7.25 8 7.25H16C16.4142 7.25 16.75 7.58579 16.75 8C16.75 8.41421 16.4142 8.75 16 8.75H8C7.58579 8.75 7.25 8.41421 7.25 8ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4142 16.4142 12.75 16 12.75H8C7.58579 12.75 7.25 12.4142 7.25 12ZM8 15.25C7.58579 15.25 7.25 15.5858 7.25 16C7.25 16.4142 7.58579 16.75 8 16.75H13C13.4142 16.75 13.75 16.4142 13.75 16C13.75 15.5858 13.4142 15.25 13 15.25H8Z"></path></svg>
+              </span>
+            </div>
             <ul class="program-features">
               <li>١٠١ الاستعداد للمتعة الزوجية</li>
               <li>فهم الجسمين وحدود الأمان</li>
               <li>أسئلة تخجلي من طرحها</li>
               <li>العدوى المنقولة جنسياً</li>
             </ul>
+
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
@@ -1930,12 +2167,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="program-body">
             <h3>صحة جسمك و دورتك الشهرية</h3>
             <p>برنامج صحة جسمك و دورتك الشهرية هيساعدك تفهمي جسمك بعمق و بطريقة بسيطة و واضحة</p>
+            <div class="program-media-tags" aria-hidden="false">
+              <span class="media-tag" aria-label="فيديو" title="فيديو">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3v18l15-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="بودكاست" title="بودكاست">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11v1a7 7 0 0 1-14 0v-1"/></svg>
+              </span>
+              <span class="media-tag" aria-label="صوتيات" title="صوتيات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v4a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a7 7 0 0 1 14 0v6a2 2 0 0 0-2 2h1a3 3 0 0 0 3-3v-4a9 9 0 0 0-9-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="مقالات" title="مقالات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M13 3v5h5"/></svg>
+              </span>
+            </div>
             <ul class="program-features">
               <li>فهم الدورة الشهرية بالتفصيل</li>
               <li>التعامل مع الدورة الغزيرة أو الغير منتظمة أو المؤلمة</li>
               <li>متلازمة تكيّس المبايض (PCOS)</li>
               <li>الخريطة الكاملة لصحة إنجابية أحسن</li>
             </ul>
+            
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
@@ -1944,6 +2196,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="program-body">
             <h3>تنظيم الأسرة و وسائل منع الحمل</h3>
             <p>اختاري وسيلة منع الحمل اللي تناسبك بكل ثقة! البرنامج ده هيعرفك على كل وسائل منع الحمل الهرمونية والغير هرمونية</p>
+            <div class="program-media-tags" aria-hidden="false">
+              <span class="media-tag" aria-label="فيديو" title="فيديو">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3v18l15-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="بودكاست" title="بودكاست">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11v1a7 7 0 0 1-14 0v-1"/></svg>
+              </span>
+              <span class="media-tag" aria-label="صوتيات" title="صوتيات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v4a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a7 7 0 0 1 14 0v6a2 2 0 0 0-2 2h1a3 3 0 0 0 3-3v-4a9 9 0 0 0-9-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="مقالات" title="مقالات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M13 3v5h5"/></svg>
+              </span>
+            </div>
+          
             <ul class="program-features">
               <li>إفهمي جسمك: الخطوة الأولى في منع الحمل</li>
               <li>وسائل منع الحمل الغير هرمونية</li>
@@ -1958,12 +2225,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="program-body">
             <h3>التعامل مع التشنج المهبلي</h3>
             <p>برنامج شامل للتعامل مع التشنج المهبلي بخطوات علاجية وتمارين تدريجية</p>
+            <div class="program-media-tags" aria-hidden="false">
+              <span class="media-tag" aria-label="فيديو" title="فيديو">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3v18l15-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="بودكاست" title="بودكاست">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11v1a7 7 0 0 1-14 0v-1"/></svg>
+              </span>
+              <span class="media-tag" aria-label="صوتيات" title="صوتيات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v4a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a7 7 0 0 1 14 0v6a2 2 0 0 0-2 2h1a3 3 0 0 0 3-3v-4a9 9 0 0 0-9-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="مقالات" title="مقالات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M13 3v5h5"/></svg>
+              </span>
+            </div>
             <ul class="program-features">
               <li>فهم التشنج المهبلي</li>
               <li>خطوات علاجية تدريجية</li>
               <li>تمارين ارتخاء وتعليم جسدي</li>
               <li>دعم نفسي وتواصل مع الشريك</li>
             </ul>
+            
             <p class="program-more">والمزيد...</p>
           </div>
         </a>
@@ -1972,6 +2254,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="program-body">
             <h3>دليلكِ للتغذية والوزن الصحي</h3>
             <p>رحلتكِ للأكل الصحي وخسارة الوزن مش محتاجة حرمان ولا تعقيد!</p>
+            <div class="program-media-tags" aria-hidden="false">
+              <span class="media-tag" aria-label="فيديو" title="فيديو">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3v18l15-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="بودكاست" title="بودكاست">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11v1a7 7 0 0 1-14 0v-1"/></svg>
+              </span>
+              <span class="media-tag" aria-label="صوتيات" title="صوتيات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v4a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a7 7 0 0 1 14 0v6a2 2 0 0 0-2 2h1a3 3 0 0 0 3-3v-4a9 9 0 0 0-9-9z"/></svg>
+              </span>
+              <span class="media-tag" aria-label="مقالات" title="مقالات">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M13 3v5h5"/></svg>
+              </span>
+            </div>
             <ul class="program-features">
               <li>أساسيات التغذية</li>
               <li>تحديد الأهداف الواقعية</li>
@@ -1983,6 +2279,326 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </a>
       </div>
     </section>
+    <!-- أطباء ومتخصصين دليلة (كـ Carousel تحت قسم البرامج) -->
+    <section id="doctors" class="section" dir="rtl" style="background:#fff;padding:30px 16px;">
+      <style>
+        /* Play button: rounded radar/pulse animation */
+        #doctors .doctor-play{
+          width:36px;
+          height:36px;
+          border-radius:50%;
+          display:inline-grid;
+          place-items:center;
+          background:#fff;
+          color:#e91e63;
+          border:0;
+          box-shadow:0 6px 18px rgba(0,0,0,0.08);
+          position:relative;
+          overflow:visible;
+          cursor:pointer;
+          transition:transform .18s ease;
+        }
+        #doctors .doctor-play svg{ width:18px; height:18px; display:block; }
+        #doctors .doctor-play:hover{ transform:translateY(-2px) scale(1.04); }
+        /* radar rings */
+        #doctors .doctor-play::before,
+        #doctors .doctor-play::after{
+          content:'';
+          position:absolute;
+          left:50%;
+          top:50%;
+          transform:translate(-50%,-50%) scale(0.8);
+          width:36px;
+          height:36px;
+          border-radius:50%;
+          pointer-events:none;
+          box-shadow: 0 0 0 2px rgba(233,30,99,0.12) inset;
+          opacity:0.85;
+        }
+        #doctors .doctor-play::after{
+          box-shadow:0 0 0 2px rgba(233,30,99,0.18);
+          animation:radarPulse 2.2s infinite linear;
+          opacity:0;
+        }
+        @keyframes radarPulse{
+          0%{ transform:translate(-50%,-50%) scale(0.6); opacity:0.9; }
+          60%{ transform:translate(-50%,-50%) scale(1.8); opacity:0.12; }
+          100%{ transform:translate(-50%,-50%) scale(2.2); opacity:0; }
+        }
+      </style>
+      <div class="section-header" style="text-align:center;">
+        <h2>أطباء ومتخصصين دليلة</h2>
+        <!-- <p style="margin-top:6px;color:#666;">اضغطوا على صورة الطبيب لمشاهدة فيديو تقديمي عنه</p> -->
+      </div>
+
+      <div class="doctors-carousel" style="margin-top:18px;">
+        <div class="doctors-carousel-wrapper" style="display:flex;transition:transform 0.4s ease;will-change:transform;">
+          <!-- slide -->
+          <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
+            <button class="doctor-avatar" data-video="https://www.youtube.com/embed/VIDEO_ID_0" aria-label="فتح فيديو نور" style="border:0;background:none;cursor:pointer;">
+              <img src="https://image.moengage.com/daleelamoengage/20260207053847962410ABA8YQNOURCEOjpgcompdaleelamoengage.jpg" alt="نور - مؤسسة أبلكيشن دليلة" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+            </button>
+            <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <strong>نور امام</strong>
+                <!-- no play icon for other doctors -->
+              </div>
+              <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">مؤسسة أبلكيشن دليلة</div>
+            </div>
+          </div>
+          <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
+            <button class="doctor-avatar" data-video="https://drive.google.com/file/d/1EEPaVMRaWEVSB-cd6wnYvfjKd0xMoGcJ/preview?autoplay=1" aria-label="فتح فيديو ا.د/ اية محمد فهمي" style="border:0;background:none;cursor:pointer;">
+              <img src="https://image.moengage.com/daleelamoengage/20260207054122122750DGEIN8DrAyaskinjpgcompdaleelamoengage.jpg" alt="ا.د/ اية محمد فهمي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+            </button>
+            <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <strong>ا.د/ اية محمد فهمي</strong>
+                <button class="doctor-play" data-video="https://drive.google.com/file/d/1EEPaVMRaWEVSB-cd6wnYvfjKd0xMoGcJ/preview?autoplay=1" aria-label="تشغيل فيديو ا.د/ اية محمد فهمي" style="border:0;background:none;cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;color:#e91e63;">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">استاذ مساعد و استشاري الأمراض الجلدية و التجميل و الليزر كلية طب القصر العيني جامعة القاهرة</div>
+            </div>
+          </div>
+          
+
+          <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
+            <button class="doctor-avatar" data-video="https://drive.google.com/file/d/1smmtvBPeY8iOsf9cwnHfZ7c3mYq4QdLr/preview?autoplay=1" aria-label="فتح فيديو د/ دينا الشرقاوي" style="border:0;background:none;cursor:pointer;">
+              <img src="https://image.moengage.com/daleelamoengage/202602070540284416511WL17WDrDinaSkinjpgcompdaleelamoengage.jpg" alt="د/ دينا الشرقاوي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+            </button>
+            <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <strong>د/ دينا الشرقاوي</strong>
+                <button class="doctor-play" data-video="https://drive.google.com/file/d/1smmtvBPeY8iOsf9cwnHfZ7c3mYq4QdLr/preview?autoplay=1" aria-label="تشغيل فيديو د/ دينا الشرقاوي" style="border:0;background:none;cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;color:#e91e63;">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">استشاري و أستاذ مساعد الامراض الجلدية كلية طب القصر العيني جامعة القاهرة</div>
+            </div>
+          </div>
+
+
+          <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
+            <button class="doctor-avatar" data-video="https://drive.google.com/file/d/1sLIqohrddhMtmgPQFtYInANMnjlHSHJm/preview?autoplay=1" aria-label="فتح فيديو د/ مي ضياء سرحان" style="border:0;background:none;cursor:pointer;">
+              <img src="https://image.moengage.com/daleelamoengage/20260207054003368833I1K987DrMainutritionjpgcompdaleelamoengage.jpg" alt="د/ مي ضياء سرحان" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+            </button>
+            <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <strong>د/ مي ضياء سرحان</strong>
+                <button class="doctor-play" data-video="https://drive.google.com/file/d/1sLIqohrddhMtmgPQFtYInANMnjlHSHJm/preview?autoplay=1" aria-label="تشغيل فيديو د/ مي ضياء سرحان" style="border:0;background:none;cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;color:#e91e63;">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">أستاذ مساعد في القصر العيني و إخصائية تغذية علاجية</div>
+            </div>
+          </div>
+          <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
+            <button class="doctor-avatar" data-video="https://www.youtube.com/embed/VIDEO_ID_MONIQUE" aria-label="فتح فيديو د/ مونيك مجدي" style="border:0;background:none;cursor:pointer;">
+              <img src="https://image.moengage.com/daleelamoengage/20260207053938250159VTBQD8DrMoniqueSexualHealthjpgcompdaleelamoengage.jpg" alt="د/ مونيك مجدي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+            </button>
+            <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <strong>د/ مونيك مجدي</strong>
+                <!-- no play icon for other doctors -->
+              </div>
+              <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">دكتورة امراض النساء والتوليد والعقم</div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="carousel-nav" style="display:flex;justify-content:center;align-items:center;gap:12px;margin-top:20px;">
+          <button class="carousel-arrow doctors-prev" aria-label="السابق" style="border:0;background:#fff;border-radius:8px;padding:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08);cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="doctors-dots" style="display:flex;gap:8px;"></div>
+          <button class="carousel-arrow doctors-next" aria-label="التالي" style="border:0;background:#fff;border-radius:8px;padding:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08);cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Video modal -->
+      <div id="doctor-video-modal" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:0;">
+        <div id="doctor-video-container" style="background:#000;border-radius:6px;max-width:100%;width:100%;height:100%;max-height:100vh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
+          <button id="doctor-video-close" aria-label="إغلاق الفيديو" style="position:absolute;right:12px;top:12px;background:rgba(255,255,255,0.9);border-radius:50%;border:0;padding:8px;cursor:pointer;font-size:16px;z-index:3;">✕</button>
+          <!-- make iframe take full modal area so desktop behaves like mobile fullscreen -->
+          <iframe id="doctor-video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen="allowfullscreen" style="width:100%;height:100%;border:0;display:block;"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function(){
+        // Toggle to enable/disable doctors' videos and play buttons.
+        // Disabled by default.
+        const DOCTORS_VIDEOS_ENABLED = false;
+
+        const carousel = document.querySelector('.doctors-carousel');
+        const wrapper = carousel && carousel.querySelector('.doctors-carousel-wrapper');
+        const cards = wrapper ? wrapper.querySelectorAll('.doctor-card') : [];
+        const prevBtn = document.querySelector('.doctors-prev');
+        const nextBtn = document.querySelector('.doctors-next');
+        const dotsContainer = document.querySelector('.doctors-dots');
+
+        if (carousel && wrapper && cards.length) {
+          let currentIndex = 0;
+          const total = cards.length;
+
+          const getCardsPerView = () => window.innerWidth <= 768 ? 1 : 3;
+
+          const createDots = () => {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+              const d = document.createElement('button');
+              d.className = 'carousel-dot';
+              d.setAttribute('aria-label', `اذهب إلى ${i+1}`);
+              if (i === 0) d.classList.add('active');
+              d.addEventListener('click', () => { goTo(i); });
+              dotsContainer.appendChild(d);
+            }
+          };
+
+          const update = (skipTransition = false) => {
+            currentIndex = Math.max(0, Math.min(currentIndex, total - 1));
+            const first = cards[0];
+            const style = getComputedStyle(first);
+            const cardWidth = first.offsetWidth + (parseInt(style.marginLeft) || 0) + (parseInt(style.marginRight) || 0);
+            const containerWidth = carousel.clientWidth;
+            const cardsPerView = getCardsPerView();
+
+            let translateX = 0;
+            if (cardsPerView > 1) {
+              // desktop/tablet: align to start, but prevent overscroll
+              translateX = Math.min(currentIndex * cardWidth, Math.max(0, total * cardWidth - containerWidth));
+            } else {
+              // mobile: center the active card
+              translateX = Math.max(0, currentIndex * cardWidth - (containerWidth - cardWidth) / 2);
+              // clamp
+              translateX = Math.max(0, Math.min(translateX, Math.max(0, total * cardWidth - containerWidth)));
+            }
+
+            if (skipTransition) wrapper.style.transition = 'none';
+            wrapper.style.transform = `translateX(-${translateX}px)`;
+            if (skipTransition) requestAnimationFrame(() => wrapper.style.transition = 'transform 0.4s ease');
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+          };
+
+          const goTo = (i) => { currentIndex = i; update(); };
+          prevBtn.addEventListener('click', () => { currentIndex = Math.max(0, currentIndex - 1); update(); });
+          nextBtn.addEventListener('click', () => { currentIndex = Math.min(total - 1, currentIndex + 1); update(); });
+          window.addEventListener('resize', () => { update(true); });
+
+          createDots();
+          update(true);
+          
+          // Drag-to-slide support for transform-based carousel
+          let isDragging = false;
+          let dragStartX = 0;
+          let dragStartTranslate = 0;
+
+          const getCurrentTranslate = () => {
+            const t = wrapper.style.transform || '';
+            const m = t.match(/translateX\(-?([\d.]+)px\)/);
+            return m ? parseFloat(m[1]) : 0;
+          };
+
+          wrapper.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartTranslate = getCurrentTranslate();
+            wrapper.style.transition = 'none';
+            wrapper.setPointerCapture(e.pointerId);
+          });
+          wrapper.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const dx = dragStartX - e.clientX;
+            const newTranslate = Math.max(0, Math.min(dragStartTranslate + dx, Math.max(0, total * (cards[0].offsetWidth + parseInt(getComputedStyle(cards[0]).marginLeft || 0) + parseInt(getComputedStyle(cards[0]).marginRight || 0)) - carousel.clientWidth)));
+            wrapper.style.transform = `translateX(-${newTranslate}px)`;
+          });
+          wrapper.addEventListener('pointerup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            wrapper.releasePointerCapture(e.pointerId);
+            // snap to nearest card
+            const cardStyle = getComputedStyle(cards[0]);
+            const cardW = cards[0].offsetWidth + (parseInt(cardStyle.marginLeft)||0) + (parseInt(cardStyle.marginRight)||0);
+            const finalTranslate = getCurrentTranslate();
+            const newIndex = Math.round(finalTranslate / cardW);
+            currentIndex = Math.max(0, Math.min(total - 1, newIndex));
+            update();
+          });
+          wrapper.addEventListener('pointercancel', () => { if (isDragging) { isDragging = false; update(); } });
+        }
+
+        // Video modal behavior
+        const avatars = document.querySelectorAll('#doctors .doctor-avatar');
+        const plays = document.querySelectorAll('#doctors .doctor-play');
+        const modal = document.getElementById('doctor-video-modal');
+        const iframe = document.getElementById('doctor-video-iframe');
+        const closeBtn = document.getElementById('doctor-video-close');
+
+        if (!DOCTORS_VIDEOS_ENABLED) {
+          // Hide play buttons and make avatars inert when videos are disabled.
+          plays.forEach(p => {
+            p.style.display = 'none';
+            p.setAttribute('aria-hidden', 'true');
+          });
+          avatars.forEach(btn => {
+            // remove pointer cursor and mark as disabled for accessibility
+            btn.style.cursor = 'default';
+            btn.setAttribute('aria-disabled', 'true');
+            // prevent any accidental clicks from opening videos
+            btn.addEventListener('click', function(e){
+              e.preventDefault();
+              e.stopPropagation();
+              // no-op while videos are disabled
+            });
+          });
+        } else {
+          // Attach click handlers only when enabled
+          avatars.forEach(btn => btn.addEventListener('click', function(){
+            const video = btn.getAttribute('data-video') || '';
+            if (!video) return;
+            let src = video;
+            if (video.indexOf('youtube.com') !== -1 && video.indexOf('autoplay') === -1) {
+              src = video + (video.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1';
+            }
+            iframe.src = src;
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden';
+          }));
+
+          plays.forEach(btn => btn.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            const video = btn.getAttribute('data-video') || (btn.closest('.doctor-card') && btn.closest('.doctor-card').querySelector('.doctor-avatar') ? btn.closest('.doctor-card').querySelector('.doctor-avatar').getAttribute('data-video') : '') || '';
+            if (!video) return;
+            let src = video;
+            if (video.indexOf('youtube.com') !== -1 && video.indexOf('autoplay') === -1) {
+              src = video + (video.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1';
+            }
+            iframe.src = src;
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden';
+          }));
+        }
+
+        function closeModal() {
+          iframe.src = '';
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden','true');
+          document.body.style.overflow = '';
+        }
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.style.display === 'flex') closeModal(); });
+      })();
+    </script>
 
     <!-- Consultation Section -->
     <section id="consultation" class="section">
@@ -2095,7 +2711,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <div class="testimonials-stats">
         <div class="testimonials-stat-item">
-          <h3>أكثر من ٢٥٠ ألف امرأة تثق بدليلة</h3>
+          <h3>أكثر من ٢٧٠ ألف امرأة تثق بدليلة</h3>
           <p>انضمي إلى مجتمع من النساء اللواتي يثقن بدليلة في رحلتهن الصحية</p>
         </div>
         <div class="testimonials-stat-item">
@@ -2778,9 +3394,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const totalCards = carouselCards.length;
       let isLooping = false;
       
-      // Get cards per view based on screen size
+      // Get cards per view based on screen size (matches CSS breakpoints)
       const getCardsPerView = () => {
-        return window.innerWidth <= 768 ? 1 : 3;
+        if (window.innerWidth <= 768) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 3;
       };
       
       // Create dots based on total cards
@@ -3372,6 +3990,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         behavior: 'smooth'
       });
     }
+    
+    function scrollToTestimonials(event) {
+      event.preventDefault();
+      const nav = document.querySelector('.nav');
+      if (nav && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+      }
+      const section = document.getElementById('testimonials');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.href = '#testimonials';
+      }
+    }
   </script>
   
   <!-- Try It Section - Show after 2 seconds and check for "Yousef ElSammaa" -->
@@ -3520,6 +4152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     });
   </script>
+  
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BV9NT964"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
