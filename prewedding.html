@@ -7,13 +7,13 @@
   <title>دليلك للعلاقة الزوجية | برنامج دليلة التعليمي</title>
   
   <!-- Meta Description -->
-  <meta name="description" content="برنامج الاستعداد للزواج والمتعة الجنسية - دليلك الشامل للعلاقة الزوجية. تعلمي عن جسمك وجسمه، أول مرة، أساسيات الجنس، المتعة والنشوة، ومواجهة الخرافات. مساحة آمنة لطرح كل أسئلتك.">
+  <meta name="description" content="دليلك للعلاقة الزوجية - برنامج دليلة الشامل. تعلمي عن جسمك وجسمه، أول مرة، أساسيات الجنس، المتعة والنشوة، ومواجهة الخرافات. مساحة آمنة لطرح كل أسئلتك.">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://motherbeing.com/ar/programs/marital-relationship">
   <meta property="og:title" content="دليلك للعلاقة الزوجية | برنامج دليلة التعليمي">
-  <meta property="og:description" content="برنامج الاستعداد للزواج والمتعة الجنسية - دليلك الشامل للعلاقة الزوجية. تعلمي عن جسمك وجسمه، أول مرة، أساسيات الجنس، المتعة والنشوة، ومواجهة الخرافات.">
+  <meta property="og:description" content="دليلك للعلاقة الزوجية - برنامج دليلة الشامل. تعلمي عن جسمك وجسمه، أول مرة، أساسيات الجنس، المتعة والنشوة، ومواجهة الخرافات.">
   <meta property="og:image" content="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://motherbeing.com/ar/programs/marital-relationship">
   <meta name="twitter:title" content="دليلك للعلاقة الزوجية | برنامج دليلة التعليمي">
-  <meta name="twitter:description" content="برنامج الاستعداد للزواج والمتعة الجنسية - دليلك الشامل للعلاقة الزوجية. تعلمي عن جسمك وجسمه، أول مرة، أساسيات الجنس، المتعة والنشوة.">
+  <meta name="twitter:description" content="دليلك للعلاقة الزوجية - برنامج دليلة الشامل. تعلمي عن جسمك وجسمه، أول مرة، أساسيات الجنس، المتعة والنشوة.">
   <meta name="twitter:image" content="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -356,22 +356,87 @@ snaptr('track', 'PAGE_VIEW');
     
     /* Hero Section */
     .hero {
-      padding: 80px 24px;
+      padding: 72px 24px 88px;
       max-width: var(--max-width);
       margin: 0 auto;
       text-align: center;
+      position: relative;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(100%, 900px);
+      height: 100%;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(243, 230, 234, 0.7) 0%, transparent 70%);
+      pointer-events: none;
+      border-radius: 0 0 50% 50% / 0 0 20% 20%;
     }
     
     .hero-content {
       margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
     }
     
     .hero h1 {
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(26px, 4.2vw, 42px);
       font-weight: 800;
-      line-height: 1.2;
+      line-height: 1.4;
       color: var(--text-primary);
-      margin-bottom: 24px;
+      margin-bottom: 32px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero h1 .hero-emoji {
+      display: inline-block;
+      margin-inline-start: 6px;
+      vertical-align: middle;
+    }
+    
+    .hero-intro {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent-pink-dark);
+      margin-bottom: 22px;
+      line-height: 1.65;
+      letter-spacing: 0.01em;
+    }
+    
+    .hero-benefits {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto 32px;
+      max-width: 520px;
+      text-align: center;
+    }
+    
+    .hero-benefits li {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.9;
+      color: var(--text-primary);
+      padding: 10px 0;
+      margin: 0;
+    }
+    
+    .hero-benefits li:not(:last-child) {
+      border-bottom: 1px solid rgba(97, 49, 63, 0.12);
+    }
+    
+    .hero-tagline {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      opacity: 0.85;
+      margin-bottom: 40px;
+      font-weight: 400;
     }
     
     .hero p {
@@ -1313,7 +1378,49 @@ snaptr('track', 'PAGE_VIEW');
       }
       
       .hero {
-        padding: 40px 16px;
+        padding: 40px 16px 56px;
+      }
+      
+      .hero-content {
+        margin-bottom: 32px;
+      }
+      
+      .hero h1 {
+        font-size: clamp(22px, 5.5vw, 42px);
+        margin-bottom: 24px;
+        line-height: 1.35;
+      }
+      
+      .hero-intro {
+        font-size: 16px;
+        margin-bottom: 18px;
+      }
+      
+      .hero-benefits {
+        margin-bottom: 24px;
+        padding: 0 8px;
+      }
+      
+      .hero-benefits li {
+        font-size: 16px;
+        padding: 12px 0;
+        line-height: 1.75;
+      }
+      
+      .hero-tagline {
+        font-size: 15px;
+        margin-bottom: 32px;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 0;
+      }
+      
+      .hero-cta .btn {
+        width: 100%;
+        min-height: 48px;
       }
       
       .main-content {
@@ -1427,8 +1534,8 @@ snaptr('track', 'PAGE_VIEW');
       </button>
       <nav class="nav">
         <a href="https://motherbeing.com/ar?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=nav_home" class="nav-link" target="_blank" rel="noopener noreferrer">الرئيسية</a>
-        <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=nav_subscribe" class="nav-link" target="_blank" rel="noopener noreferrer">الاشتراك</a>
-        <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=nav_programs#programs" class="nav-link" target="_blank" rel="noopener noreferrer">البرامج</a>
+        <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=nav_subscribe" class="nav-link" target="_blank" rel="noopener noreferrer">الاشتراك</a>
+        <a href="https://motherbeing.com/ar/programs/?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=nav_programs" class="nav-link" target="_blank" rel="noopener noreferrer">البرامج</a>
       </nav>
     </div>
   </header>
@@ -1436,17 +1543,22 @@ snaptr('track', 'PAGE_VIEW');
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1>دليلك للعلاقة الزوجية</h1>
-      <h2 style="font-size: 24px; font-weight: 600; color: var(--accent-pink); margin-bottom: 16px;">فرحك قرب؟</h2>
-      <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;"><strong>طبيعي تحسي بتوتر وأسئلة عن اللي هايحصل</strong></p>
-      <p style="font-size: 16px; line-height: 1.7; margin-bottom: 24px; opacity: 0.9;">يمكن تكوني خايفة من اللحظات الأولى، أو مش عارفة إيه اللي تتوقعيه في العلاقة الحميمية. ومش عارفة إزاي تكسري حاجز الخجل وتبدأي حياة فيها حب حقيقي وراحة مع شريك حياتك.</p>
-      <p style="font-size: 17px; line-height: 1.8; margin-bottom: 32px; color: var(--accent-pink-dark); font-weight: 600;">برنامج "الاستعداد للزواج والمتعة الجنسية" بيجاوب على كل أسئلتك وهايساعد يزيل كل مخاوفك</p>
-      <p style="font-size: 16px; line-height: 1.7; margin-bottom: 32px;">البرنامج ده معمول عشان يديكي المعلومات والثقة عشان تبدأي حياتك الحميمية من غير خوف. اتعلمي كل اللي انت محتاجاه عشان تفهمي جسمك وجسمه، وتعرفي يعني إيه علاقة حميمية. ومش بس كده، البرنامج ده كمان هيفتح لك باب لفهم أعمق عن المتعة والعلاقة بينك وبين جوزك، عشان تستمري في حياتك الزوجية بسعادة وراحة.</p>
+      <h1><span class="hero-emoji" aria-hidden="true">👰💍</span> فرحك قرب؟ خلي أول أيام جوازك تبدأ بثقة مش خوف</h1>
+      <p class="hero-intro">برنامج دليلك للعلاقة الزوجية من دليلة هيساعدك تفهمي:</p>
+      <ul class="hero-benefits">
+        <li>إيه اللي بيحصل في أول مرة بالظبط</li>
+        <li>جسمك وجسم شريك حياتك من غير إحراج</li>
+        <li>يعني إيه علاقة حميمية صحية وممتعة</li>
+      </ul>
+      <p class="hero-tagline">كل ده بإرشاد طبي موثوق وفي خصوصية تامة.</p>
       <div class="hero-cta">
-        <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=hero_cta" target="_blank" class="btn btn-primary">
+        <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=hero_cta" target="_blank" class="btn btn-primary">
           اشتركي الآن
         </a>
-        <a href="#testimonials" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+        <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=hero_program_sections" target="_blank" class="btn btn-secondary">
+          شاهدي كل أقسام البرنامج
+        </a>
+        <a href="#testimonials" id="hero-testimonials-btn" class="btn btn-secondary" rel="noopener noreferrer">
           آراء المشتركات
         </a>
       </div>
@@ -1533,6 +1645,7 @@ snaptr('track', 'PAGE_VIEW');
   <div class="section-header">
     <h2>أقسام البرنامج</h2>
     <p>برنامج شامل يغطي كل ما تحتاجين معرفته للاستعداد للمتعة الزوجية</p>
+    <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=program_sections_cta" target="_blank" class="btn btn-primary">شاهدي كل أقسام البرنامج</a>
   </div>
   <div class="modules-grid">
     <div class="module-card">
@@ -1549,7 +1662,7 @@ snaptr('track', 'PAGE_VIEW');
         <div class="module-video-blocker"></div>
         <div class="module-video-overlay">
           <h3>اشتركي لمشاهده البرنامج كاملا</h3>
-          <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
+          <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
             اشتركي الآن
           </a>
         </div>
@@ -1612,7 +1725,7 @@ snaptr('track', 'PAGE_VIEW');
         <div class="module-video-blocker"></div>
         <div class="module-video-overlay">
           <h3>اشتركي لمشاهده البرنامج كاملا</h3>
-          <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
+          <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
             اشتركي الآن
           </a>
         </div>
@@ -1676,7 +1789,7 @@ snaptr('track', 'PAGE_VIEW');
         <div class="module-video-blocker"></div>
         <div class="module-video-overlay">
           <h3>اشتركي لمشاهده البرنامج كاملا</h3>
-          <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
+          <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay" target="_blank" class="btn">
             اشتركي الآن
           </a>
         </div>
@@ -2009,8 +2122,8 @@ snaptr('track', 'PAGE_VIEW');
     <!-- CTA Section -->
     <section class="cta-section">
       <h2>ابدئي رحلتكِ بثقة اليوم</h2>
-      <p>انضمي لآلاف النساء اللواتي استفدن من برنامج "الاستعداد للزواج والمتعة الجنسية". احصلي على كل المعلومات اللي تحتاجيها عن جسمك وجسمه، أول مرة، المتعة والنشوة، وكل الأسئلة اللي بتخجلي من طرحها</p>
-      <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=cta_section" target="_blank" class="btn btn-primary">
+      <p>انضمي لآلاف النساء اللواتي استفدن من برنامج "دليلك للعلاقة الزوجية". احصلي على كل المعلومات اللي تحتاجيها عن جسمك وجسمه، أول مرة، المتعة والنشوة، وكل الأسئلة اللي بتخجلي من طرحها</p>
+      <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=cta_section" target="_blank" class="btn btn-primary">
         اشتركي الآن
       </a>
     </section>
@@ -2106,7 +2219,7 @@ snaptr('track', 'PAGE_VIEW');
             متبقي: <span id="sticky-hours">02</span> : <span id="sticky-minutes">34</span> : <span id="sticky-seconds">50</span>
           </div>
         </div>
-        <a href="https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=sticky_cta" target="_blank" class="btn btn-primary">
+        <a href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=sticky_cta" target="_blank" class="btn btn-primary">
           اشتركي الآن
         </a>
       </div>
@@ -2205,7 +2318,7 @@ snaptr('track', 'PAGE_VIEW');
                 e.preventDefault();
                 e.stopPropagation();
                 // Redirect to subscribe instead
-                const subscribeUrl = 'https://motherbeing.com/ar/programs/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay';
+                const subscribeUrl = 'https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_video_overlay';
                 window.open(subscribeUrl, '_blank');
               }
             });
@@ -2752,7 +2865,7 @@ snaptr('track', 'PAGE_VIEW');
     }
 
     // Smooth scroll for "آراء المشتركات" button
-    const testimonialsButton = document.querySelector('.hero-cta .btn-secondary');
+    const testimonialsButton = document.getElementById('hero-testimonials-btn');
     if (testimonialsButton) {
       testimonialsButton.addEventListener('click', (e) => {
         e.preventDefault();
