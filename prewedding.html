@@ -482,7 +482,8 @@ snaptr('track', 'PAGE_VIEW');
       background: #000;
     }
     
-    .hero-media .video-wrapper iframe {
+    .hero-media .video-wrapper iframe,
+    .hero-media .video-wrapper video {
       position: absolute;
       top: 0;
       left: 0;
@@ -490,6 +491,7 @@ snaptr('track', 'PAGE_VIEW');
       height: 100%;
       border: none;
       border-radius: 16px;
+      object-fit: cover;
     }
     
     .hero-cta {
@@ -1599,14 +1601,16 @@ snaptr('track', 'PAGE_VIEW');
     <div class="hero-media">
       <div class="video-wrapper">
         <!-- Hero video - Main program introduction -->
-        <iframe 
-          src="https://player.vimeo.com/video/1128393746?title=0&byline=0&portrait=0&autoplay=1&muted=1&loop=1" 
-          frameborder="0" 
-          allow="autoplay; fullscreen; picture-in-picture" 
-          allowfullscreen
-          loading="lazy"
+        <video
+          id="hero-video"
+          src="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Prewedding.mp4"
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
           title="دليلك للعلاقة الزوجية">
-        </iframe>
+        </video>
       </div>
     </div>
   </section>
@@ -2257,6 +2261,26 @@ snaptr('track', 'PAGE_VIEW');
         </a>
       </div>
     </div>
+
+    <!-- Hero video: autoplay when scrolled into view -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var heroVideo = document.getElementById('hero-video');
+        if (!heroVideo) return;
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              heroVideo.play().catch(function() {});
+            } else {
+              heroVideo.pause();
+            }
+          });
+        }, { threshold: 0.25, rootMargin: '0px' });
+
+        observer.observe(heroVideo);
+      });
+    </script>
 
     <!-- Vimeo Player API -->
     <script src="https://player.vimeo.com/api/player.js"></script>
