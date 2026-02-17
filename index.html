@@ -380,6 +380,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .hero-media .video-wrapper {
       position: relative;
     }
+
+    /* Hero video fullscreen button */
+    .hero-media .hero-fullscreen-btn {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 5;
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    }
+    .hero-media .hero-fullscreen-btn:hover {
+      background: rgba(0,0,0,0.85);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    }
+    .hero-media .hero-fullscreen-btn svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
     
     /* Video.js customizations */
     .hero-media .video-wrapper .video-js .vjs-control-bar {
@@ -410,6 +441,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 40px;
+    }
+
+    .hero-cta-below {
+      margin-top: 24px;
+      margin-bottom: 0;
     }
     
     .hero-subscribe {
@@ -1852,18 +1888,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="hero-content">
       <h1>خليكي صاحبة جسمك وصحتك</h1>
       <p>دليلة هي المساعدة الصحية المثلى للمرأة العربية، حيث توفّر لكِ كل ما تحتاجينه عن صحة المرأة، مع إمكانية الوصول الفوري إلى الأطباء بسهولة، وخصوصية، وبطريقة مصممة خصيصًا لكِ.</p>
-      <div class="hero-cta">
-  <!-- <a href="#try-it" class="btn btn-secondary" onclick="scrollToTryIt(event)">
-    جربي دليلة
-  </a> -->
-  <a href="#testimonials" class="btn btn-secondary" onclick="scrollToTestimonials(event)">
-    آراء المشتركات
-  </a>
-  <a href="https://daleela.go.link/bsN7f" target="_blank" rel="noopener" class="btn btn-secondary">
-    تحميل التطبيق
-  </a>
-</div>
-
     </div>
     <div class="hero-media">
       <div class="video-wrapper">
@@ -1894,23 +1918,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         -->
                             <!-- src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FDaleelaapp%2Fvideos%2F2906701216186925%2F%23&show_text=0&width=560&height=315&autoplay=true&muted=1&loop=1"         -->
 
-        <!-- Facebook Video Player -->
-        <iframe 
-          id="fb-video-iframe"
-                   src="https://image.moengage.com/daleelamoengage/images/20260209134117209400SY58TWdaleelaintromp4daleelamoengage/images.mp4"        
-
-          width="100%" 
-          height="100%" 
-          style="border:none;overflow:hidden;display:block" 
-          scrolling="no" 
-          frameborder="0" 
-          allowfullscreen="true" 
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
-          loading="lazy"
-          title="Hero Video"
-          webkitallowfullscreen="true"
-          mozallowfullscreen="true">
-        </iframe>
+        <!-- Hero HTML5 video player -->
+        <video
+          id="hero-video"
+          controls
+          muted
+          playsinline
+          preload="metadata"
+          style="width:100%;height:100%;display:block;border:0;object-fit:cover;border-radius:16px;">
+          <source src="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/daleela%20intro.mp4" type="video/mp4">
+          متصفحك لا يدعم تشغيل الفيديو.
+        </video>
+        
+        <!-- Fullscreen offer button -->
+        <button type="button" id="hero-video-fullscreen" class="hero-fullscreen-btn" aria-label="تشغيل الفيديو في وضع ملء الشاشة">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 3H3v4h2V5h2V3zm10 0v2h2v2h2V3h-4zM5 17H3v4h4v-2H5v-2zm16 0h-2v2h-2v2h4v-4z"/>
+          </svg>
+          <span>تكبير الفيديو</span>
+        </button>
         
         <!-- Option 3: Video.js with direct video URL (requires direct video hosting) -->
         <!-- 
@@ -1931,15 +1957,80 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         -->
       </div>
     </div>
+    <div class="hero-cta hero-cta-below">
+      <a href="#testimonials" class="btn btn-secondary" onclick="scrollToTestimonials(event)">
+        آراء المستخدمات
+      </a>
+      <a href="#doctors" class="btn btn-secondary" onclick="scrollToDoctors(event)">
+        تعرفي علي أطباء دليلة
+      </a>
+      <a href="https://daleela.go.link/bsN7f" target="_blank" rel="noopener" class="btn btn-secondary">
+        تحميل التطبيق
+      </a>
+    </div>
   </section>
+
+  <script>
+    // Autoplay hero video when scrolled into view & offer fullscreen
+    (function() {
+      function initHeroVideo() {
+        var video = document.getElementById('hero-video');
+        if (!video) return;
+
+        // Ensure muted for autoplay policies
+        video.muted = true;
+
+        var hasAutoPlayed = false;
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting && !hasAutoPlayed) {
+                hasAutoPlayed = true;
+                video.play().catch(function() {});
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(video);
+        } else {
+          // Fallback: try to play once after a short delay
+          setTimeout(function() {
+            if (!hasAutoPlayed) {
+              hasAutoPlayed = true;
+              video.play().catch(function() {});
+            }
+          }, 2000);
+        }
+
+        // Fullscreen button
+        var fsBtn = document.getElementById('hero-video-fullscreen');
+        if (fsBtn) {
+          fsBtn.addEventListener('click', function() {
+            if (video.requestFullscreen) {
+              video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+              video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+              video.msRequestFullscreen();
+            }
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeroVideo);
+      } else {
+        initHeroVideo();
+      }
+    })();
+  </script>
 
   <!-- Main Content -->
   <main class="main-content">
     <!-- Why Subscribe Section -->
     <section id="benefits" class="section">
       <div class="section-header">
-        <h2>لماذا تختاري اشتراك دليلة؟</h2>
-        <p>اشتراك واحد يقدم لكِ كل الدعم الصحي اللي تحتاجيه</p>
+        <h2>لماذا تختاري دليلة؟</h2>
+        <p>تطبيق واحد يقدم لكِ كل الدعم الصحي اللي تحتاجيه</p>
         <p class="benefits-demo-note">اضغطي على أي ميزة أدناه لمشاهدة ديمو التطبيق</p>
       </div>
       <div class="benefits-list">
@@ -2279,48 +2370,112 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- أطباء ومتخصصين دليلة (كـ Carousel تحت قسم البرامج) -->
     <section id="doctors" class="section" dir="rtl" style="background:#fff;padding:30px 16px;">
       <style>
-        /* Play button: rounded radar/pulse animation */
-        #doctors .doctor-play{
-          width:36px;
-          height:36px;
-          border-radius:50%;
-          display:inline-grid;
-          place-items:center;
-          background:#fff;
-          color:#e91e63;
-          border:0;
-          box-shadow:0 6px 18px rgba(0,0,0,0.08);
-          position:relative;
-          overflow:visible;
-          cursor:pointer;
-          transition:transform .18s ease;
+        /* Cards with video: clickable; ensure they receive clicks on desktop */
+        #doctors .doctor-card { position: relative; z-index: 1; }
+        #doctors .doctor-avatar { position: relative; z-index: 2; }
+        /* No-video card (e.g. Nour): not clickable */
+        #doctors .doctor-card-no-video .doctor-avatar {
+          cursor: default !important;
+          pointer-events: none;
         }
-        #doctors .doctor-play svg{ width:18px; height:18px; display:block; }
-        #doctors .doctor-play:hover{ transform:translateY(-2px) scale(1.04); }
-        /* radar rings */
+        #doctors .doctor-card-no-video .doctor-avatar:hover { transform: none; opacity: 1; }
+        /* Avatar with video: play overlay on hover */
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar {
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar:hover {
+          transform: scale(1.02);
+          box-shadow: 0 8px 24px rgba(233,30,99,0.2);
+        }
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar-wrap {
+          position: relative;
+          display: inline-block;
+        }
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar-wrap::after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: rgba(233,30,99,0.9);
+          opacity: 0;
+          transition: opacity 0.2s ease;
+          pointer-events: none;
+        }
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar-wrap .play-overlay-icon {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+          width: 28px;
+          height: 28px;
+          margin-left: 3px;
+          color: #fff;
+          opacity: 0;
+          transition: opacity 0.2s ease;
+          pointer-events: none;
+        }
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar-wrap:hover::after,
+        #doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar-wrap:hover .play-overlay-icon { opacity: 1; }
+        /* Play button next to name: enhanced UX */
+        #doctors .doctor-play {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+          color: #fff;
+          border: 0;
+          box-shadow: 0 4px 14px rgba(233,30,99,0.4);
+          position: relative;
+          overflow: visible;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #doctors .doctor-play:hover {
+          transform: translateY(-2px) scale(1.08);
+          box-shadow: 0 6px 20px rgba(233,30,99,0.5);
+        }
+        #doctors .doctor-play:active { transform: translateY(0) scale(1); }
+        #doctors .doctor-play svg {
+          width: 20px;
+          height: 20px;
+          display: block;
+          fill: #fff;
+          position: relative;
+          z-index: 1;
+        }
         #doctors .doctor-play::before,
-        #doctors .doctor-play::after{
-          content:'';
-          position:absolute;
-          left:50%;
-          top:50%;
-          transform:translate(-50%,-50%) scale(0.8);
-          width:36px;
-          height:36px;
-          border-radius:50%;
-          pointer-events:none;
-          box-shadow: 0 0 0 2px rgba(233,30,99,0.12) inset;
-          opacity:0.85;
+        #doctors .doctor-play::after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: -1;
+          box-shadow: 0 0 0 2px rgba(233,30,99,0.25);
+          opacity: 0.9;
         }
-        #doctors .doctor-play::after{
-          box-shadow:0 0 0 2px rgba(233,30,99,0.18);
-          animation:radarPulse 2.2s infinite linear;
-          opacity:0;
+        #doctors .doctor-play::after {
+          z-index: -1;
+          box-shadow: 0 0 0 2px rgba(233,30,99,0.35);
+          animation: doctorRadarPulse 2.2s infinite linear;
+          opacity: 0;
         }
-        @keyframes radarPulse{
-          0%{ transform:translate(-50%,-50%) scale(0.6); opacity:0.9; }
-          60%{ transform:translate(-50%,-50%) scale(1.8); opacity:0.12; }
-          100%{ transform:translate(-50%,-50%) scale(2.2); opacity:0; }
+        @keyframes doctorRadarPulse {
+          0% { transform: translate(-50%,-50%) scale(0.7); opacity: 0.9; }
+          60% { transform: translate(-50%,-50%) scale(1.6); opacity: 0.15; }
+          100% { transform: translate(-50%,-50%) scale(2); opacity: 0; }
         }
       </style>
       <div class="section-header" style="text-align:center;">
@@ -2331,27 +2486,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="doctors-carousel" style="margin-top:18px;">
         <div class="doctors-carousel-wrapper" style="display:flex;transition:transform 0.4s ease;will-change:transform;">
           <!-- slide -->
-          <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
-            <button class="doctor-avatar" data-video="https://www.youtube.com/embed/VIDEO_ID_0" aria-label="فتح فيديو نور" style="border:0;background:none;cursor:pointer;">
-              <img src="https://image.moengage.com/daleelamoengage/20260207053847962410ABA8YQNOURCEOjpgcompdaleelamoengage.jpg" alt="نور - مؤسسة أبلكيشن دليلة" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
-            </button>
+          <div class="doctor-card doctor-card-no-video" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
+            <div class="doctor-avatar-wrap">
+              <button type="button" class="doctor-avatar" aria-label="نور امام" style="border:0;background:none;">
+                <img src="https://image.moengage.com/daleelamoengage/20260207053847962410ABA8YQNOURCEOjpgcompdaleelamoengage.jpg" alt="نور - مؤسسة أبلكيشن دليلة" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+              </button>
+            </div>
             <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
               <div style="display:flex;align-items:center;gap:8px;">
                 <strong>نور امام</strong>
-                <!-- no play icon for other doctors -->
               </div>
               <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">مؤسسة أبلكيشن دليلة</div>
             </div>
           </div>
           <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
-            <button class="doctor-avatar" data-video="https://drive.google.com/file/d/1EEPaVMRaWEVSB-cd6wnYvfjKd0xMoGcJ/preview?autoplay=1" aria-label="فتح فيديو ا.د/ اية محمد فهمي" style="border:0;background:none;cursor:pointer;">
-              <img src="https://image.moengage.com/daleelamoengage/20260207054122122750DGEIN8DrAyaskinjpgcompdaleelamoengage.jpg" alt="ا.د/ اية محمد فهمي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
-            </button>
+            <div class="doctor-avatar-wrap">
+              <button type="button" class="doctor-avatar" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Aya%20Skin.mp4" aria-label="فتح فيديو ا.د/ اية محمد فهمي" style="border:0;background:none;">
+                <img src="https://image.moengage.com/daleelamoengage/20260207054122122750DGEIN8DrAyaskinjpgcompdaleelamoengage.jpg" alt="ا.د/ اية محمد فهمي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+              </button>
+              <svg class="play-overlay-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </div>
             <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
               <div style="display:flex;align-items:center;gap:8px;">
                 <strong>ا.د/ اية محمد فهمي</strong>
-                <button class="doctor-play" data-video="https://drive.google.com/file/d/1EEPaVMRaWEVSB-cd6wnYvfjKd0xMoGcJ/preview?autoplay=1" aria-label="تشغيل فيديو ا.د/ اية محمد فهمي" style="border:0;background:none;cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;color:#e91e63;">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <button type="button" class="doctor-play" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Aya%20Skin.mp4" aria-label="تشغيل فيديو ا.د/ اية محمد فهمي" style="border:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
                 </button>
               </div>
               <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">استاذ مساعد و استشاري الأمراض الجلدية و التجميل و الليزر كلية طب القصر العيني جامعة القاهرة</div>
@@ -2360,14 +2519,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
           <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
-            <button class="doctor-avatar" data-video="https://drive.google.com/file/d/1smmtvBPeY8iOsf9cwnHfZ7c3mYq4QdLr/preview?autoplay=1" aria-label="فتح فيديو د/ دينا الشرقاوي" style="border:0;background:none;cursor:pointer;">
-              <img src="https://image.moengage.com/daleelamoengage/202602070540284416511WL17WDrDinaSkinjpgcompdaleelamoengage.jpg" alt="د/ دينا الشرقاوي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
-            </button>
+            <div class="doctor-avatar-wrap">
+              <button type="button" class="doctor-avatar" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Dina%20Skin.mp4" aria-label="فتح فيديو د/ دينا الشرقاوي" style="border:0;background:none;">
+                <img src="https://image.moengage.com/daleelamoengage/202602070540284416511WL17WDrDinaSkinjpgcompdaleelamoengage.jpg" alt="د/ دينا الشرقاوي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+              </button>
+              <svg class="play-overlay-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </div>
             <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
               <div style="display:flex;align-items:center;gap:8px;">
                 <strong>د/ دينا الشرقاوي</strong>
-                <button class="doctor-play" data-video="https://drive.google.com/file/d/1smmtvBPeY8iOsf9cwnHfZ7c3mYq4QdLr/preview?autoplay=1" aria-label="تشغيل فيديو د/ دينا الشرقاوي" style="border:0;background:none;cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;color:#e91e63;">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <button type="button" class="doctor-play" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Dina%20Skin.mp4" aria-label="تشغيل فيديو د/ دينا الشرقاوي" style="border:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
                 </button>
               </div>
               <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">استشاري و أستاذ مساعد الامراض الجلدية كلية طب القصر العيني جامعة القاهرة</div>
@@ -2376,27 +2538,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
           <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
-            <button class="doctor-avatar" data-video="https://drive.google.com/file/d/1sLIqohrddhMtmgPQFtYInANMnjlHSHJm/preview?autoplay=1" aria-label="فتح فيديو د/ مي ضياء سرحان" style="border:0;background:none;cursor:pointer;">
-              <img src="https://image.moengage.com/daleelamoengage/20260207054003368833I1K987DrMainutritionjpgcompdaleelamoengage.jpg" alt="د/ مي ضياء سرحان" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
-            </button>
+            <div class="doctor-avatar-wrap">
+              <button type="button" class="doctor-avatar" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Mai%20Nutrition.mp4" aria-label="فتح فيديو د/ مي ضياء سرحان" style="border:0;background:none;">
+                <img src="https://image.moengage.com/daleelamoengage/20260207054003368833I1K987DrMainutritionjpgcompdaleelamoengage.jpg" alt="د/ مي ضياء سرحان" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+              </button>
+              <svg class="play-overlay-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </div>
             <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
               <div style="display:flex;align-items:center;gap:8px;">
                 <strong>د/ مي ضياء سرحان</strong>
-                <button class="doctor-play" data-video="https://drive.google.com/file/d/1sLIqohrddhMtmgPQFtYInANMnjlHSHJm/preview?autoplay=1" aria-label="تشغيل فيديو د/ مي ضياء سرحان" style="border:0;background:none;cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;color:#e91e63;">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <button type="button" class="doctor-play" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Mai%20Nutrition.mp4" aria-label="تشغيل فيديو د/ مي ضياء سرحان" style="border:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
                 </button>
               </div>
               <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">أستاذ مساعد في القصر العيني و إخصائية تغذية علاجية</div>
             </div>
           </div>
           <div class="doctor-card" style="margin:0 12px;flex-shrink:0;width:260px;text-align:center;padding:16px;border-radius:12px;">
-            <button class="doctor-avatar" data-video="https://www.youtube.com/embed/VIDEO_ID_MONIQUE" aria-label="فتح فيديو د/ مونيك مجدي" style="border:0;background:none;cursor:pointer;">
-              <img src="https://image.moengage.com/daleelamoengage/20260207053938250159VTBQD8DrMoniqueSexualHealthjpgcompdaleelamoengage.jpg" alt="د/ مونيك مجدي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
-            </button>
+            <div class="doctor-avatar-wrap">
+              <button type="button" class="doctor-avatar" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Monique%20Sexology.mp4" aria-label="فتح فيديو د/ مونيك مجدي" style="border:0;background:none;">
+                <img src="https://image.moengage.com/daleelamoengage/20260207053938250159VTBQD8DrMoniqueSexualHealthjpgcompdaleelamoengage.jpg" alt="د/ مونيك مجدي" style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;">
+              </button>
+              <svg class="play-overlay-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </div>
             <div class="doctor-info" style="color:#222;display:flex;flex-direction:column;align-items:center;">
               <div style="display:flex;align-items:center;gap:8px;">
                 <strong>د/ مونيك مجدي</strong>
-                <!-- no play icon for other doctors -->
+                <button type="button" class="doctor-play" data-video="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Dr%20Monique%20Sexology.mp4" aria-label="تشغيل فيديو د/ مونيك مجدي" style="border:0;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+                </button>
               </div>
               <div style="color:#777;font-size:13px;margin-top:6px;text-align:center;">دكتورة امراض النساء والتوليد والعقم</div>
             </div>
@@ -2415,22 +2585,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
 
       </div>
-
-      <!-- Video modal -->
-      <div id="doctor-video-modal" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:0;">
-        <div id="doctor-video-container" style="background:#000;border-radius:6px;max-width:100%;width:100%;height:100%;max-height:100vh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
-          <button id="doctor-video-close" aria-label="إغلاق الفيديو" style="position:absolute;right:12px;top:12px;background:rgba(255,255,255,0.9);border-radius:50%;border:0;padding:8px;cursor:pointer;font-size:16px;z-index:3;">✕</button>
-          <!-- make iframe take full modal area so desktop behaves like mobile fullscreen -->
-          <iframe id="doctor-video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen="allowfullscreen" style="width:100%;height:100%;border:0;display:block;"></iframe>
-        </div>
-      </div>
     </section>
 
     <script>
       (function(){
         // Toggle to enable/disable doctors' videos and play buttons.
-        // Disabled by default.
-        const DOCTORS_VIDEOS_ENABLED = false;
+        const DOCTORS_VIDEOS_ENABLED = true;
 
         const carousel = document.querySelector('.doctors-carousel');
         const wrapper = carousel && carousel.querySelector('.doctors-carousel-wrapper');
@@ -2530,70 +2690,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           wrapper.addEventListener('pointercancel', () => { if (isDragging) { isDragging = false; update(); } });
         }
 
-        // Video modal behavior
-        const avatars = document.querySelectorAll('#doctors .doctor-avatar');
-        const plays = document.querySelectorAll('#doctors .doctor-play');
-        const modal = document.getElementById('doctor-video-modal');
-        const iframe = document.getElementById('doctor-video-iframe');
-        const closeBtn = document.getElementById('doctor-video-close');
+        // Video modal: run after DOM is ready so modal (at end of body) exists
+        function initDoctorVideoModal() {
+          var modal = document.getElementById('doctor-video-modal');
+          var videoEl = document.getElementById('doctor-video-player');
+          var sourceEl = document.getElementById('doctor-video-source');
+          var closeBtn = document.getElementById('doctor-video-close');
+          if (!modal || !videoEl || !sourceEl) return;
 
-        if (!DOCTORS_VIDEOS_ENABLED) {
-          // Hide play buttons and make avatars inert when videos are disabled.
-          plays.forEach(p => {
-            p.style.display = 'none';
-            p.setAttribute('aria-hidden', 'true');
-          });
-          avatars.forEach(btn => {
-            // remove pointer cursor and mark as disabled for accessibility
-            btn.style.cursor = 'default';
-            btn.setAttribute('aria-disabled', 'true');
-            // prevent any accidental clicks from opening videos
-            btn.addEventListener('click', function(e){
+          function openVideoModal(src) {
+            if (!src) return;
+            sourceEl.src = src;
+            sourceEl.type = 'video/mp4';
+            videoEl.load();
+            modal.style.setProperty('display', 'flex', 'important');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            videoEl.play().catch(function() {});
+          }
+
+          function closeModal() {
+            videoEl.pause();
+            sourceEl.removeAttribute('src');
+            videoEl.load();
+            modal.style.setProperty('display', 'none', 'important');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+
+          if (!DOCTORS_VIDEOS_ENABLED) {
+            document.querySelectorAll('#doctors .doctor-play').forEach(function(p) {
+              p.style.display = 'none';
+              p.setAttribute('aria-hidden', 'true');
+            });
+            document.querySelectorAll('#doctors .doctor-card:not(.doctor-card-no-video) .doctor-avatar').forEach(function(btn) {
+              btn.style.cursor = 'default';
+              btn.setAttribute('aria-disabled', 'true');
+            });
+          } else {
+            document.addEventListener('click', function(e) {
+              var trigger = e.target.closest('#doctors .doctor-avatar[data-video], #doctors .doctor-play[data-video]');
+              if (!trigger) return;
+              var video = trigger.getAttribute('data-video');
+              if (!video) return;
               e.preventDefault();
               e.stopPropagation();
-              // no-op while videos are disabled
+              openVideoModal(video);
             });
+          }
+          if (closeBtn) closeBtn.addEventListener('click', closeModal);
+          modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
           });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initDoctorVideoModal);
         } else {
-          // Attach click handlers only when enabled
-          avatars.forEach(btn => btn.addEventListener('click', function(){
-            const video = btn.getAttribute('data-video') || '';
-            if (!video) return;
-            let src = video;
-            if (video.indexOf('youtube.com') !== -1 && video.indexOf('autoplay') === -1) {
-              src = video + (video.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1';
-            }
-            iframe.src = src;
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden','false');
-            document.body.style.overflow = 'hidden';
-          }));
-
-          plays.forEach(btn => btn.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            const video = btn.getAttribute('data-video') || (btn.closest('.doctor-card') && btn.closest('.doctor-card').querySelector('.doctor-avatar') ? btn.closest('.doctor-card').querySelector('.doctor-avatar').getAttribute('data-video') : '') || '';
-            if (!video) return;
-            let src = video;
-            if (video.indexOf('youtube.com') !== -1 && video.indexOf('autoplay') === -1) {
-              src = video + (video.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1';
-            }
-            iframe.src = src;
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden','false');
-            document.body.style.overflow = 'hidden';
-          }));
+          initDoctorVideoModal();
         }
-
-        function closeModal() {
-          iframe.src = '';
-          modal.style.display = 'none';
-          modal.setAttribute('aria-hidden','true');
-          document.body.style.overflow = '';
-        }
-        if (closeBtn) closeBtn.addEventListener('click', closeModal);
-        if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.style.display === 'flex') closeModal(); });
       })();
     </script>
 
@@ -2703,7 +2858,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- Testimonials -->
     <section id="testimonials" class="section">
       <div class="section-header">
-        <h2>آراء المشتركات</h2>
+        <h2>آراء المستخدمات</h2>
         <p>نتائج حقيقية من نساء مثلِك</p>
       </div>
       <div class="testimonials-stats">
@@ -4001,6 +4156,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         window.location.href = '#testimonials';
       }
     }
+
+    function scrollToDoctors(event) {
+      event.preventDefault();
+      const nav = document.querySelector('.nav');
+      if (nav && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+      }
+      const section = document.getElementById('doctors');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.href = '#doctors';
+      }
+    }
   </script>
   
   <!-- Try It Section - Show after 2 seconds and check for "Yousef ElSammaa" -->
@@ -4154,5 +4323,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BV9NT964"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Doctor video modal: top-level so it works on desktop and mobile -->
+  <div id="doctor-video-modal" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.88);z-index:99999;padding:16px;box-sizing:border-box;">
+    <div id="doctor-video-container" style="background:#000;border-radius:8px;max-width:100%;width:100%;height:100%;max-height:100vh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
+      <button type="button" id="doctor-video-close" aria-label="إغلاق الفيديو" style="position:absolute;right:12px;top:12px;background:rgba(255,255,255,0.95);border-radius:50%;border:0;padding:10px;cursor:pointer;font-size:18px;z-index:10;line-height:1;">✕</button>
+      <video id="doctor-video-player" controls playsinline style="width:100%;height:100%;object-fit:contain;display:block;" preload="metadata">
+        <source id="doctor-video-source" src="" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+    </div>
+  </div>
+
 </body>
 </html>
