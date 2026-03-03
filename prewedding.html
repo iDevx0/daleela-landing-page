@@ -2395,8 +2395,9 @@ snaptr('track', 'PAGE_VIEW');
       });
     </script>
 
-    <!-- Meta Pixel InitiateCheckout Event -->
+    <!-- Meta Pixel InitiateCheckout Event + GA4 dataLayer -->
     <script>
+      window.dataLayer = window.dataLayer || [];
       document.addEventListener('DOMContentLoaded', function() {
         const subscribeButtons = document.querySelectorAll('a[href*="/subscribe/product/program/program_prewedding"]');
         
@@ -2410,6 +2411,26 @@ snaptr('track', 'PAGE_VIEW');
             if (typeof snaptr !== 'undefined') {
               snaptr('track', 'CHECKOUT_START');
             }
+            // GA4 / GTM dataLayer - begin_checkout
+            var buttonLocation = 'unknown';
+            if (button.closest('.hero-cta')) buttonLocation = 'hero_section';
+            else if (button.closest('.sticky-cta')) buttonLocation = 'sticky_cta';
+            else if (button.closest('.module-video-overlay')) buttonLocation = 'module_video_overlay';
+            else if (button.closest('#modules') || button.closest('.section')) {
+              var sec = button.closest('section') || button.closest('.section');
+              buttonLocation = (sec && sec.id) ? sec.id : 'cta_section';
+            }
+            dataLayer.push({
+              event: 'begin_checkout',
+              event_category: 'engagement',
+              event_label: 'subscribe_button_click',
+              button_text: (button.textContent || '').trim() || 'اشتركي الآن',
+              button_location: buttonLocation,
+              button_href: button.href || '',
+              page_location: window.location.href,
+              page_title: document.title || 'دليلك للعلاقة الزوجية',
+              program: 'program_prewedding'
+            });
           });
         });
       });
@@ -2933,6 +2954,147 @@ snaptr('track', 'PAGE_VIEW');
       });
     }
     </script>
+
+    <!-- GA4 Events: dataLayer pushes for GTM/GA4 -->
+    <script>
+    (function() {
+      window.dataLayer = window.dataLayer || [];
+      function ga4Event(eventName, params) {
+        var payload = { event: eventName };
+        if (params && typeof params === 'object') {
+          for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) payload[k] = params[k];
+        }
+        payload.page_location = payload.page_location || (window.location && window.location.href);
+        payload.page_title = payload.page_title || (document && document.title);
+        payload.program = payload.program || 'program_prewedding';
+        dataLayer.push(payload);
+      }
+      function onDomReady(fn) {
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn();
+      }
+      onDomReady(function() {
+        var doc = document;
+
+        // ——— Nav links ———
+        doc.querySelectorAll('header .nav-link').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', {
+              link_url: a.href || '',
+              link_text: (a.textContent || '').trim(),
+              outbound: true,
+              section: 'nav'
+            });
+          });
+        });
+
+        // ——— Logo (header) ———
+        doc.querySelectorAll('header a.logo').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', { link_text: 'logo', link_url: a.href, outbound: true, section: 'header' });
+          });
+        });
+
+        // ——— Mobile menu toggle ———
+        var menuToggle = doc.querySelector('.mobile-menu-toggle');
+        if (menuToggle) {
+          menuToggle.addEventListener('click', function() {
+            var nav = doc.querySelector('.nav');
+            ga4Event('menu_toggle', { menu_open: nav && nav.classList.contains('active') });
+          });
+        }
+
+        // ——— Hero CTAs ———
+        doc.querySelectorAll('.hero-cta a[href*="program_prewedding"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', {
+              link_text: 'شاهدي كل أقسام البرنامج',
+              link_url: a.href,
+              cta_location: 'hero',
+              outbound: true
+            });
+          });
+        });
+        var heroTestimonials = doc.getElementById('hero-testimonials-btn');
+        if (heroTestimonials) {
+          heroTestimonials.addEventListener('click', function() {
+            ga4Event('click', { link_text: 'آراء المستخدمات', link_url: '#testimonials', cta_location: 'hero', outbound: false });
+          });
+        }
+
+        // ——— Program sections CTA ———
+        doc.querySelectorAll('#modules .btn-primary[href*="program_prewedding"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('select_content', {
+              content_type: 'program',
+              item_id: 'prewedding_sections',
+              link_url: a.href,
+              link_text: (a.textContent || '').trim().slice(0, 80),
+              cta_location: 'program_sections'
+            });
+          });
+        });
+
+        // ——— Module card click ———
+        doc.querySelectorAll('.module-content').forEach(function(el) {
+          el.addEventListener('click', function() {
+            var titleEl = el.querySelector('h3');
+            ga4Event('module_card_click', {
+              content_type: 'program_module',
+              item_id: 'prewedding',
+              module_title: titleEl ? (titleEl.textContent || '').trim().slice(0, 100) : '',
+              section: 'modules'
+            });
+          });
+        });
+
+        // ——— App download (footer) ———
+        doc.querySelectorAll('a[href*="daleela.go.link"], a[href*="go.link"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            var loc = a.closest('footer') ? 'footer' : (a.closest('.sticky-cta') ? 'sticky_cta' : 'other');
+            ga4Event('app_download_click', { link_url: a.href, cta_location: loc, link_text: (a.textContent || '').trim().slice(0, 100) });
+          });
+        });
+
+        // ——— Footer logo ———
+        doc.querySelectorAll('footer .footer-logo a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', { link_text: 'logo', link_url: a.href, outbound: true, section: 'footer' });
+          });
+        });
+
+        // ——— Footer terms/privacy ———
+        doc.querySelectorAll('footer a.footer-link').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', { link_url: a.href, link_text: (a.textContent || '').trim(), outbound: true, section: 'footer' });
+          });
+        });
+
+        // ——— Hero video play ———
+        var heroVideo = doc.getElementById('hero-video');
+        if (heroVideo) {
+          heroVideo.addEventListener('play', function oncePlay() {
+            heroVideo.removeEventListener('play', oncePlay);
+            ga4Event('video_start', { video_title: 'prewedding_hero', video_location: 'hero' });
+          });
+        }
+
+        // ——— Sticky CTA first view ———
+        var stickyCta = doc.querySelector('.sticky-cta');
+        if (stickyCta && typeof IntersectionObserver !== 'undefined') {
+          var stickyObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                ga4Event('sticky_cta_view', { visible: true });
+                stickyObserver.disconnect();
+              }
+            });
+          }, { threshold: 0.1 });
+          stickyObserver.observe(stickyCta);
+        }
+      });
+    })();
+    </script>
+
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-BV9NT964"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
