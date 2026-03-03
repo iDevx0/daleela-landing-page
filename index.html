@@ -457,6 +457,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin-top: 24px;
       margin-bottom: 0;
     }
+
+    .hero-cta .btn-primary.hero-cta-main {
+      min-width: 220px;
+      padding: 16px 36px;
+      font-size: 17px;
+    }
     
     .hero-subscribe {
       text-align: center;
@@ -1924,14 +1930,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
     <div class="hero-cta hero-cta-below">
+      <a href="https://daleela.go.link/bsN7f" target="_blank" rel="noopener" class="btn btn-primary hero-cta-main">
+        تحميل التطبيق
+      </a>
       <a href="#testimonials" class="btn btn-secondary" onclick="scrollToTestimonials(event)">
         آراء المستخدمات
       </a>
       <a href="#doctors" class="btn btn-secondary" onclick="scrollToDoctors(event)">
         تعرفي علي أطباء دليلة
-      </a>
-      <a href="https://daleela.go.link/bsN7f" target="_blank" rel="noopener" class="btn btn-secondary">
-        تحميل التطبيق
       </a>
     </div>
   </section>
@@ -4104,18 +4110,200 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           if (typeof snaptr !== 'undefined') {
             snaptr('track', 'START_CHECKOUT');
           }
-          // Google Tag Manager - Push event to dataLayer
+          // GA4 / GTM dataLayer - standard event begin_checkout
           dataLayer.push({
-            'event': 'initiate_checkout',
+            'event': 'begin_checkout',
             'event_category': 'engagement',
             'event_label': 'subscribe_button_click',
             'button_text': button.textContent.trim() || 'اشتركي الآن',
             'button_location': buttonLocation,
-            'button_href': button.href || ''
+            'button_href': button.href || '',
+            'page_location': window.location.href,
+            'page_title': document.title || 'دليلة - Daleela'
           });
         });
       });
     });
+  </script>
+  
+  <!-- GA4 Events: all key interactions push to dataLayer for GTM/GA4 -->
+  <script>
+    (function() {
+      window.dataLayer = window.dataLayer || [];
+      function ga4Event(eventName, params) {
+        var payload = { event: eventName };
+        if (params && typeof params === 'object') {
+          for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) payload[k] = params[k];
+        }
+        payload.page_location = payload.page_location || (window.location && window.location.href);
+        payload.page_title = payload.page_title || (document && document.title);
+        dataLayer.push(payload);
+      }
+
+      function onDomReady(fn) {
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn();
+      }
+
+      onDomReady(function() {
+        var doc = document;
+
+        // ——— Nav links (in-page anchor clicks) ———
+        doc.querySelectorAll('a.nav-link[href^="#"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', {
+              link_url: a.getAttribute('href') || '#',
+              link_text: (a.textContent || '').trim(),
+              outbound: false,
+              section: (a.getAttribute('href') || '').replace('#', '') || 'hero'
+            });
+          });
+        });
+
+        // ——— Language switch ———
+        doc.querySelectorAll('a.lang-switch, a[hreflang="en"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('language_switch', { from_language: 'ar', to_language: 'en', link_url: a.href || '/en/' });
+          });
+        });
+
+        // ——— Logo click ———
+        doc.querySelectorAll('a.logo[href*="motherbeing"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', { link_text: 'logo', link_url: a.href, outbound: true });
+          });
+        });
+
+        // ——— Hero CTAs: scroll to testimonials / doctors (only buttons in hero) ———
+        doc.querySelectorAll('.hero-cta a[href="#testimonials"]').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            ga4Event('click', { link_text: 'آراء المستخدمات', link_url: '#testimonials', cta_location: 'hero', outbound: false });
+          });
+        });
+        doc.querySelectorAll('.hero-cta a[href="#doctors"]').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            ga4Event('click', { link_text: 'تعرفي علي أطباء دليلة', link_url: '#doctors', cta_location: 'hero', outbound: false });
+          });
+        });
+
+        // ——— App download (hero + footer) ———
+        doc.querySelectorAll('a[href*="daleela.go.link"], a[href*="go.link"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            var location = a.closest('.hero-cta') ? 'hero' : (a.closest('footer') ? 'footer' : (a.closest('.sticky-cta') ? 'sticky_cta' : 'other'));
+            ga4Event('app_download_click', {
+              link_url: a.href,
+              cta_location: location,
+              link_text: (a.textContent || '').trim().slice(0, 100)
+            });
+          });
+        });
+
+        // ——— Program cards (select_content) ———
+        doc.querySelectorAll('a.program-card[data-module]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('select_content', {
+              content_type: 'program',
+              item_id: a.getAttribute('data-module') || 'unknown',
+              link_url: a.href,
+              link_text: (a.textContent || '').trim().slice(0, 80)
+            });
+          });
+        });
+
+        // ——— Benefit demo open ———
+        doc.querySelectorAll('.benefit-item.demo-launch').forEach(function(el) {
+          el.addEventListener('click', function() {
+            var url = el.getAttribute('data-demo-url') || '';
+            ga4Event('demo_open', {
+              demo_url: url,
+              demo_name: url.split('/').pop() || 'demo',
+              section: 'benefits'
+            });
+          });
+        });
+
+        // ——— Demo iframe close ———
+        var demoClose = doc.getElementById('demo-iframe-close');
+        if (demoClose) {
+          demoClose.addEventListener('click', function() {
+            ga4Event('demo_close', { section: 'benefits' });
+          });
+        }
+
+        // ——— Hero video: play & fullscreen ———
+        var heroVideo = doc.getElementById('hero-video');
+        if (heroVideo) {
+          heroVideo.addEventListener('play', function oncePlay() {
+            heroVideo.removeEventListener('play', oncePlay);
+            ga4Event('video_start', { video_title: 'hero_intro', video_location: 'hero' });
+          });
+          heroVideo.addEventListener('enterfullscreen', function() { ga4Event('video_fullscreen', { video_title: 'hero_intro' }); });
+          heroVideo.addEventListener('webkitbeginfullscreen', function() { ga4Event('video_fullscreen', { video_title: 'hero_intro' }); });
+        }
+        var heroFsBtn = doc.getElementById('hero-video-fullscreen');
+        if (heroFsBtn) {
+          heroFsBtn.addEventListener('click', function() {
+            ga4Event('video_fullscreen_click', { video_title: 'hero_intro', video_location: 'hero' });
+          });
+        }
+
+        // ——— Doctor video modal: start & close ———
+        var doctorVideoEl = doc.getElementById('doctor-video-player');
+        var doctorSource = doc.getElementById('doctor-video-source');
+        if (doctorVideoEl && doctorSource) {
+          doctorVideoEl.addEventListener('play', function() {
+            var src = (doctorSource.src || '').split('/').pop() || 'doctor_video';
+            ga4Event('video_start', { video_title: src.replace(/%20/g, '_'), video_location: 'doctors_section' });
+          });
+        }
+        var doctorModal = doc.getElementById('doctor-video-modal');
+        var doctorClose = doc.getElementById('doctor-video-close');
+        if (doctorClose) {
+          doctorClose.addEventListener('click', function() {
+            ga4Event('video_close', { video_location: 'doctors_section' });
+          });
+        }
+        if (doctorModal) {
+          doctorModal.addEventListener('click', function(e) {
+            if (e.target === doctorModal) ga4Event('video_close', { video_location: 'doctors_section' });
+          });
+        }
+
+        // ——— Sticky CTA: first view (visibility) ———
+        var stickyCta = doc.querySelector('.sticky-cta');
+        if (stickyCta && typeof IntersectionObserver !== 'undefined') {
+          var stickyObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                ga4Event('sticky_cta_view', { visible: true });
+                stickyObserver.disconnect();
+              }
+            });
+          }, { threshold: 0.1 });
+          stickyObserver.observe(stickyCta);
+        }
+
+        // ——— Footer links (terms, privacy) ———
+        doc.querySelectorAll('a.footer-link[href*="terms"], a.footer-link[href*="privacy"]').forEach(function(a) {
+          a.addEventListener('click', function() {
+            ga4Event('click', {
+              link_url: a.href,
+              link_text: (a.textContent || '').trim(),
+              outbound: true,
+              section: 'footer'
+            });
+          });
+        });
+
+        // ——— Mobile menu toggle ———
+        var menuToggle = doc.querySelector('.mobile-menu-toggle');
+        if (menuToggle) {
+          menuToggle.addEventListener('click', function() {
+            var nav = doc.querySelector('.nav');
+            ga4Event('menu_toggle', { menu_open: nav && nav.classList.contains('active') });
+          });
+        }
+      });
+    })();
   </script>
   
   <!-- Google Tag Manager (noscript) -->
