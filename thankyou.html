@@ -53,7 +53,16 @@
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '1084939266838453');
-  fbq('track', 'Purchase');
+  fbq('track', 'Purchase', {
+    value: 385,
+    currency: 'EGP',
+    content_name: 'prog_prewedd',
+    content_ids: ['prog_prewedd'],
+    content_type: 'product',
+    contents: [
+      { id: 'prog_prewedd', quantity: 1, item_price: 385 }
+    ]
+  });
   </script>
   <!-- End Meta Pixel Code -->
 
