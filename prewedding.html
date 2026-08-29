@@ -59,6 +59,7 @@ snaptr('track', 'PAGE_VIEW');
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   })(window, document, "clarity", "script", "ttn8rkzvsi");
   </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
   <style>
     :root {
       --text-primary: #22263b;
@@ -75,6 +76,11 @@ snaptr('track', 'PAGE_VIEW');
       --header-h: 96px;
       --max: 1200px;
       --radius: 16px;
+      --plyr-color-main: #63323e;
+      --plyr-video-background: #111;
+      --plyr-font-family: 'Vazirmatn', 'Plus Jakarta Sans', system-ui, sans-serif;
+      --plyr-control-radius: 8px;
+      --plyr-range-fill-background: #63323e;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
@@ -206,6 +212,41 @@ snaptr('track', 'PAGE_VIEW');
       display: block;
       background: #111;
     }
+    .player .plyr {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+    .player .plyr__video-wrapper {
+      width: 100%;
+      height: 100%;
+      background: #111;
+      cursor: pointer;
+    }
+    .player .plyr__poster {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .player .plyr__control--overlaid {
+      display: none;
+    }
+    .player .plyr__controls {
+      padding: 12px 14px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    }
+    .player .plyr__control.plyr__tab-focus,
+    .player .plyr__control:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .player.is-paywalled .plyr__controls,
+    .player.is-paywalled .plyr__control--overlaid {
+      opacity: 0;
+      pointer-events: none;
+    }
     .player-paywall {
       position: absolute;
       inset: 0;
@@ -237,11 +278,92 @@ snaptr('track', 'PAGE_VIEW');
     }
     .player.is-paywalled video { pointer-events: none; }
     .player-cta {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       margin: 20px 0 40px;
       width: 100%;
+      text-align: center;
+    }
+    .player-cta-proof {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+      margin-bottom: 4px;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .player-cta.is-revealed .player-cta-proof {
+      animation: proofReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes proofReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .player-cta-proof strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .player-cta-count-wrap {
+      display: inline-block;
+      position: relative;
+      vertical-align: baseline;
+    }
+    .player-cta-count {
+      display: inline-block;
+      min-width: 6.5ch;
+      font-variant-numeric: tabular-nums;
+      transform-origin: center bottom;
+    }
+    .player-cta-count.is-ticking {
+      animation: countTick 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @keyframes countTick {
+      0% { transform: translateY(0) scale(1); }
+      35% { transform: translateY(-0.14em) scale(1.04); }
+      100% { transform: translateY(0) scale(1); }
+    }
+    .player-cta-count.is-complete {
+      animation: countComplete 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes countComplete {
+      0% { transform: scale(1); filter: brightness(1); }
+      45% { transform: scale(1.14); filter: brightness(1.08); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+    .player-cta-count-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -3px -10px;
+      border-radius: 8px;
+      background: rgba(99, 50, 62, 0);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .player-cta-count-wrap.is-complete::after {
+      animation: countGlow 1s ease-out forwards;
+    }
+    @keyframes countGlow {
+      0% { background: rgba(99, 50, 62, 0); transform: scale(0.92); }
+      35% { background: rgba(99, 50, 62, 0.16); transform: scale(1.04); }
+      100% { background: rgba(99, 50, 62, 0); transform: scale(1); }
     }
     .player-cta .btn-unlock { width: 100%; }
+    .btn-download-app {
+      width: 100%;
+      height: 52px;
+      background: var(--white);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-download-app:hover { background: #f3e6ea; }
     .lesson-chip {
       display: flex; align-items: center; gap: 12px;
       margin-top: 24px; margin-bottom: 32px;
@@ -588,7 +710,7 @@ snaptr('track', 'PAGE_VIEW');
       <section>
         <div class="preview-player-desktop">
           <div class="player player-desktop" id="player-desktop" style="--player-ar-num:16;--player-ar-den:9">
-            <video id="hero-video" controls playsinline preload="metadata" src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" title="مقدمة"></video>
+            <video id="hero-video" playsinline preload="none" src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" title="مقدمة"></video>
             <div class="player-paywall" hidden>
               <p class="player-paywall-text">اشتري البرنامج لمتابعة باقي المحتوى</p>
               <a class="btn-unlock player-paywall-cta" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=preview_paywall" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
@@ -603,13 +725,13 @@ snaptr('track', 'PAGE_VIEW');
           <div class="preview-player-wrap">
             <h3 class="preview-player-label">مقدمة</h3>
             <div class="player" id="player-intro" style="--player-ar-num:16;--player-ar-den:9">
-              <video controls playsinline preload="metadata" src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" title="مقدمة"></video>
+              <video playsinline preload="none" src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" title="مقدمة"></video>
             </div>
           </div>
           <div class="preview-player-wrap">
             <h3 class="preview-player-label">جسمك</h3>
             <div class="player" id="player-body" data-preview-limit="80" style="--player-ar-num:4;--player-ar-den:5">
-              <video controls playsinline preload="metadata" src="https://cms.motherbeing.com/uploads/HERBODY_FORAPP_new_b606ee5c77.mp4" poster="https://mediacdn.motherbeing.com//cms/Her_Body_0caee2f0e5/Her_Body_0caee2f0e5.png" title="جسمك"></video>
+              <video playsinline preload="none" src="https://cms.motherbeing.com/uploads/HERBODY_FORAPP_new_b606ee5c77.mp4" poster="https://mediacdn.motherbeing.com//cms/Her_Body_0caee2f0e5/Her_Body_0caee2f0e5.png" title="جسمك"></video>
               <div class="player-paywall" hidden>
                 <p class="player-paywall-text">اشتري البرنامج لمتابعة باقي المحتوى</p>
                 <a class="btn-unlock player-paywall-cta" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=preview_paywall" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
@@ -618,7 +740,9 @@ snaptr('track', 'PAGE_VIEW');
           </div>
         </div>
         <div class="player-cta">
+          <p class="player-cta-proof">انضمي لأكثر من <strong class="player-cta-count-wrap"><span class="player-cta-count" id="user-count" data-target="426209" aria-live="polite">426,209</span></strong> مستخدمة تثق في دليلة</p>
           <a class="btn-unlock" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=video_cta" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
+          <a class="btn-download-app" href="https://go.daleela.app/koggxc?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=video_app_download" target="_blank" rel="noopener noreferrer">حمّلي تطبيق دليلة</a>
         </div>
         <div class="about">
           <p>يمكن تكوني خايفة من اللحظات الأولى، أو مش عارفة إيه اللي تتوقعيه في العلاقة الحميمية. برنامج "الاستعداد للزواج والمتعة الجنسية" بيجاوب على كل أسئلتك ويساعد يزيل مخاوفك.</p>
@@ -1203,8 +1327,103 @@ snaptr('track', 'PAGE_VIEW');
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      var plyrI18n = {
+        restart: 'إعادة التشغيل',
+        rewind: 'رجوع {seektime}s',
+        play: 'تشغيل',
+        pause: 'إيقاف',
+        fastForward: 'تقديم {seektime}s',
+        seek: 'انتقال',
+        seekLabel: '{currentTime} من {duration}',
+        played: 'تم التشغيل',
+        buffered: 'تم التحميل',
+        currentTime: 'الوقت الحالي',
+        duration: 'المدة',
+        volume: 'الصوت',
+        mute: 'كتم',
+        unmute: 'إلغاء الكتم',
+        enableCaptions: 'تفعيل الترجمة',
+        disableCaptions: 'إيقاف الترجمة',
+        download: 'تحميل',
+        enterFullscreen: 'ملء الشاشة',
+        exitFullscreen: 'خروج من ملء الشاشة',
+        frameTitle: 'مشغّل {title}',
+        captions: 'ترجمة',
+        settings: 'الإعدادات',
+        pip: 'صورة داخل صورة',
+        menuBack: 'رجوع',
+        speed: 'السرعة',
+        normal: 'عادي',
+        quality: 'الجودة',
+        loop: 'تكرار',
+        start: 'البداية',
+        end: 'النهاية',
+        all: 'الكل',
+        reset: 'إعادة ضبط',
+        disabled: 'معطّل',
+        enabled: 'مفعّل',
+        advertisement: 'إعلان',
+        qualityBadge: { 2160: '4K', 1440: 'HD', 1080: 'HD', 720: 'HD', 576: 'SD', 480: 'SD' }
+      };
+
+      var plyrOptions = {
+        controls: [
+          'play',
+          'progress',
+          'current-time',
+          'duration',
+          'mute',
+          'volume',
+          'settings',
+          'pip',
+          'fullscreen'
+        ],
+        settings: ['speed'],
+        speed: { selected: 1, options: [0.75, 1, 1.25, 1.5, 2] },
+        ratio: null,
+        hideControls: true,
+        clickToPlay: false,
+        i18n: plyrI18n
+      };
+
+      function syncPlayerAspectRatioFromPoster(video) {
+        var poster = video && video.getAttribute('poster');
+        if (!poster) return;
+        var img = new Image();
+        img.onload = function () {
+          var player = video.closest('.player');
+          if (player && img.naturalWidth && img.naturalHeight) {
+            player.style.setProperty('--player-ar-num', img.naturalWidth);
+            player.style.setProperty('--player-ar-den', img.naturalHeight);
+          }
+        };
+        img.src = poster;
+      }
+
+      function bindVideoClickToggle(plyrInstance, player) {
+        if (!plyrInstance || !player) return;
+        plyrInstance.on('ready', function () {
+          var wrapper = player.querySelector('.plyr__video-wrapper');
+          if (!wrapper) return;
+          wrapper.addEventListener('click', function (e) {
+            if (e.target.closest('.plyr__controls') || e.target.closest('button')) return;
+            if (player.classList.contains('is-paywalled')) return;
+            if (plyrInstance.playing) plyrInstance.pause();
+            else plyrInstance.play().catch(function () {});
+          });
+        });
+      }
+
+      function createPlyr(video, player) {
+        if (!video || typeof Plyr === 'undefined') return null;
+        syncPlayerAspectRatioFromPoster(video);
+        var instance = new Plyr(video, plyrOptions);
+        bindVideoClickToggle(instance, player);
+        return instance;
+      }
       function syncPlayerAspectRatio(video) {
         var player = video && video.closest('.player');
         if (!player || !video.videoWidth || !video.videoHeight) return;
@@ -1226,6 +1445,7 @@ snaptr('track', 'PAGE_VIEW');
         options = options || {};
         if (!video || !player) return null;
 
+        var plyrInstance = createPlyr(video, player);
         var paywall = player.querySelector('.player-paywall');
         var previewLimit = options.previewLimit != null ? options.previewLimit : null;
         var pauseScope = options.pauseScope || null;
@@ -1292,7 +1512,37 @@ snaptr('track', 'PAGE_VIEW');
 
         if (video.readyState >= 1) syncPlayerAspectRatio(video);
 
-        return { setPreviewLimit: setPreviewLimit };
+        if (plyrInstance) {
+          plyrInstance.on('loadedmetadata', function () {
+            syncPlayerAspectRatio(video);
+          });
+        }
+
+        return {
+          setPreviewLimit: setPreviewLimit,
+          plyr: plyrInstance,
+          setSource: function (src, poster) {
+            if (poster) video.setAttribute('poster', poster);
+            syncPlayerAspectRatioFromPoster(video);
+            if (plyrInstance) {
+              plyrInstance.source = {
+                type: 'video',
+                sources: [{ src: src, type: 'video/mp4' }],
+                poster: poster || ''
+              };
+            } else {
+              video.pause();
+              video.src = src;
+              if (poster) video.poster = poster;
+              video.load();
+            }
+            this._lastSrc = src;
+          },
+          play: function () {
+            if (plyrInstance) return plyrInstance.play();
+            return video.play();
+          }
+        };
       }
 
       function isMobileView() {
@@ -1304,6 +1554,9 @@ snaptr('track', 'PAGE_VIEW');
       var desktopVideo = document.getElementById('hero-video');
       if (desktopPlayerEl && desktopVideo) {
         desktopController = initNativePlayer(desktopVideo, desktopPlayerEl, { previewLimit: null, pauseScope: null });
+        if (desktopController) {
+          desktopController._lastSrc = desktopVideo.getAttribute('src') || desktopVideo.currentSrc;
+        }
       }
 
       document.querySelectorAll('.preview-players-mobile .player').forEach(function (playerEl) {
@@ -1345,17 +1598,12 @@ snaptr('track', 'PAGE_VIEW');
           var poster = lesson.getAttribute('data-video-poster');
           var limit = lesson.getAttribute('data-preview-limit');
           if (!src) return;
-          var srcChanged = desktopVideo.getAttribute('src') !== src;
-          if (srcChanged) {
-            desktopVideo.pause();
-            desktopVideo.src = src;
-            if (poster) desktopVideo.poster = poster;
-            desktopVideo.load();
-          }
+          var srcChanged = desktopController._lastSrc !== src;
           desktopController.setPreviewLimit(limit ? parseInt(limit, 10) : null);
+          if (srcChanged) desktopController.setSource(src, poster);
           setActiveLesson(lesson);
           if (autoplay) {
-            var play = function () { desktopVideo.play().catch(function () {}); };
+            var play = function () { desktopController.play().catch(function () {}); };
             if (!srcChanged && desktopVideo.readyState >= 2) play();
             else desktopVideo.addEventListener('canplay', play, { once: true });
           }
@@ -1386,6 +1634,85 @@ snaptr('track', 'PAGE_VIEW');
           currentLesson = active;
           var label = active.getAttribute('data-lesson-title');
           if (titleEl && label) titleEl.textContent = label;
+        }
+      })();
+
+      (function initUserCountAnimation() {
+        var el = document.getElementById('user-count');
+        var wrap = el && el.closest('.player-cta-count-wrap');
+        var section = el && el.closest('.player-cta');
+        if (!el || !section) return;
+
+        var target = parseInt(el.getAttribute('data-target'), 10) || 426209;
+        var duration = 3400;
+        var started = false;
+        var startValue = 392000;
+        var lastValue = startValue;
+
+        function formatCount(value) {
+          return value.toLocaleString('en-US');
+        }
+
+        function easePremium(t) {
+          if (t < 0.72) {
+            var p = t / 0.72;
+            return 0.9 * (1 - Math.pow(1 - p, 2.8));
+          }
+          var p = (t - 0.72) / 0.28;
+          return 0.9 + 0.1 * (1 - Math.pow(1 - p, 5));
+        }
+
+        function pulseDigit() {
+          el.classList.remove('is-ticking');
+          void el.offsetWidth;
+          el.classList.add('is-ticking');
+        }
+
+        function finishCount() {
+          el.textContent = formatCount(target);
+          el.classList.remove('is-ticking');
+          el.classList.add('is-complete');
+          if (wrap) wrap.classList.add('is-complete');
+        }
+
+        function runCountUp() {
+          if (started) return;
+          started = true;
+          section.classList.add('is-revealed');
+          el.textContent = formatCount(startValue);
+          lastValue = startValue;
+
+          var startTime = performance.now();
+
+          function tick(now) {
+            var progress = Math.min((now - startTime) / duration, 1);
+            var eased = easePremium(progress);
+            var current = Math.round(startValue + (target - startValue) * eased);
+
+            if (current !== lastValue) {
+              el.textContent = formatCount(current);
+              if (progress > 0.55) pulseDigit();
+              lastValue = current;
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              finishCount();
+            }
+          }
+
+          requestAnimationFrame(tick);
+        }
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) runCountUp();
+            });
+          }, { threshold: 0.35 }).observe(section);
+        } else {
+          runCountUp();
         }
       })();
 
@@ -1492,6 +1819,22 @@ snaptr('track', 'PAGE_VIEW');
             event_label: 'subscribe_button_click',
             button_text: (button.textContent || '').trim() || 'اشتري البرنامج بخصم 30%',
             button_location: loc,
+            button_href: button.href || '',
+            page_location: window.location.href,
+            page_title: document.title,
+            program: 'program_prewedding'
+          });
+        });
+      });
+
+      document.querySelectorAll('a.btn-download-app').forEach(function (button) {
+        button.addEventListener('click', function () {
+          dataLayer.push({
+            event: 'app_download_click',
+            event_category: 'engagement',
+            event_label: 'download_daleela_app',
+            button_text: (button.textContent || '').trim() || 'حمّلي تطبيق دليلة',
+            button_location: button.closest('.player-cta') ? 'video_cta' : 'other',
             button_href: button.href || '',
             page_location: window.location.href,
             page_title: document.title,
