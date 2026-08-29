@@ -247,6 +247,34 @@ snaptr('track', 'PAGE_VIEW');
       opacity: 0;
       pointer-events: none;
     }
+    .player-loader {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.42);
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .player.is-loading .player-loader {
+      opacity: 1;
+      visibility: visible;
+    }
+    .player-loader-spinner {
+      width: 46px;
+      height: 46px;
+      border: 3px solid rgba(255, 255, 255, 0.22);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: playerSpin 0.7s linear infinite;
+    }
+    @keyframes playerSpin {
+      to { transform: rotate(360deg); }
+    }
     .player-paywall {
       position: absolute;
       inset: 0;
@@ -1403,7 +1431,55 @@ snaptr('track', 'PAGE_VIEW');
         img.src = poster;
       }
 
-      function bindVideoClickToggle(plyrInstance, player) {
+      function bindPlayerLoading(video, player) {
+        if (!video || !player || player.querySelector('.player-loader')) return null;
+
+        var loader = document.createElement('div');
+        loader.className = 'player-loader';
+        loader.innerHTML = '<span class="player-loader-spinner" aria-hidden="true"></span>';
+        loader.setAttribute('role', 'status');
+        loader.setAttribute('aria-label', 'جاري التحميل');
+        player.appendChild(loader);
+
+        var loadingTimer = null;
+
+        function showLoader(immediate) {
+          if (player.classList.contains('is-paywalled')) return;
+          clearTimeout(loadingTimer);
+          loadingTimer = setTimeout(function () {
+            if (video.paused && video.readyState >= 3) return;
+            player.classList.add('is-loading');
+          }, immediate ? 0 : 120);
+        }
+
+        function hideLoader() {
+          clearTimeout(loadingTimer);
+          player.classList.remove('is-loading');
+        }
+
+        video.addEventListener('loadstart', function () {
+          if (!video.paused || video.networkState === video.NETWORK_LOADING) showLoader(true);
+        });
+        video.addEventListener('play', function () {
+          if (video.readyState < 3) showLoader(true);
+        });
+        video.addEventListener('waiting', function () {
+          if (!video.paused) showLoader(false);
+        });
+        video.addEventListener('seeking', function () {
+          if (!video.paused && video.readyState < 3) showLoader(false);
+        });
+        video.addEventListener('playing', hideLoader);
+        video.addEventListener('canplay', hideLoader);
+        video.addEventListener('canplaythrough', hideLoader);
+        video.addEventListener('pause', hideLoader);
+        video.addEventListener('error', hideLoader);
+        video.addEventListener('emptied', hideLoader);
+
+        return { showLoader: showLoader, hideLoader: hideLoader };
+      }
+
+      function bindVideoClickToggle(plyrInstance, player, loadingApi) {
         if (!plyrInstance || !player) return;
         plyrInstance.on('ready', function () {
           var wrapper = player.querySelector('.plyr__video-wrapper');
@@ -1411,8 +1487,14 @@ snaptr('track', 'PAGE_VIEW');
           wrapper.addEventListener('click', function (e) {
             if (e.target.closest('.plyr__controls') || e.target.closest('button')) return;
             if (player.classList.contains('is-paywalled')) return;
-            if (plyrInstance.playing) plyrInstance.pause();
-            else plyrInstance.play().catch(function () {});
+            if (plyrInstance.playing) {
+              plyrInstance.pause();
+            } else {
+              if (loadingApi) loadingApi.showLoader(true);
+              plyrInstance.play().catch(function () {
+                if (loadingApi) loadingApi.hideLoader();
+              });
+            }
           });
         });
       }
@@ -1420,8 +1502,10 @@ snaptr('track', 'PAGE_VIEW');
       function createPlyr(video, player) {
         if (!video || typeof Plyr === 'undefined') return null;
         syncPlayerAspectRatioFromPoster(video);
+        var loadingApi = bindPlayerLoading(video, player);
         var instance = new Plyr(video, plyrOptions);
-        bindVideoClickToggle(instance, player);
+        bindVideoClickToggle(instance, player, loadingApi);
+        instance._loadingApi = loadingApi;
         return instance;
       }
       function syncPlayerAspectRatio(video) {
@@ -1539,8 +1623,18 @@ snaptr('track', 'PAGE_VIEW');
             this._lastSrc = src;
           },
           play: function () {
-            if (plyrInstance) return plyrInstance.play();
-            return video.play();
+            if (plyrInstance && plyrInstance._loadingApi) {
+              plyrInstance._loadingApi.showLoader(true);
+            }
+            var result;
+            if (plyrInstance) result = plyrInstance.play();
+            else result = video.play();
+            if (result && result.catch) {
+              result.catch(function () {
+                if (plyrInstance && plyrInstance._loadingApi) plyrInstance._loadingApi.hideLoader();
+              });
+            }
+            return result;
           }
         };
       }
