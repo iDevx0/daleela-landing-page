@@ -168,20 +168,36 @@ snaptr('track', 'PAGE_VIEW');
       gap: 24px 48px;
       align-items: start;
     }
+    .preview-players-mobile {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .preview-player-desktop { display: block; }
+    .preview-player-wrap.is-selected .player {
+      box-shadow: 0 0 0 3px var(--accent), var(--shadow);
+    }
+    .preview-player-label {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
     .player {
       position: relative;
       border-radius: 20px;
       overflow: hidden;
       background: #111;
-      margin: 0 auto;
-      width: min(100%, calc(min(72vh, 680px) * var(--player-ar-num, 16) / var(--player-ar-den, 9)));
+      width: 100%;
       aspect-ratio: var(--player-ar-num, 16) / var(--player-ar-den, 9);
-      max-height: min(72vh, 680px);
+      max-height: min(58vh, 480px);
       box-shadow: var(--shadow);
     }
-    .player-stage {
-      position: absolute;
-      inset: 0;
+    .player-desktop {
+      margin: 0 auto;
+      width: min(100%, calc(min(72vh, 680px) * var(--player-ar-num, 16) / var(--player-ar-den, 9)));
+      max-height: min(72vh, 680px);
     }
     .player video {
       width: 100%;
@@ -190,136 +206,6 @@ snaptr('track', 'PAGE_VIEW');
       display: block;
       background: #111;
     }
-    .player-loading {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.35);
-      pointer-events: none;
-    }
-    .player.is-loading .player-loading { display: flex; }
-    .player-spinner {
-      width: 44px;
-      height: 44px;
-      border: 3px solid rgba(255, 255, 255, 0.25);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: player-spin 0.75s linear infinite;
-    }
-    @keyframes player-spin { to { transform: rotate(360deg); } }
-    .player-big-play {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      background: rgba(0, 0, 0, 0.18);
-      cursor: pointer;
-      transition: background 0.2s ease, opacity 0.25s ease;
-    }
-    .player-big-play:hover { background: rgba(0, 0, 0, 0.28); }
-    .player-big-play svg {
-      width: 72px;
-      height: 72px;
-      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
-      transition: transform 0.2s ease;
-    }
-    .player-big-play:hover svg { transform: scale(1.06); }
-    .player.is-playing:not(.is-paused):not(.is-paywalled) .player-big-play,
-    .player.is-loading .player-big-play { opacity: 0; pointer-events: none; }
-    .player-ui {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
-      padding: 48px 14px 12px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
-      opacity: 1;
-      transition: opacity 0.25s ease;
-    }
-    .player.is-playing:not(.is-paused):not(.is-hovering):not(.is-paywalled) .player-ui {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .player-progress-wrap {
-      direction: ltr;
-      margin-bottom: 10px;
-      padding: 0 2px;
-    }
-    .player-progress-track {
-      position: relative;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.22);
-      cursor: pointer;
-    }
-    .player-progress-track:hover { height: 7px; }
-    .player-progress-buffer,
-    .player-progress-preview,
-    .player-progress-played {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      border-radius: inherit;
-      pointer-events: none;
-    }
-    .player-progress-buffer { background: rgba(255, 255, 255, 0.28); width: 0; }
-    .player-progress-preview {
-      background: rgba(255, 255, 255, 0.12);
-      width: 0;
-      border-right: 2px dashed rgba(255, 180, 120, 0.85);
-    }
-    .player-progress-played {
-      background: linear-gradient(90deg, #c48494, #fff);
-      width: 0;
-    }
-    .player-progress {
-      position: absolute;
-      inset: -6px 0;
-      width: 100%;
-      height: calc(100% + 12px);
-      margin: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-    .player-bar {
-      direction: ltr;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .player-btn {
-      width: 36px;
-      height: 36px;
-      border: none;
-      border-radius: 10px;
-      background: transparent;
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background 0.15s ease;
-    }
-    .player-btn:hover { background: rgba(255, 255, 255, 0.14); }
-    .player-btn svg { width: 20px; height: 20px; fill: currentColor; }
-    .player-time {
-      font-size: 12px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.92);
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
-      min-width: 88px;
-    }
-    .player-spacer { flex: 1; }
     .player-paywall {
       position: absolute;
       inset: 0;
@@ -350,12 +236,10 @@ snaptr('track', 'PAGE_VIEW');
       font-size: 15px;
     }
     .player.is-paywalled video { pointer-events: none; }
-    .player.is-paywalled .player-ui,
-    .player.is-paywalled .player-big-play { display: none; }
     .player-cta {
       display: block;
-      margin: 20px auto 0;
-      width: min(100%, calc(min(72vh, 680px) * var(--player-ar-num, 16) / var(--player-ar-den, 9)));
+      margin: 20px 0 40px;
+      width: 100%;
     }
     .player-cta .btn-unlock { width: 100%; }
     .lesson-chip {
@@ -370,6 +254,8 @@ snaptr('track', 'PAGE_VIEW');
     }
     .lesson-chip h2 { font-size: 20px; font-weight: 700; }
     .about h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .hero-copy .about { max-width: 703px; }
+    .hero-copy .about h3 { margin-top: 4px; }
     .about p { color: var(--text-tertiary); margin-bottom: 28px; max-width: 703px; }
     .learn-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px;
@@ -457,7 +343,7 @@ snaptr('track', 'PAGE_VIEW');
     .lesson-status { flex-shrink: 0; display: inline-flex; align-items: center; }
     .lesson-lock, .lesson-unlock, .lesson-active { display: none; align-items: center; justify-content: center; }
     .lesson.is-locked .lesson-lock { display: inline-flex; }
-    .lesson[data-video-src]:not(.is-active) .lesson-unlock { display: inline-flex; }
+    .lesson[data-player-target]:not(.is-active) .lesson-unlock { display: inline-flex; }
     .lesson.is-active .lesson-active { display: inline-flex; }
     .lesson.is-active .lesson-title { font-weight: 600; color: #22263B; }
     .lesson-sub { font-size: 12px; color: var(--text-muted); }
@@ -604,7 +490,6 @@ snaptr('track', 'PAGE_VIEW');
     .footer-links { display: flex; gap: 16px; }
 
     .sticky-cta {
-      display: none !important;
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
       background: var(--white); border-top: 1px solid var(--border);
       padding: 12px 16px; box-shadow: 0 -4px 16px rgba(0,0,0,.08);
@@ -614,17 +499,18 @@ snaptr('track', 'PAGE_VIEW');
     .sticky-cta.show { transform: none; opacity: 1; visibility: visible; }
     .sticky-cta-content {
       max-width: var(--max); margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .sticky-cta h3 { font-size: 15px; font-weight: 700; color: var(--accent); }
-    .sticky-cta .btn-unlock { width: auto; min-width: 160px; height: 44px; padding: 0 20px; }
-    body.has-sticky-cta { padding-bottom: 88px; }
+    .sticky-cta .btn-unlock { width: 100%; max-width: 420px; height: 44px; padding: 0 20px; }
+    body.has-sticky-cta { padding-bottom: 72px; }
 
     @media (max-width: 1100px) {
       .layout { grid-template-columns: 1fr; }
       .p-track { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
+      .preview-player-desktop { display: none; }
+      .preview-players-mobile { display: grid; }
       .testimonial-card {
         flex: 0 0 calc(100% - 24px);
         max-width: none;
@@ -686,57 +572,6 @@ snaptr('track', 'PAGE_VIEW');
         </nav>
         <h1>دليلك للعلاقة الزوجية</h1>
         <p class="hero-lead"><strong>فرحك قرب؟</strong> طبيعي تحسي بتوتر وأسئلة عن اللي هايحصل.</p>
-        <p>يمكن تكوني خايفة من اللحظات الأولى، أو مش عارفة إيه اللي تتوقعيه في العلاقة الحميمية. برنامج "الاستعداد للزواج والمتعة الجنسية" بيجاوب على كل أسئلتك ويساعد يزيل مخاوفك.</p>
-      </div>
-    </div>
-
-    <div class="layout">
-      <section>
-        <div class="player" id="video-player" tabindex="0" aria-label="مشغّل الفيديو">
-          <div class="player-stage">
-            <video id="hero-video" src="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Prewedding.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" muted playsinline preload="metadata" title="دليلك للعلاقة الزوجية"></video>
-            <div class="player-loading" aria-hidden="true"><span class="player-spinner"></span></div>
-            <button type="button" class="player-big-play" id="player-big-play" aria-label="تشغيل">
-              <svg viewBox="0 0 72 72" fill="none" aria-hidden="true"><circle cx="36" cy="36" r="36" fill="rgba(255,255,255,0.95)"/><path d="M30 22v28l22-14-22-14z" fill="#63323e"/></svg>
-            </button>
-            <div class="player-ui" id="player-ui">
-              <div class="player-progress-wrap">
-                <div class="player-progress-track" id="player-progress-track">
-                  <div class="player-progress-buffer" id="player-progress-buffer"></div>
-                  <div class="player-progress-preview" id="player-progress-preview"></div>
-                  <div class="player-progress-played" id="player-progress-played"></div>
-                  <input type="range" class="player-progress" id="player-progress" min="0" max="100" step="0.1" value="0" aria-label="تقدّم الفيديو">
-                </div>
-              </div>
-              <div class="player-bar">
-                <button type="button" class="player-btn player-play-btn" id="player-play-btn" aria-label="تشغيل">
-                  <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/></svg>
-                  <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>
-                </button>
-                <span class="player-time"><span id="player-current">0:00</span> / <span id="player-duration">0:00</span></span>
-                <span class="player-spacer"></span>
-                <button type="button" class="player-btn player-mute-btn" id="player-mute-btn" aria-label="كتم الصوت">
-                  <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                  <svg class="icon-unmuted" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                </button>
-                <button type="button" class="player-btn player-fs-btn" id="player-fs-btn" aria-label="ملء الشاشة">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                </button>
-              </div>
-            </div>
-            <div class="player-paywall" id="player-paywall" hidden>
-              <p class="player-paywall-text">اشتري البرنامج لمتابعة باقي المحتوى</p>
-              <a class="btn-unlock player-paywall-cta" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=preview_paywall" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
-            </div>
-          </div>
-        </div>
-        <div class="player-cta">
-          <a class="btn-unlock" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=video_cta" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
-        </div>
-        <div class="lesson-chip">
-          <div class="chip-icon">▶</div>
-          <h2 id="current-lesson-title">مقدمة</h2>
-        </div>
         <div class="about">
           <h3>هتتعلمي إيه</h3>
           <div class="learn-grid">
@@ -745,6 +580,48 @@ snaptr('track', 'PAGE_VIEW');
             <div class="learn-item"><span class="check">✓</span>المتعة والنشوة الجنسية</div>
             <div class="learn-item"><span class="check">✓</span>مواجهة الخرافات والمعلومات المغلوطة</div>
           </div>
+        </div>
+        </div>
+      </div>
+
+    <div class="layout">
+      <section>
+        <div class="preview-player-desktop">
+          <div class="player player-desktop" id="player-desktop" style="--player-ar-num:16;--player-ar-den:9">
+            <video id="hero-video" controls playsinline preload="metadata" src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" title="مقدمة"></video>
+            <div class="player-paywall" hidden>
+              <p class="player-paywall-text">اشتري البرنامج لمتابعة باقي المحتوى</p>
+              <a class="btn-unlock player-paywall-cta" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=preview_paywall" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
+            </div>
+          </div>
+          <div class="lesson-chip">
+            <div class="chip-icon">▶</div>
+            <h2 id="current-lesson-title">مقدمة</h2>
+          </div>
+        </div>
+        <div class="preview-players-mobile">
+          <div class="preview-player-wrap">
+            <h3 class="preview-player-label">مقدمة</h3>
+            <div class="player" id="player-intro" style="--player-ar-num:16;--player-ar-den:9">
+              <video controls playsinline preload="metadata" src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" title="مقدمة"></video>
+            </div>
+          </div>
+          <div class="preview-player-wrap">
+            <h3 class="preview-player-label">جسمك</h3>
+            <div class="player" id="player-body" data-preview-limit="80" style="--player-ar-num:4;--player-ar-den:5">
+              <video controls playsinline preload="metadata" src="https://cms.motherbeing.com/uploads/HERBODY_FORAPP_new_b606ee5c77.mp4" poster="https://mediacdn.motherbeing.com//cms/Her_Body_0caee2f0e5/Her_Body_0caee2f0e5.png" title="جسمك"></video>
+              <div class="player-paywall" hidden>
+                <p class="player-paywall-text">اشتري البرنامج لمتابعة باقي المحتوى</p>
+                <a class="btn-unlock player-paywall-cta" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=preview_paywall" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="player-cta">
+          <a class="btn-unlock" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=video_cta" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
+        </div>
+        <div class="about">
+          <p>يمكن تكوني خايفة من اللحظات الأولى، أو مش عارفة إيه اللي تتوقعيه في العلاقة الحميمية. برنامج "الاستعداد للزواج والمتعة الجنسية" بيجاوب على كل أسئلتك ويساعد يزيل مخاوفك.</p>
         </div>
       </section>
 
@@ -760,14 +637,14 @@ snaptr('track', 'PAGE_VIEW');
               <span class="chevron" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7.5 10.5L12 15l4.5-4.5" stroke="#22263B" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </button>
             <div class="mod-body">
-              <a class="lesson is-active" href="#hero-video" data-lesson-title="مقدمة" data-video-src="https://github.com/iDevx0/daleela-landing-page/raw/refs/heads/main/Prewedding.mp4" data-video-poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg">
+              <a class="lesson is-active" href="#player-desktop" data-lesson-title="مقدمة" data-video-src="https://cms.motherbeing.com/uploads/Prewedding_1_2d137769cc.mp4" data-video-poster="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" data-player-target="player-intro">
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//101_Prepare_for_Your_First_Time_19f767f70f.jpg" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">مقدمة</div>
-                </div>
+              </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
-              <a class="lesson" href="#hero-video" data-lesson-title="جسمك" data-video-src="https://cms.motherbeing.com/uploads/HERBODY_FORAPP_new_b606ee5c77.mp4" data-video-poster="https://mediacdn.motherbeing.com//cms/Her_Body_0caee2f0e5/Her_Body_0caee2f0e5.png" data-preview-limit="80">
+              <a class="lesson" href="#player-body" data-lesson-title="جسمك" data-video-src="https://cms.motherbeing.com/uploads/HERBODY_FORAPP_new_b606ee5c77.mp4" data-video-poster="https://mediacdn.motherbeing.com//cms/Her_Body_0caee2f0e5/Her_Body_0caee2f0e5.png" data-preview-limit="80" data-player-target="player-body">
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//cms/Her_Body_0caee2f0e5/Her_Body_0caee2f0e5.png" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">جسمك</div>
@@ -778,14 +655,14 @@ snaptr('track', 'PAGE_VIEW');
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//cms/SETTINGEXPECTATIONS_a90ee621ab/SETTINGEXPECTATIONS_a90ee621ab.jpg" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">أول مرة</div>
-                </div>
+            </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//His_Body_2_f064a81183.png" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">جسم الرجل</div>
-                </div>
+          </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
@@ -817,14 +694,14 @@ snaptr('track', 'PAGE_VIEW');
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//cms/BASICSOFSEX_82f8e059ac/BASICSOFSEX_82f8e059ac.jpeg" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">أساسيات الجنس</div>
-                </div>
+            </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//cms/FEAROFPENETRATION_d174dca3dd/FEAROFPENETRATION_d174dca3dd.jpeg" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.75458 14.716L3.27222 16.6479C3.87647 18.9029 4.17859 20.0305 4.86351 20.7618C5.40432 21.3392 6.10421 21.7433 6.87466 21.9229C7.85044 22.1504 8.97798 21.8483 11.2331 21.244C13.4881 20.6398 14.6157 20.3377 15.347 19.6528C15.4077 19.5959 15.4664 19.5373 15.5233 19.477C15.1891 19.449 14.852 19.3952 14.5094 19.3271C13.8133 19.1887 12.9862 18.967 12.008 18.7049L11.9012 18.6763L11.8764 18.6697C10.8121 18.3845 9.92281 18.1457 9.21277 17.8892C8.46607 17.6195 7.7876 17.287 7.21148 16.7474C6.41753 16.0038 5.86193 15.0414 5.61491 13.982C5.43567 13.2133 5.48691 12.4594 5.62666 11.6779C5.76058 10.929 6.00109 10.0315 6.28926 8.95613L6.28926 8.95611L6.82365 6.96174L6.84245 6.8916C4.9219 7.40896 3.91101 7.71505 3.23687 8.34646C2.65945 8.88726 2.25537 9.58715 2.07573 10.3576C1.84821 11.3334 2.15033 12.4609 2.75458 14.716Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M20.8293 10.7154L20.3116 12.6473C19.7074 14.9024 19.4052 16.0299 18.7203 16.7612C18.1795 17.3386 17.4796 17.7427 16.7092 17.9223C16.6129 17.9448 16.5152 17.9621 16.415 17.9744C15.4999 18.0873 14.3834 17.7881 12.3508 17.2435C10.0957 16.6392 8.96815 16.3371 8.23687 15.6522C7.65945 15.1114 7.25537 14.4115 7.07573 13.641C6.84821 12.6652 7.15033 11.5377 7.75458 9.28263L8.27222 7.35077C8.3591 7.02654 8.43979 6.7254 8.51621 6.44561C8.97128 4.77957 9.27709 3.86298 9.86351 3.23687C10.4043 2.65945 11.1042 2.25537 11.8747 2.07573C12.8504 1.84821 13.978 2.15033 16.2331 2.75458C18.4881 3.35883 19.6157 3.66095 20.347 4.34587C20.9244 4.88668 21.3285 5.58657 21.5081 6.35703C21.7356 7.3328 21.4335 8.46034 20.8293 10.7154ZM11.0524 9.80589C11.1596 9.40579 11.5709 9.16835 11.971 9.27556L16.8006 10.5697C17.2007 10.6769 17.4381 11.0881 17.3309 11.4882C17.2237 11.8883 16.8125 12.1257 16.4124 12.0185L11.5827 10.7244C11.1826 10.6172 10.9452 10.206 11.0524 9.80589ZM10.2756 12.7033C10.3828 12.3032 10.794 12.0658 11.1941 12.173L14.0919 12.9495C14.492 13.0567 14.7294 13.4679 14.6222 13.868C14.515 14.2681 14.1038 14.5056 13.7037 14.3984L10.8059 13.6219C10.4058 13.5147 10.1683 13.1034 10.2756 12.7033Z"></path></svg></span></div>
                   <div class="lesson-title">معلومة مسلية عن الجنس</div>
-                </div>
+          </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
@@ -863,14 +740,14 @@ snaptr('track', 'PAGE_VIEW');
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//cms/YOURPLEASURE_2b7dc27a0c/YOURPLEASURE_2b7dc27a0c.jpg" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">متعتك الجنسية</div>
-                </div>
+            </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//Types_of_Orgasms_2_6a694bc1e0.png" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.50989 2.00001H15.49C15.7225 1.99995 15.9007 1.99991 16.0565 2.01515C17.1643 2.12352 18.0711 2.78958 18.4556 3.68678H5.54428C5.92879 2.78958 6.83555 2.12352 7.94337 2.01515C8.09917 1.99991 8.27741 1.99995 8.50989 2.00001Z"></path><path d="M6.31052 4.72312C4.91989 4.72312 3.77963 5.56287 3.3991 6.67691C3.39117 6.70013 3.38356 6.72348 3.37629 6.74693C3.77444 6.62636 4.18881 6.54759 4.60827 6.49382C5.68865 6.35531 7.05399 6.35538 8.64002 6.35547H15.5321C17.1181 6.35538 18.4835 6.35531 19.5639 6.49382C19.9833 6.54759 20.3977 6.62636 20.7958 6.74693C20.7886 6.72348 20.781 6.70013 20.773 6.67691C20.3925 5.56287 19.2522 4.72312 17.8616 4.72312H6.31052Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3276 7.54204H8.67239C5.29758 7.54204 3.61017 7.54204 2.66232 8.52887C1.71447 9.5157 1.93748 11.0403 2.38351 14.0896L2.80648 16.9811C3.15626 19.3724 3.33115 20.568 4.22834 21.284C5.12553 22 6.4488 22 9.09534 22H14.9046C17.5512 22 18.8745 22 19.7717 21.284C20.6689 20.568 20.8437 19.3724 21.1935 16.9811L21.6165 14.0896C22.0625 11.0404 22.2855 9.51569 21.3377 8.52887C20.3898 7.54204 18.7024 7.54204 15.3276 7.54204ZM14.5812 15.7942C15.1396 15.4481 15.1396 14.5519 14.5812 14.2058L11.2096 12.1156C10.6669 11.7792 10 12.2171 10 12.9099V17.0901C10 17.7829 10.6669 18.2208 11.2096 17.8844L14.5812 15.7942Z"></path></svg></span></div>
                   <div class="lesson-title">التحفيز الفموي</div>
-                </div>
+          </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
@@ -951,14 +828,14 @@ snaptr('track', 'PAGE_VIEW');
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//Performance_Anxiety_c4b7f7f9a9.png" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 12.124C2 6.53269 6.47713 2 11.9999 2C17.5228 2 21.9999 6.53269 21.9999 12.124L21.9999 17.3675C22.0002 18.1844 22.0004 18.7446 21.8568 19.2364C21.576 20.1982 20.9046 20.9937 20.01 21.4245C19.5525 21.6449 19.0059 21.732 18.2088 21.8591L18.0789 21.8799C17.7954 21.9252 17.5532 21.9639 17.3522 21.9839C17.1431 22.0047 16.9299 22.0111 16.7118 21.9676C15.9942 21.8245 15.4024 21.3126 15.1508 20.6172C15.0744 20.4059 15.0474 20.1916 15.035 19.9793C15.0232 19.7753 15.0232 19.527 15.0232 19.2365L15.0231 15.0641C15.0226 14.6386 15.0222 14.2725 15.1195 13.959C15.3422 13.2416 15.9238 12.6975 16.6477 12.5292C16.9641 12.4556 17.3246 12.4849 17.7435 12.5189L17.8367 12.5264L17.9465 12.5352C18.7302 12.5975 19.2664 12.6402 19.7216 12.8106C20.0415 12.9304 20.3381 13.0953 20.6046 13.2976V12.124C20.6046 7.31288 16.7521 3.41266 11.9999 3.41266C7.24776 3.41266 3.39534 7.31288 3.39534 12.124V13.2976C3.66176 13.0953 3.95843 12.9304 4.27829 12.8106C4.73345 12.6402 5.26965 12.5975 6.05335 12.5352L6.16318 12.5264L6.25641 12.5189C6.67534 12.4849 7.03581 12.4556 7.35224 12.5292C8.07612 12.6975 8.65766 13.2416 8.88039 13.959C8.97774 14.2725 8.9773 14.6386 8.97678 15.0641L8.97671 19.2365C8.97671 19.527 8.97672 19.7753 8.96487 19.9793C8.95254 20.1916 8.9255 20.4059 8.84906 20.6172C8.59754 21.3126 8.00574 21.8245 7.28812 21.9676C7.07001 22.0111 6.85675 22.0047 6.64768 21.9839C6.44671 21.9639 6.20449 21.9252 5.92102 21.8799L5.79106 21.8591C4.99399 21.732 4.44737 21.6449 3.98991 21.4245C3.09534 20.9937 2.42388 20.1982 2.14308 19.2364C2.02467 18.8309 2.00404 18.3788 2.0006 17.7747L2 17.5803V12.124Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M11.9999 5.75C12.4142 5.75 12.7499 6.08579 12.7499 6.5L12.7499 11.5C12.7499 11.9142 12.4142 12.25 11.9999 12.25C11.5857 12.25 11.2499 11.9142 11.2499 11.5L11.2499 6.5C11.2499 6.08579 11.5857 5.75 11.9999 5.75Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.9999 7.25C15.4142 7.25 15.7499 7.58579 15.7499 8V10C15.7499 10.4142 15.4142 10.75 14.9999 10.75C14.5857 10.75 14.2499 10.4142 14.2499 10V8C14.2499 7.58579 14.5857 7.25 14.9999 7.25Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M8.99995 7.25C9.41416 7.25 9.74995 7.58579 9.74995 8L9.74995 10C9.74995 10.4142 9.41416 10.75 8.99995 10.75C8.58573 10.75 8.24995 10.4142 8.24995 10L8.24995 8C8.24995 7.58579 8.58573 7.25 8.99995 7.25Z"></path></svg></span></div>
                   <div class="lesson-title">كلام صريح: قلق الأداء الجنسي</div>
-                </div>
+            </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//Foreplay_aa9421eb09.png" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.75458 14.716L3.27222 16.6479C3.87647 18.9029 4.17859 20.0305 4.86351 20.7618C5.40432 21.3392 6.10421 21.7433 6.87466 21.9229C7.85044 22.1504 8.97798 21.8483 11.2331 21.244C13.4881 20.6398 14.6157 20.3377 15.347 19.6528C15.4077 19.5959 15.4664 19.5373 15.5233 19.477C15.1891 19.449 14.852 19.3952 14.5094 19.3271C13.8133 19.1887 12.9862 18.967 12.008 18.7049L11.9012 18.6763L11.8764 18.6697C10.8121 18.3845 9.92281 18.1457 9.21277 17.8892C8.46607 17.6195 7.7876 17.287 7.21148 16.7474C6.41753 16.0038 5.86193 15.0414 5.61491 13.982C5.43567 13.2133 5.48691 12.4594 5.62666 11.6779C5.76058 10.929 6.00109 10.0315 6.28926 8.95613L6.28926 8.95611L6.82365 6.96174L6.84245 6.8916C4.9219 7.40896 3.91101 7.71505 3.23687 8.34646C2.65945 8.88726 2.25537 9.58715 2.07573 10.3576C1.84821 11.3334 2.15033 12.4609 2.75458 14.716Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M20.8293 10.7154L20.3116 12.6473C19.7074 14.9024 19.4052 16.0299 18.7203 16.7612C18.1795 17.3386 17.4796 17.7427 16.7092 17.9223C16.6129 17.9448 16.5152 17.9621 16.415 17.9744C15.4999 18.0873 14.3834 17.7881 12.3508 17.2435C10.0957 16.6392 8.96815 16.3371 8.23687 15.6522C7.65945 15.1114 7.25537 14.4115 7.07573 13.641C6.84821 12.6652 7.15033 11.5377 7.75458 9.28263L8.27222 7.35077C8.3591 7.02654 8.43979 6.7254 8.51621 6.44561C8.97128 4.77957 9.27709 3.86298 9.86351 3.23687C10.4043 2.65945 11.1042 2.25537 11.8747 2.07573C12.8504 1.84821 13.978 2.15033 16.2331 2.75458C18.4881 3.35883 19.6157 3.66095 20.347 4.34587C20.9244 4.88668 21.3285 5.58657 21.5081 6.35703C21.7356 7.3328 21.4335 8.46034 20.8293 10.7154ZM11.0524 9.80589C11.1596 9.40579 11.5709 9.16835 11.971 9.27556L16.8006 10.5697C17.2007 10.6769 17.4381 11.0881 17.3309 11.4882C17.2237 11.8883 16.8125 12.1257 16.4124 12.0185L11.5827 10.7244C11.1826 10.6172 10.9452 10.206 11.0524 9.80589ZM10.2756 12.7033C10.3828 12.3032 10.794 12.0658 11.1941 12.173L14.0919 12.9495C14.492 13.0567 14.7294 13.4679 14.6222 13.868C14.515 14.2681 14.1038 14.5056 13.7037 14.3984L10.8059 13.6219C10.4058 13.5147 10.1683 13.1034 10.2756 12.7033Z"></path></svg></span></div>
                   <div class="lesson-title">المداعبة جزء لا يتجزأ من علاقتكم الحميمية</div>
-                </div>
+          </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
@@ -1032,7 +909,7 @@ snaptr('track', 'PAGE_VIEW');
                 <div class="lesson-main">
                   <div class="lesson-ico"><img src="https://mediacdn.motherbeing.com//PORN_b91031d1fb.png" alt="" width="36" height="36" loading="lazy" /><span class="lesson-ico-overlay" aria-hidden="true"></span><span class="lesson-ico-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 12.124C2 6.53269 6.47713 2 11.9999 2C17.5228 2 21.9999 6.53269 21.9999 12.124L21.9999 17.3675C22.0002 18.1844 22.0004 18.7446 21.8568 19.2364C21.576 20.1982 20.9046 20.9937 20.01 21.4245C19.5525 21.6449 19.0059 21.732 18.2088 21.8591L18.0789 21.8799C17.7954 21.9252 17.5532 21.9639 17.3522 21.9839C17.1431 22.0047 16.9299 22.0111 16.7118 21.9676C15.9942 21.8245 15.4024 21.3126 15.1508 20.6172C15.0744 20.4059 15.0474 20.1916 15.035 19.9793C15.0232 19.7753 15.0232 19.527 15.0232 19.2365L15.0231 15.0641C15.0226 14.6386 15.0222 14.2725 15.1195 13.959C15.3422 13.2416 15.9238 12.6975 16.6477 12.5292C16.9641 12.4556 17.3246 12.4849 17.7435 12.5189L17.8367 12.5264L17.9465 12.5352C18.7302 12.5975 19.2664 12.6402 19.7216 12.8106C20.0415 12.9304 20.3381 13.0953 20.6046 13.2976V12.124C20.6046 7.31288 16.7521 3.41266 11.9999 3.41266C7.24776 3.41266 3.39534 7.31288 3.39534 12.124V13.2976C3.66176 13.0953 3.95843 12.9304 4.27829 12.8106C4.73345 12.6402 5.26965 12.5975 6.05335 12.5352L6.16318 12.5264L6.25641 12.5189C6.67534 12.4849 7.03581 12.4556 7.35224 12.5292C8.07612 12.6975 8.65766 13.2416 8.88039 13.959C8.97774 14.2725 8.9773 14.6386 8.97678 15.0641L8.97671 19.2365C8.97671 19.527 8.97672 19.7753 8.96487 19.9793C8.95254 20.1916 8.9255 20.4059 8.84906 20.6172C8.59754 21.3126 8.00574 21.8245 7.28812 21.9676C7.07001 22.0111 6.85675 22.0047 6.64768 21.9839C6.44671 21.9639 6.20449 21.9252 5.92102 21.8799L5.79106 21.8591C4.99399 21.732 4.44737 21.6449 3.98991 21.4245C3.09534 20.9937 2.42388 20.1982 2.14308 19.2364C2.02467 18.8309 2.00404 18.3788 2.0006 17.7747L2 17.5803V12.124Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M11.9999 5.75C12.4142 5.75 12.7499 6.08579 12.7499 6.5L12.7499 11.5C12.7499 11.9142 12.4142 12.25 11.9999 12.25C11.5857 12.25 11.2499 11.9142 11.2499 11.5L11.2499 6.5C11.2499 6.08579 11.5857 5.75 11.9999 5.75Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.9999 7.25C15.4142 7.25 15.7499 7.58579 15.7499 8V10C15.7499 10.4142 15.4142 10.75 14.9999 10.75C14.5857 10.75 14.2499 10.4142 14.2499 10V8C14.2499 7.58579 14.5857 7.25 14.9999 7.25Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M8.99995 7.25C9.41416 7.25 9.74995 7.58579 9.74995 8L9.74995 10C9.74995 10.4142 9.41416 10.75 8.99995 10.75C8.58573 10.75 8.24995 10.4142 8.24995 10L8.24995 8C8.24995 7.58579 8.58573 7.25 8.99995 7.25Z"></path></svg></span></div>
                   <div class="lesson-title">كلام صريح: حقيقة الأفلام الإباحية</div>
-                </div>
+            </div>
                 <span class="lesson-status" aria-hidden="true"><span class="lesson-lock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0V9.25" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-unlock"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.75" y="9.25" width="10.5" height="7.5" rx="1.75" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4"/><path d="M7.25 9.25V6.75a2.75 2.75 0 015.5 0" stroke="#22263B" stroke-opacity="0.45" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="lesson-active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#5CA4A9"/><path d="M6.2 10.4l2.1 2.1 5.5-5.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
               </a>
               <a class="lesson is-locked" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=module_locked" target="_blank" rel="noopener noreferrer">
@@ -1322,16 +1199,12 @@ snaptr('track', 'PAGE_VIEW');
 
   <div class="sticky-cta" id="sticky-cta">
     <div class="sticky-cta-content">
-      <h3>لو اشتركتي اليوم — هتاخدي 30% خصم!</h3>
       <a class="btn-unlock" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=sticky_cta" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var heroVideo = document.getElementById('hero-video');
-      var playerEl = document.getElementById('video-player');
-
       function syncPlayerAspectRatio(video) {
         var player = video && video.closest('.player');
         if (!player || !video.videoWidth || !video.videoHeight) return;
@@ -1339,240 +1212,24 @@ snaptr('track', 'PAGE_VIEW');
         player.style.setProperty('--player-ar-den', video.videoHeight);
       }
 
-      function formatTime(seconds) {
-        if (!isFinite(seconds) || seconds < 0) return '0:00';
-        var m = Math.floor(seconds / 60);
-        var s = Math.floor(seconds % 60);
-        return m + ':' + (s < 10 ? '0' : '') + s;
+      function selectPreviewPlayer(playerEl) {
+        if (!playerEl || !playerEl.id) return;
+        document.querySelectorAll('.preview-player-wrap').forEach(function (wrap) {
+          wrap.classList.toggle('is-selected', wrap.contains(playerEl));
+        });
+        document.querySelectorAll('#modules .lesson[data-player-target]').forEach(function (lesson) {
+          lesson.classList.toggle('is-active', lesson.getAttribute('data-player-target') === playerEl.id);
+        });
       }
 
-      function initCustomPlayer(video, player) {
+      function initNativePlayer(video, player, options) {
+        options = options || {};
         if (!video || !player) return null;
 
-        var bigPlay = document.getElementById('player-big-play');
-        var playBtn = document.getElementById('player-play-btn');
-        var muteBtn = document.getElementById('player-mute-btn');
-        var fsBtn = document.getElementById('player-fs-btn');
-        var progress = document.getElementById('player-progress');
-        var progressTrack = document.getElementById('player-progress-track');
-        var progressPlayed = document.getElementById('player-progress-played');
-        var progressBuffer = document.getElementById('player-progress-buffer');
-        var progressPreview = document.getElementById('player-progress-preview');
-        var currentEl = document.getElementById('player-current');
-        var durationEl = document.getElementById('player-duration');
-        var playIcon = playBtn && playBtn.querySelector('.icon-play');
-        var pauseIcon = playBtn && playBtn.querySelector('.icon-pause');
-        var mutedIcon = muteBtn && muteBtn.querySelector('.icon-muted');
-        var unmutedIcon = muteBtn && muteBtn.querySelector('.icon-unmuted');
-        var previewLimit = null;
-        var hideTimer = null;
-
-        function getDuration() {
-          return video.duration && isFinite(video.duration) ? video.duration : 0;
-        }
-
-        function setPreviewLimit(limit) {
-          previewLimit = limit != null && !isNaN(limit) ? limit : null;
-          updateProgressUI();
-        }
-
-        function pct(time) {
-          var dur = getDuration();
-          return dur > 0 ? (time / dur) * 100 : 0;
-        }
-
-        function updatePlayState() {
-          var playing = !video.paused && !video.ended;
-          player.classList.toggle('is-playing', playing || video.currentTime > 0);
-          player.classList.toggle('is-paused', video.paused || video.ended);
-          if (playIcon && pauseIcon) {
-            playIcon.hidden = playing;
-            pauseIcon.hidden = !playing;
-          }
-          var label = playing ? 'إيقاف مؤقت' : 'تشغيل';
-          if (playBtn) playBtn.setAttribute('aria-label', label);
-          if (bigPlay) bigPlay.setAttribute('aria-label', label);
-        }
-
-        function updateMuteState() {
-          var muted = video.muted || video.volume === 0;
-          if (mutedIcon && unmutedIcon) {
-            mutedIcon.hidden = !muted;
-            unmutedIcon.hidden = muted;
-          }
-          if (muteBtn) muteBtn.setAttribute('aria-label', muted ? 'تشغيل الصوت' : 'كتم الصوت');
-        }
-
-        function updateProgressUI() {
-          var dur = getDuration();
-          var cur = video.currentTime || 0;
-          if (progress) {
-            progress.max = dur || 100;
-            progress.value = cur;
-          }
-          if (progressPlayed) progressPlayed.style.width = pct(cur) + '%';
-          if (progressBuffer && video.buffered.length) {
-            var end = video.buffered.end(video.buffered.length - 1);
-            progressBuffer.style.width = pct(end) + '%';
-          }
-          if (progressPreview) {
-            if (previewLimit != null && dur > 0) {
-              progressPreview.style.width = pct(previewLimit) + '%';
-              progressPreview.hidden = false;
-            } else {
-              progressPreview.style.width = '0';
-              progressPreview.hidden = true;
-            }
-          }
-          if (currentEl) currentEl.textContent = formatTime(cur);
-          if (durationEl) durationEl.textContent = formatTime(dur);
-        }
-
-        function togglePlay() {
-          if (player.classList.contains('is-paywalled')) return;
-          if (video.paused || video.ended) video.play().catch(function () {});
-          else video.pause();
-        }
-
-        function seekTo(time) {
-          var dur = getDuration();
-          var t = Math.max(0, Math.min(time, dur || time));
-          if (previewLimit != null && t > previewLimit) t = previewLimit;
-          video.currentTime = t;
-          updateProgressUI();
-        }
-
-        function seekFromClientX(clientX) {
-          if (!progressTrack) return;
-          var rect = progressTrack.getBoundingClientRect();
-          var ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-          seekTo(ratio * getDuration());
-        }
-
-        function showControls() {
-          player.classList.add('is-hovering');
-          clearTimeout(hideTimer);
-          hideTimer = setTimeout(function () {
-            player.classList.remove('is-hovering');
-          }, 2800);
-        }
-
-        function toggleFullscreen() {
-          var target = player;
-          if (document.fullscreenElement || document.webkitFullscreenElement) {
-            if (document.exitFullscreen) document.exitFullscreen();
-            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-          } else if (target.requestFullscreen) target.requestFullscreen();
-          else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-          else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
-        }
-
-        if (bigPlay) bigPlay.addEventListener('click', togglePlay);
-        if (playBtn) playBtn.addEventListener('click', togglePlay);
-        if (muteBtn) muteBtn.addEventListener('click', function () {
-          video.muted = !video.muted;
-          if (!video.muted && video.volume === 0) video.volume = 1;
-          updateMuteState();
-        });
-        if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
-
-        if (progress) {
-          progress.addEventListener('input', function () {
-            seekTo(parseFloat(progress.value));
-          });
-        }
-        if (progressTrack) {
-          progressTrack.addEventListener('click', function (e) {
-            seekFromClientX(e.clientX);
-          });
-        }
-
-        player.addEventListener('mousemove', showControls);
-        player.addEventListener('touchstart', showControls, { passive: true });
-        player.addEventListener('click', function (e) {
-          if (e.target.closest('.player-ui, .player-paywall, .player-big-play')) return;
-          togglePlay();
-        });
-        player.addEventListener('keydown', function (e) {
-          if (e.key === ' ' || e.key === 'k') {
-            e.preventDefault();
-            togglePlay();
-          } else if (e.key === 'f') {
-            e.preventDefault();
-            toggleFullscreen();
-          } else if (e.key === 'm') {
-            e.preventDefault();
-            video.muted = !video.muted;
-            updateMuteState();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            seekTo(video.currentTime - 5);
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            seekTo(video.currentTime + 5);
-          }
-        });
-
-        video.addEventListener('play', updatePlayState);
-        video.addEventListener('pause', updatePlayState);
-        video.addEventListener('ended', updatePlayState);
-        video.addEventListener('timeupdate', updateProgressUI);
-        video.addEventListener('loadedmetadata', function () {
-          syncPlayerAspectRatio(video);
-          updateProgressUI();
-        });
-        video.addEventListener('durationchange', updateProgressUI);
-        video.addEventListener('progress', updateProgressUI);
-        video.addEventListener('volumechange', updateMuteState);
-        video.addEventListener('waiting', function () { player.classList.add('is-loading'); });
-        video.addEventListener('canplay', function () { player.classList.remove('is-loading'); });
-        video.addEventListener('playing', function () { player.classList.remove('is-loading'); });
-
-        updatePlayState();
-        updateMuteState();
-        updateProgressUI();
-
-        return { setPreviewLimit: setPreviewLimit, updateProgressUI: updateProgressUI };
-      }
-
-      var customPlayer = initCustomPlayer(heroVideo, playerEl);
-
-      if (heroVideo) {
-        heroVideo.addEventListener('loadedmetadata', function () {
-          syncPlayerAspectRatio(heroVideo);
-        });
-        if (heroVideo.readyState >= 1) syncPlayerAspectRatio(heroVideo);
-      }
-
-      if (heroVideo && 'IntersectionObserver' in window) {
-        var vo = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) heroVideo.play().catch(function () {});
-            else heroVideo.pause();
-          });
-        }, { threshold: 0.25 });
-        vo.observe(heroVideo);
-      }
-
-      document.querySelectorAll('.mod-head').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          btn.closest('.mod').classList.toggle('open');
-        });
-      });
-
-      (function initLessonPlayer() {
-        var titleEl = document.getElementById('current-lesson-title');
-        var video = document.getElementById('hero-video');
-        var paywall = document.getElementById('player-paywall');
-        var playerEl = document.querySelector('.player');
-        if (!titleEl || !video) return;
-
-        var previewLessons = Array.prototype.slice.call(
-          document.querySelectorAll('#modules .lesson[data-video-src]')
-        );
+        var paywall = player.querySelector('.player-paywall');
+        var previewLimit = options.previewLimit != null ? options.previewLimit : null;
+        var pauseScope = options.pauseScope || null;
         var paywallShown = false;
-        var currentPreviewLimit = null;
-        var currentLesson = null;
 
         function hidePaywall() {
           paywallShown = false;
@@ -1580,38 +1237,94 @@ snaptr('track', 'PAGE_VIEW');
             paywall.classList.remove('show');
             paywall.hidden = true;
           }
-          if (playerEl) playerEl.classList.remove('is-paywalled');
+          player.classList.remove('is-paywalled');
         }
 
         function showPaywall() {
-          if (paywallShown || currentPreviewLimit == null) return;
+          if (paywallShown || previewLimit == null) return;
           paywallShown = true;
           video.pause();
-          if (video.currentTime > currentPreviewLimit) video.currentTime = currentPreviewLimit;
+          if (video.currentTime > previewLimit) video.currentTime = previewLimit;
           if (paywall) {
             paywall.classList.add('show');
             paywall.hidden = false;
           }
-          if (playerEl) playerEl.classList.add('is-paywalled');
+          player.classList.add('is-paywalled');
         }
 
-        function getNextPreviewLesson(lesson) {
-          var i = previewLessons.indexOf(lesson);
-          return i >= 0 && i < previewLessons.length - 1 ? previewLessons[i + 1] : null;
-        }
-
-        function applyPreviewRules(lesson) {
+        function setPreviewLimit(limit) {
+          previewLimit = limit != null && !isNaN(limit) ? limit : null;
           hidePaywall();
-          var limit = lesson.getAttribute('data-preview-limit');
-          currentPreviewLimit = limit ? parseInt(limit, 10) : null;
-          if (customPlayer) customPlayer.setPreviewLimit(currentPreviewLimit);
-          video.loop = false;
-          if (currentPreviewLimit != null) video.currentTime = 0;
         }
 
-        function playVideo() {
-          video.play().catch(function () {});
+        function pauseOtherPlayers() {
+          if (!pauseScope) return;
+          document.querySelectorAll(pauseScope + ' video').forEach(function (v) {
+            if (v !== video && !v.paused) v.pause();
+          });
         }
+
+        video.addEventListener('play', function () {
+          if (paywallShown) {
+            video.pause();
+            return;
+          }
+          pauseOtherPlayers();
+          if (pauseScope) selectPreviewPlayer(player);
+        });
+
+        video.addEventListener('timeupdate', function () {
+          if (previewLimit == null || paywallShown) return;
+          if (video.currentTime >= previewLimit) showPaywall();
+        });
+
+        video.addEventListener('seeking', function () {
+          if (previewLimit == null) return;
+          if (paywallShown || video.currentTime > previewLimit) {
+            video.currentTime = paywallShown ? previewLimit : Math.min(video.currentTime, previewLimit);
+            if (!paywallShown && video.currentTime >= previewLimit) showPaywall();
+          }
+        });
+
+        video.addEventListener('loadedmetadata', function () {
+          syncPlayerAspectRatio(video);
+        });
+
+        if (video.readyState >= 1) syncPlayerAspectRatio(video);
+
+        return { setPreviewLimit: setPreviewLimit };
+      }
+
+      function isMobileView() {
+        return window.matchMedia('(max-width: 768px)').matches;
+      }
+
+      var desktopController = null;
+      var desktopPlayerEl = document.getElementById('player-desktop');
+      var desktopVideo = document.getElementById('hero-video');
+      if (desktopPlayerEl && desktopVideo) {
+        desktopController = initNativePlayer(desktopVideo, desktopPlayerEl, { previewLimit: null, pauseScope: null });
+      }
+
+      document.querySelectorAll('.preview-players-mobile .player').forEach(function (playerEl) {
+        var video = playerEl.querySelector('video');
+        var limitAttr = playerEl.getAttribute('data-preview-limit');
+        var limit = limitAttr ? parseInt(limitAttr, 10) : null;
+        initNativePlayer(video, playerEl, { previewLimit: limit, pauseScope: '.preview-players-mobile' });
+      });
+
+      document.querySelectorAll('.mod-head').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btn.closest('.mod').classList.toggle('open');
+        });
+      });
+
+      (function initLessonNavigation() {
+        var titleEl = document.getElementById('current-lesson-title');
+        var previewLessons = Array.prototype.slice.call(
+          document.querySelectorAll('#modules .lesson[data-video-src]')
+        );
+        var currentLesson = null;
 
         function setActiveLesson(lesson) {
           currentLesson = lesson;
@@ -1623,90 +1336,94 @@ snaptr('track', 'PAGE_VIEW');
           lesson.classList.add('is-active');
           lesson.classList.remove('is-locked');
           var label = lesson.getAttribute('data-lesson-title');
-          if (label) titleEl.textContent = label;
+          if (titleEl && label) titleEl.textContent = label;
         }
 
-        function loadLessonVideo(lesson, autoplay) {
+        function loadDesktopLesson(lesson, autoplay) {
+          if (!desktopController || !desktopVideo) return;
           var src = lesson.getAttribute('data-video-src');
           var poster = lesson.getAttribute('data-video-poster');
+          var limit = lesson.getAttribute('data-preview-limit');
           if (!src) return;
-          var srcChanged = video.getAttribute('src') !== src;
+          var srcChanged = desktopVideo.getAttribute('src') !== src;
           if (srcChanged) {
-            video.pause();
-            video.src = src;
-            if (poster) video.poster = poster;
-            video.addEventListener('loadedmetadata', function onMeta() {
-              syncPlayerAspectRatio(video);
-            }, { once: true });
-            video.load();
+            desktopVideo.pause();
+            desktopVideo.src = src;
+            if (poster) desktopVideo.poster = poster;
+            desktopVideo.load();
           }
-          applyPreviewRules(lesson);
+          desktopController.setPreviewLimit(limit ? parseInt(limit, 10) : null);
           setActiveLesson(lesson);
           if (autoplay) {
-            if (!srcChanged && video.readyState >= 2) playVideo();
-            else video.addEventListener('canplay', playVideo, { once: true });
+            var play = function () { desktopVideo.play().catch(function () {}); };
+            if (!srcChanged && desktopVideo.readyState >= 2) play();
+            else desktopVideo.addEventListener('canplay', play, { once: true });
           }
         }
 
-        video.addEventListener('timeupdate', function () {
-          if (currentPreviewLimit == null || paywallShown) return;
-          if (video.currentTime >= currentPreviewLimit) showPaywall();
-        });
-
-        video.addEventListener('seeking', function () {
-          if (currentPreviewLimit == null) return;
-          if (paywallShown || video.currentTime > currentPreviewLimit) {
-            video.currentTime = paywallShown ? currentPreviewLimit : Math.min(video.currentTime, currentPreviewLimit);
-            if (!paywallShown && video.currentTime >= currentPreviewLimit) showPaywall();
-          }
-        });
-
-        video.addEventListener('play', function () {
-          if (paywallShown) video.pause();
-        });
-
-        video.addEventListener('ended', function () {
-          if (paywallShown || !currentLesson) return;
-          var next = getNextPreviewLesson(currentLesson);
-          if (next) loadLessonVideo(next, true);
-        });
-
-        document.querySelectorAll('#modules .lesson[data-video-src]').forEach(function (lesson) {
+        previewLessons.forEach(function (lesson) {
           lesson.classList.remove('is-locked');
-          lesson.setAttribute('href', '#hero-video');
           lesson.addEventListener('click', function (e) {
             e.preventDefault();
-            loadLessonVideo(lesson, true);
-            video.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (isMobileView()) {
+              var targetId = lesson.getAttribute('data-player-target');
+              var targetPlayer = targetId && document.getElementById(targetId);
+              if (!targetPlayer) return;
+              selectPreviewPlayer(targetPlayer);
+              targetPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              if (targetPlayer.focus) targetPlayer.focus({ preventScroll: true });
+              return;
+            }
+            loadDesktopLesson(lesson, true);
+            if (desktopPlayerEl) desktopPlayerEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           });
         });
 
         var active = document.querySelector('#modules .lesson.is-active[data-video-src]');
-        if (active) {
-          applyPreviewRules(active);
+        if (active && desktopController) {
+          var limit = active.getAttribute('data-preview-limit');
+          desktopController.setPreviewLimit(limit ? parseInt(limit, 10) : null);
           currentLesson = active;
           var label = active.getAttribute('data-lesson-title');
-          if (label) titleEl.textContent = label;
+          if (titleEl && label) titleEl.textContent = label;
         }
       })();
 
-      /* Sticky CTA disabled for now
-      var sticky = document.getElementById('sticky-cta');
-      var trigger = document.getElementById('modules');
-      if (sticky && trigger && 'IntersectionObserver' in window) {
-        var shown = false;
-        var so = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting && !shown) {
-              sticky.classList.add('show');
-              document.body.classList.add('has-sticky-cta');
-              shown = true;
+      (function initStickyCta() {
+        var sticky = document.getElementById('sticky-cta');
+        var trigger = document.querySelector('.player-cta');
+        if (!sticky || !trigger) return;
+
+        var activated = false;
+
+        function showSticky() {
+          sticky.classList.add('show');
+          document.body.classList.add('has-sticky-cta');
+        }
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !activated) {
+                activated = true;
+                showSticky();
+              }
+            });
+          }, { threshold: 0.1 }).observe(trigger);
+        } else {
+          function onScroll() {
+            if (activated) return;
+            var rect = trigger.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+              activated = true;
+              showSticky();
+              window.removeEventListener('scroll', onScroll);
             }
-          });
-        }, { threshold: 0.1 });
-        so.observe(trigger);
-      }
-      */
+          }
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
+        }
+      })();
 
       (function initTestimonialsCarousel() {
         var track = document.getElementById('testimonials-track');
