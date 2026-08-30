@@ -457,6 +457,55 @@ snaptr('track', 'PAGE_VIEW');
     .mod-body { display: none; padding: 0 20px 8px; }
     .mod.open .mod-body { display: block; }
     .hero-lead { margin-bottom: 8px; }
+    .hero-intro {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 16px;
+      line-height: 1.65;
+      max-width: 588px;
+    }
+    .hero-benefits {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      max-width: 588px;
+    }
+    .hero-benefits li {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.75;
+      color: var(--text-primary);
+      padding: 10px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .hero-benefits li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #e8f3fb;
+      color: #3b82c4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .hero-benefits li:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tagline {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-tertiary);
+      margin-bottom: 28px;
+      max-width: 588px;
+    }
     .lesson {
       display: flex; align-items: center; justify-content: space-between;
       gap: 12px; padding: 10px 0; text-decoration: none; color: inherit;
@@ -720,19 +769,18 @@ snaptr('track', 'PAGE_VIEW');
           <span class="crumb-icon"><img src="assets/prewedding-redesign/icon-arrow.svg" alt="" width="7" height="11"></span>
           <span class="current">دليلك للعلاقة الزوجية</span>
         </nav>
-        <h1>دليلك للعلاقة الزوجية</h1>
-        <p class="hero-lead"><strong>فرحك قرب؟</strong> طبيعي تحسي بتوتر وأسئلة عن اللي هايحصل.</p>
-        <div class="about">
-          <h3>هتتعلمي إيه</h3>
-          <div class="learn-grid">
-            <div class="learn-item"><span class="check">✓</span>الاستعداد للمتعة الزوجية</div>
-            <div class="learn-item"><span class="check">✓</span>أساسيات العلاقة الجنسية</div>
-            <div class="learn-item"><span class="check">✓</span>المتعة والنشوة الجنسية</div>
-            <div class="learn-item"><span class="check">✓</span>مواجهة الخرافات والمعلومات المغلوطة</div>
-          </div>
-        </div>
-        </div>
+        <h1>فرحك قرب؟ خلي أول أيام جوازك تبدأ بثقة مش خوف</h1>
+        <p class="hero-intro">برنامج دليلك للعلاقة الزوجية من دليلة هيساعدك تفهمي:</p>
+        <ul class="hero-benefits">
+          <li>إيه اللي بيحصل في أول مرة بالظبط</li>
+          <li>جسمك وجسم شريك حياتك من غير إحراج</li>
+          <li>يعني إيه علاقة حميمية صحية وممتعة</li>
+          <li>الاستعداد للمتعة الزوجية</li>
+          <li>المتعة والنشوة الجنسية</li>
+        </ul>
+        <p class="hero-tagline">كل ده بإرشاد طبي موثوق وفي خصوصية تامة.</p>
       </div>
+    </div>
 
     <div class="layout">
       <section>
@@ -768,7 +816,7 @@ snaptr('track', 'PAGE_VIEW');
           </div>
         </div>
         <div class="player-cta">
-          <p class="player-cta-proof">انضمي لأكثر من <strong class="player-cta-count-wrap"><span class="player-cta-count" id="user-count" data-target="426209" aria-live="polite">426,209</span></strong> مستخدمة تثق في دليلة</p>
+          <p class="player-cta-proof">انضمي لأكثر من <strong class="player-cta-count-wrap"><span class="player-cta-count" id="user-count" data-target="426000" aria-live="polite">426,000</span></strong> مستخدمة تثق في دليلة</p>
           <a class="btn-unlock" href="https://motherbeing.com/ar/subscribe/product/program/program_prewedding?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=video_cta" target="_blank" rel="noopener noreferrer">اشتري البرنامج بخصم 30%</a>
           <a class="btn-download-app" href="https://go.daleela.app/koggxc?utm_source=program_prewedding_page&utm_medium=web&utm_campaign=prewedding_program&utm_content=video_app_download" target="_blank" rel="noopener noreferrer">حمّلي تطبيق دليلة</a>
         </div>
@@ -1762,7 +1810,7 @@ snaptr('track', 'PAGE_VIEW');
         var section = el && el.closest('.player-cta');
         if (!el || !section) return;
 
-        var target = parseInt(el.getAttribute('data-target'), 10) || 426231;
+        var target = parseInt(el.getAttribute('data-target'), 10) || 426000;
         var duration = 3400;
         var started = false;
         var startValue = 392000;
