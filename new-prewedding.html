@@ -52,6 +52,13 @@ u.parentNode.insertBefore(r,u);})(window,document,
 snaptr('init', '682e3038-8d55-4e3f-9f89-0f3865b94cf6', {});
 snaptr('track', 'PAGE_VIEW');
 </script>
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src=i+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('DAJ4JMRC77U8PGIBG8D0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
   <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -1559,13 +1566,20 @@ snaptr('track', 'PAGE_VIEW');
       }
 
       function trackVideoViewContent(video) {
-        if (typeof fbq === 'undefined' || !video) return;
+        if (!video) return;
         var contentId = getVideoContentId(video);
         if (!contentId || viewContentTracked[contentId]) return;
         viewContentTracked[contentId] = true;
-        fbq('track', 'ViewContent', {
-          content_ids: [contentId]
-        });
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'ViewContent', {
+            content_ids: [contentId]
+          });
+        }
+        if (typeof ttq !== 'undefined') {
+          ttq.track('ViewContent', {
+            contents: [{ content_id: contentId, content_type: 'product' }]
+          });
+        }
       }
 
       function syncPlayerAspectRatioFromPoster(video) {
@@ -2181,6 +2195,7 @@ snaptr('track', 'PAGE_VIEW');
         button.addEventListener('click', function () {
           if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
           if (typeof snaptr !== 'undefined') snaptr('track', 'CHECKOUT_START');
+          if (typeof ttq !== 'undefined') ttq.track('InitiateCheckout');
           var loc = 'unknown';
           if (button.closest('.player-cta')) loc = 'video_cta';
           else if (button.closest('.player-paywall')) loc = 'preview_paywall';
