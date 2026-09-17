@@ -113,6 +113,20 @@
     .kpi.rose { border-color: var(--rose-soft); }
     .kpi.jade { border-color: var(--jade-soft); }
 
+    .tier {
+      margin-top: 18px;
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .tier .label { font-size: 14px; opacity: 0.8; }
+    .tier .grade { font-size: 36px; font-weight: 700; margin-top: 4px; line-height: 1.1; }
+
+    .tier.good { background: #e7f3ee; color: #1f5c4d; border: 1px solid #c5e0d6; }
+    .tier.ok { background: #f8efe0; color: #7a5420; border: 1px solid #ead7b3; }
+    .tier.weak { background: #f6e6ea; color: #8a3a4b; border: 1px solid #e8c6ce; }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -320,7 +334,11 @@
         dailyChart: "الحالات اليومية",
         weeklyChart: "الحالات الأسبوعية",
         days: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
-        weekLabel: "أسبوع"
+        weekLabel: "أسبوع",
+        overall: "الأداء العام",
+        tierGood: "جيد",
+        tierOk: "مقبول",
+        tierWeak: "ضعيف"
       },
       en: {
         title: "Daleela Doctors Performance Report",
@@ -347,7 +365,11 @@
         dailyChart: "Daily cases",
         weeklyChart: "Weekly cases",
         days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        weekLabel: "Week"
+        weekLabel: "Week",
+        overall: "Overall performance",
+        tierGood: "Good",
+        tierOk: "Ok",
+        tierWeak: "Weak"
       }
     };
 
@@ -446,6 +468,16 @@
       return out;
     }
 
+    var WORKDAYS = 5;
+
+    function weekTier(weekCases, t) {
+      if (weekCases == null) return null;
+      var perDay = weekCases / WORKDAYS;
+      var key = perDay >= 10 ? "good" : perDay >= 7 ? "ok" : "weak";
+      var names = { good: t.tierGood, ok: t.tierOk, weak: t.tierWeak };
+      return { key: key, name: names[key] };
+    }
+
     function render() {
       var raw = params();
       var lang = String(raw.lang || "ar").toLowerCase() === "en" ? "en" : "ar";
@@ -485,6 +517,11 @@
         { label: t.mtdWaiting, value: data.mtdWaiting, cls: "" }
       ].filter(function (item) { return item.value != null; });
 
+      var tier = weekTier(data.weekCases, t);
+      var tierHtml = tier
+        ? '<section class="tier ' + tier.key + '"><div class="label">' + t.overall + '</div><div class="grade">' + tier.name + "</div></section>"
+        : "";
+
       var dailySeries = parseSeries(data.daily);
       var weekSeries = parseSeries(data.weeks);
       var charts =
@@ -500,6 +537,7 @@
           "<h1>" + (data.doctor || t.doctorFallback) + "</h1>" +
           '<div class="period">' + periodText(data, t) + "</div>"
         ) +
+        tierHtml +
         (kpis.length
           ? '<section class="kpis">' +
               kpis.map(function (item) {
