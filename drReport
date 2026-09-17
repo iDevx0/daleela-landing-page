@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>دليلة — تقرير الطبيبة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbf7f3;
+      --card: #ffffff;
+      --ink: #3a2130;
+      --muted: #6b5460;
+      --line: rgba(58, 33, 48, 0.1);
+      --rose: #b4566a;
+      --rose-soft: #ebd8dc;
+      --jade: #2f7d6a;
+      --jade-soft: #d9e4df;
+      --sand: #f4eae3;
+      --shadow: 0 8px 30px rgba(58, 33, 48, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    }
+
+    body { padding: 20px 16px 48px; }
+
+    .wrap { max-width: 920px; margin: 0 auto; }
+
+    .hero {
+      background: linear-gradient(135deg, #3a2130 0%, #6b3a4a 60%, #b4566a 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      opacity: 0.75;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      margin: 8px 0 6px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .period { opacity: 0.85; font-size: 14px; }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .kpi .label { color: var(--muted); font-size: 13px; }
+    .kpi .value { font-size: 32px; font-weight: 700; margin-top: 6px; }
+    .kpi.rose { border-color: var(--rose-soft); }
+    .kpi.jade { border-color: var(--jade-soft); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 { margin: 0 0 12px; font-size: 16px; }
+
+    .insight {
+      background: var(--sand);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 99px;
+      background: var(--sand);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--jade), var(--rose));
+      width: 0;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .metric-row:last-child { border-bottom: 0; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+    .chip {
+      background: var(--jade-soft);
+      color: #25604f;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+
+    .empty {
+      margin-top: 18px;
+      background: var(--card);
+      border-radius: 18px;
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .raw {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      word-break: break-word;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .charts { grid-template-columns: 1fr; }
+    }
+
+    .chart {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 180px;
+      padding: 8px 4px 0;
+    }
+
+    .col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 0;
+      height: 180px;
+    }
+
+    .col-val {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .col-bar {
+      width: 100%;
+      max-width: 36px;
+      border-radius: 10px 10px 4px 4px;
+      background: linear-gradient(180deg, var(--rose) 0%, var(--jade) 100%);
+      min-height: 4px;
+    }
+
+    .col.weekly .col-bar {
+      background: linear-gradient(180deg, #6b3a4a 0%, var(--rose) 100%);
+    }
+
+    .col-label {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app"></div>
+  <script>
+    var ALIASES = {
+      dr: "doctor",
+      doctor: "doctor",
+      doctorname: "doctor",
+      name: "doctor",
+      firstname: "doctor",
+      week: "weekCases",
+      weekcases: "weekCases",
+      week_cases: "weekCases",
+      weektotal: "weekCases",
+      mtd: "mtdCases",
+      mtdcases: "mtdCases",
+      mtd_cases: "mtdCases",
+      month: "mtdCases",
+      weekwaiting: "weekWaiting",
+      waiting: "weekWaiting",
+      pending: "weekWaiting",
+      waitingweek: "weekWaiting",
+      mtdwaiting: "mtdWaiting",
+      waitingmtd: "mtdWaiting",
+      weekstart: "weekStart",
+      from: "weekStart",
+      start: "weekStart",
+      weekend: "weekEnd",
+      to: "weekEnd",
+      end: "weekEnd",
+      weekrange: "weekRange",
+      range: "weekRange",
+      daily: "daily",
+      days: "daily",
+      weeks: "weeks",
+      weekly: "weeks"
+    };
+
+    var SKIP = { x: 1, lang: 1, utm_source: 1, utm_medium: 1, utm_campaign: 1, utm_content: 1, utm_term: 1 };
+
+    var LABELS = {
+      ar: {
+        title: "تقرير الحالات",
+        doctorFallback: "الطبيبة",
+        weekCases: "حالات هذا الأسبوع",
+        mtdCases: "حالات الشهر حتى اليوم",
+        weekWaiting: "بانتظار المراجعة هذا الأسبوع",
+        mtdWaiting: "بانتظار المراجعة هذا الشهر",
+        period: "الفترة",
+        analysis: "التحليل",
+        extras: "بيانات إضافية من الرابط",
+        empty: "لا توجد بيانات كافية في الرابط. أضيفي المعاملات مثل dr و week و mtd.",
+        waitingShare: "نسبة الانتظار هذا الأسبوع",
+        weekOfMonth: "حصة الأسبوع من حالات الشهر",
+        dailyMtd: "متوسط الحالات اليومي هذا الشهر",
+        projected: "إسقاط نهاية الشهر",
+        insightWaitingHigh: "نسبة الحالات المنتظرة مرتفعة. يفضّل مراجعة الحالات المعلقة أولاً.",
+        insightWaitingOk: "نسبة الانتظار ضمن مستوى مقبول.",
+        insightWeekStrong: "الأسبوع يمثل جزءاً كبيراً من إنجاز الشهر.",
+        insightWeekSoft: "نشاط الأسبوع أقل من وتيرة الشهر حتى الآن.",
+        insightNoWaiting: "لا توجد حالات منتظرة في أرقام هذا الأسبوع.",
+        dailyChart: "الحالات اليومية",
+        weeklyChart: "الحالات الأسبوعية",
+        days: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
+        weekLabel: "أسبوع"
+      },
+      en: {
+        title: "Case report",
+        doctorFallback: "Doctor",
+        weekCases: "Cases this week",
+        mtdCases: "Month-to-date cases",
+        weekWaiting: "Waiting this week",
+        mtdWaiting: "Waiting this month",
+        period: "Period",
+        analysis: "Analysis",
+        extras: "Other values from the URL",
+        empty: "Not enough data in the URL. Add params like dr, week, and mtd.",
+        waitingShare: "Waiting share this week",
+        weekOfMonth: "This week vs month-to-date",
+        dailyMtd: "Average cases per day this month",
+        projected: "Projected month-end",
+        insightWaitingHigh: "Waiting share is high. Review pending cases first.",
+        insightWaitingOk: "Waiting share looks healthy.",
+        insightWeekStrong: "This week is a large share of the month so far.",
+        insightWeekSoft: "This week is quieter than the month-to-date pace.",
+        insightNoWaiting: "No waiting cases in this week's numbers.",
+        dailyChart: "Daily cases",
+        weeklyChart: "Weekly cases",
+        days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        weekLabel: "Week"
+      }
+    };
+
+    function params() {
+      var search = new URLSearchParams(location.search);
+      var raw = {};
+      search.forEach(function (value, key) {
+        raw[key] = value;
+      });
+      return raw;
+    }
+
+    function canon(key) {
+      return ALIASES[String(key || "").toLowerCase()] || key;
+    }
+
+    function num(value) {
+      if (value == null || value === "") return null;
+      var n = Number(String(value).replace(/[^\d.-]/g, ""));
+      return isFinite(n) ? n : null;
+    }
+
+    function parseDate(value) {
+      if (!value) return null;
+      var d = new Date(String(value).replace(" ", "T"));
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function translate(raw) {
+      var data = {
+        doctor: "",
+        weekCases: null,
+        mtdCases: null,
+        weekWaiting: null,
+        mtdWaiting: null,
+        weekStart: "",
+        weekEnd: "",
+        weekRange: "",
+        daily: "",
+        weeks: "",
+        extras: []
+      };
+
+      Object.keys(raw).forEach(function (key) {
+        if (SKIP[key.toLowerCase()]) return;
+        var mapped = canon(key);
+        var value = raw[key];
+        if (data.hasOwnProperty(mapped) && mapped !== "extras") {
+          if (mapped === "weekCases" || mapped === "mtdCases" || mapped === "weekWaiting" || mapped === "mtdWaiting") {
+            data[mapped] = num(value);
+          } else {
+            data[mapped] = value;
+          }
+        } else {
+          data.extras.push({ key: key, value: value, number: num(value) });
+        }
+      });
+      return data;
+    }
+
+    function periodText(data, t) {
+      if (data.weekRange) return data.weekRange;
+      if (data.weekStart && data.weekEnd) return data.weekStart + " – " + data.weekEnd;
+      return t.period;
+    }
+
+    function parseSeries(value) {
+      if (value == null || value === "") return [];
+      return String(value)
+        .split(/[|,]/)
+        .map(function (part) { return num(part); })
+        .filter(function (n) { return n != null; });
+    }
+
+    function chartHtml(values, labels, kind) {
+      if (!values.length) return "";
+      var max = Math.max.apply(null, values.concat([1]));
+      return '<div class="chart">' + values.map(function (n, i) {
+        var h = Math.max(6, Math.round((n / max) * 140));
+        return '<div class="col ' + kind + '"><div class="col-val">' + n + '</div><div class="col-bar" style="height:' + h + 'px"></div><div class="col-label">' + (labels[i] || (i + 1)) + "</div></div>";
+      }).join("") + "</div>";
+    }
+
+    function dayLabels(data, t) {
+      var start = parseDate(data.weekStart);
+      if (!start) return t.days;
+      return t.days.map(function (name, i) {
+        var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+        return name + "<br>" + d.getDate();
+      });
+    }
+
+    function weekLabels(count, t) {
+      var out = [];
+      for (var i = 0; i < count; i++) out.push(t.weekLabel + " " + (i + 1));
+      return out;
+    }
+
+    function render() {
+      var raw = params();
+      var lang = String(raw.lang || "ar").toLowerCase() === "en" ? "en" : "ar";
+      var t = LABELS[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      var data = translate(raw);
+      var hasCore = data.doctor || data.weekCases != null || data.mtdCases != null || data.extras.length;
+      var app = document.getElementById("app");
+
+      if (!hasCore) {
+        app.innerHTML = '<div class="empty">' + t.empty + '<div class="raw">' + location.search + "</div></div>";
+        return;
+      }
+
+      var endDate = parseDate(data.weekEnd) || new Date();
+      var day = endDate.getDate();
+      var daily = data.mtdCases != null ? (data.mtdCases / Math.max(day, 1)) : null;
+
+      var kpis = [
+        { label: t.weekCases, value: data.weekCases, cls: "jade" },
+        { label: t.mtdCases, value: data.mtdCases, cls: "rose" },
+        { label: t.dailyMtd, value: daily != null ? daily.toFixed(1) : null, cls: "" },
+        { label: t.weekWaiting, value: data.weekWaiting, cls: "" },
+        { label: t.mtdWaiting, value: data.mtdWaiting, cls: "" }
+      ].filter(function (item) { return item.value != null; });
+
+      var dailySeries = parseSeries(data.daily);
+      var weekSeries = parseSeries(data.weeks);
+      var charts =
+        (dailySeries.length || weekSeries.length
+          ? '<section class="charts">' +
+              (dailySeries.length ? '<article class="card"><h2>' + t.dailyChart + "</h2>" + chartHtml(dailySeries, dayLabels(data, t), "daily") + "</article>" : "") +
+              (weekSeries.length ? '<article class="card"><h2>' + t.weeklyChart + "</h2>" + chartHtml(weekSeries, weekLabels(weekSeries.length, t), "weekly") + "</article>" : "") +
+            "</section>"
+          : "");
+
+      app.innerHTML =
+        '<section class="hero">' +
+          '<div class="eyebrow">Daleela</div>' +
+          "<h1>" + (data.doctor || t.doctorFallback) + "</h1>" +
+          '<div class="period">' + t.title + " · " + periodText(data, t) + "</div>" +
+        "</section>" +
+        (kpis.length
+          ? '<section class="kpis">' +
+              kpis.map(function (item) {
+                return '<article class="kpi ' + item.cls + '"><div class="label">' + item.label + '</div><div class="value">' + item.value + "</div></article>";
+              }).join("") +
+            "</section>"
+          : "") +
+        charts;
+    }
+
+    render();
+  </script>
+</body>
+</html>
