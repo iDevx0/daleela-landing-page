@@ -120,7 +120,7 @@
     .kpi.tier .label { color: inherit; opacity: 0.8; }
     .kpi.good { background: #e7f3ee; color: #1f5c4d; border-color: #c5e0d6; }
     .kpi.ok { background: #f8efe0; color: #7a5420; border-color: #ead7b3; }
-    .kpi.weak { background: #f6e6ea; color: #8a3a4b; border-color: #e8c6ce; }
+    .kpi.bad, .kpi.weak { background: #f6e6ea; color: #8a3a4b; border-color: #e8c6ce; }
 
     .grid {
       display: grid;
@@ -300,7 +300,10 @@
       target: "target",
       avgdailytarget: "target",
       avg_daily_target: "target",
-      dailytarget: "target"
+      dailytarget: "target",
+      tier: "tier",
+      perf: "tier",
+      performance: "tier"
     };
 
     var SKIP = { x: 1, lang: 1, utm_source: 1, utm_medium: 1, utm_campaign: 1, utm_content: 1, utm_term: 1 };
@@ -337,7 +340,8 @@
         overall: "الأداء العام",
         tierGood: "جيد",
         tierOk: "مقبول",
-        tierWeak: "ضعيف"
+        tierWeak: "ضعيف",
+        tierBad: "ضعيف"
       },
       en: {
         title: "Daleela Doctors Performance Report",
@@ -368,7 +372,8 @@
         overall: "Overall performance",
         tierGood: "Good",
         tierOk: "Ok",
-        tierWeak: "Weak"
+        tierWeak: "Bad",
+        tierBad: "Bad"
       }
     };
 
@@ -425,6 +430,7 @@
         daily: "",
         weeks: "",
         target: null,
+        tier: "",
         extras: []
       };
 
@@ -485,15 +491,12 @@
       return out;
     }
 
-    var WORKDAYS = 5;
-
-    function weekTier(weekCases, target, t) {
-      if (weekCases == null || target == null || target <= 0) return null;
-      var perDay = weekCases / WORKDAYS;
-      var okFloor = target * 0.7;
-      var key = perDay >= target ? "good" : perDay >= okFloor ? "ok" : "weak";
-      var names = { good: t.tierGood, ok: t.tierOk, weak: t.tierWeak };
-      return { key: key, name: names[key] };
+    function displayTier(value, t) {
+      var key = String(value || "").toLowerCase();
+      if (key === "good" || key === "جيد") return { key: "good", name: t.tierGood };
+      if (key === "ok" || key === "مقبول") return { key: "ok", name: t.tierOk };
+      if (key === "bad" || key === "weak" || key === "ضعيف") return { key: "bad", name: t.tierBad };
+      return null;
     }
 
     function render() {
@@ -526,8 +529,9 @@
       var endDate = parseDate(data.weekEnd) || new Date();
       var day = endDate.getDate();
       var daily = data.mtdCases != null ? (data.mtdCases / Math.max(day, 1)) : null;
+      var dailySeries = parseSeries(data.daily);
 
-      var tier = weekTier(data.weekCases, data.target, t);
+      var tier = displayTier(data.tier, t);
       var kpis = [
         { label: t.weekCases, value: data.weekCases, cls: "jade" },
         { label: t.mtdCases, value: data.mtdCases, cls: "rose" },
@@ -537,7 +541,6 @@
         { label: t.overall, value: tier ? tier.name : null, cls: tier ? "tier " + tier.key : "" }
       ].filter(function (item) { return item.value != null; });
 
-      var dailySeries = parseSeries(data.daily);
       var weekSeries = parseSeries(data.weeks);
       var charts =
         (dailySeries.length || weekSeries.length
