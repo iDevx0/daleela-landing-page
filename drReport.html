@@ -296,7 +296,11 @@
       daily: "daily",
       days: "daily",
       weeks: "weeks",
-      weekly: "weeks"
+      weekly: "weeks",
+      target: "target",
+      avgdailytarget: "target",
+      avg_daily_target: "target",
+      dailytarget: "target"
     };
 
     var SKIP = { x: 1, lang: 1, utm_source: 1, utm_medium: 1, utm_campaign: 1, utm_content: 1, utm_term: 1 };
@@ -420,6 +424,7 @@
         weekRange: "",
         daily: "",
         weeks: "",
+        target: null,
         extras: []
       };
 
@@ -428,7 +433,7 @@
         var mapped = canon(key);
         var value = raw[key];
         if (data.hasOwnProperty(mapped) && mapped !== "extras") {
-          if (mapped === "weekCases" || mapped === "mtdCases" || mapped === "weekWaiting" || mapped === "mtdWaiting") {
+          if (mapped === "weekCases" || mapped === "mtdCases" || mapped === "weekWaiting" || mapped === "mtdWaiting" || mapped === "target") {
             data[mapped] = num(value);
           } else {
             data[mapped] = value;
@@ -482,10 +487,11 @@
 
     var WORKDAYS = 5;
 
-    function weekTier(weekCases, t) {
-      if (weekCases == null) return null;
+    function weekTier(weekCases, target, t) {
+      if (weekCases == null || target == null || target <= 0) return null;
       var perDay = weekCases / WORKDAYS;
-      var key = perDay >= 10 ? "good" : perDay >= 7 ? "ok" : "weak";
+      var okFloor = target * 0.7;
+      var key = perDay >= target ? "good" : perDay >= okFloor ? "ok" : "weak";
       var names = { good: t.tierGood, ok: t.tierOk, weak: t.tierWeak };
       return { key: key, name: names[key] };
     }
@@ -521,7 +527,7 @@
       var day = endDate.getDate();
       var daily = data.mtdCases != null ? (data.mtdCases / Math.max(day, 1)) : null;
 
-      var tier = weekTier(data.weekCases, t);
+      var tier = weekTier(data.weekCases, data.target, t);
       var kpis = [
         { label: t.weekCases, value: data.weekCases, cls: "jade" },
         { label: t.mtdCases, value: data.mtdCases, cls: "rose" },
