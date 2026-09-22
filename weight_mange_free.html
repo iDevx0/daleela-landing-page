@@ -316,13 +316,13 @@
     window.dataLayer = window.dataLayer || [];
     document.querySelectorAll('.js-download').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-        if (typeof snaptr !== 'undefined') snaptr('track', 'SIGN_UP');
-        if (typeof ttq !== 'undefined') ttq.track('ClickButton');
+        if (typeof fbq !== 'undefined') fbq('trackCustom', 'download_daleela_free_wlm');
+        if (typeof snaptr !== 'undefined') snaptr('track', 'download_daleela_free_wlm');
+        if (typeof ttq !== 'undefined') ttq.track('Download');
         dataLayer.push({
-          event: 'generate_lead',
+          event: 'download',
           event_category: 'engagement',
-          event_label: 'download_daleela_injection_lp',
+          event_label: 'download_daleela_free_wlm',
           button_href: btn.href || ''
         });
       });
