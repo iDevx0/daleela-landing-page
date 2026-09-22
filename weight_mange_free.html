@@ -312,20 +312,42 @@
 
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
   <script>
-    if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 1.8 } });
+    try {
+      if (window.lucide) lucide.createIcons({ attrs: { 'stroke-width': 1.8 } });
+    } catch (e) {}
     window.dataLayer = window.dataLayer || [];
-    document.querySelectorAll('.js-download').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        if (typeof fbq !== 'undefined') fbq('trackCustom', 'download_daleela_free_wlm');
-        if (typeof snaptr !== 'undefined') snaptr('track', 'download_daleela_free_wlm');
-        if (typeof ttq !== 'undefined') ttq.track('Download');
-        dataLayer.push({
-          event: 'download',
-          event_category: 'engagement',
-          event_label: 'download_daleela_free_wlm',
-          button_href: btn.href || ''
+    var PIXEL_ID = '1084939266838453';
+    var META_EVENT = 'download_daleela_free_wlm';
+
+    function fireDownload(btn) {
+      if (btn.dataset.dlFired) return;
+      btn.dataset.dlFired = '1';
+      setTimeout(function () { delete btn.dataset.dlFired; }, 2000);
+
+      if (typeof fbq === 'function') {
+        fbq('trackSingleCustom', PIXEL_ID, META_EVENT, {
+          content_name: 'Daleela',
+          content_category: 'app_download'
         });
+      } else {
+        var src = 'https://www.facebook.com/tr?id=' + PIXEL_ID + '&ev=' + encodeURIComponent(META_EVENT) + '&noscript=1';
+        if (navigator.sendBeacon) navigator.sendBeacon(src);
+        else { var img = new Image(); img.src = src; }
+      }
+
+      if (typeof snaptr !== 'undefined') snaptr('track', META_EVENT);
+      if (typeof ttq !== 'undefined') ttq.track('Download');
+      dataLayer.push({
+        event: META_EVENT,
+        event_category: 'engagement',
+        event_label: META_EVENT,
+        button_href: (btn && btn.href) || ''
       });
+    }
+
+    document.querySelectorAll('.js-download').forEach(function (btn) {
+      btn.addEventListener('pointerdown', function () { fireDownload(btn); });
+      btn.addEventListener('click', function () { fireDownload(btn); });
     });
   </script>
 </body>
