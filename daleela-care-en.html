@@ -74,6 +74,19 @@ body{margin:0;background:#FFFFFF}
 a{color:#682E3F}a:hover{color:#4F1F2E}
 .lang-switch{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;font-size:15px;font-weight:600;color:#231F20;text-decoration:none;border-radius:999px;white-space:nowrap}
 .lang-switch:hover{color:#682E3F;background:rgba(104,46,63,.06)}
+html{scroll-behavior:smooth}
+.site-header{padding:12px 16px 0;background:transparent;display:flex;flex-direction:column;align-items:center}
+.site-header header{width:min(1220px,100%);background:transparent;border-radius:999px;padding:6px 18px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.section-nav{position:sticky;top:0;z-index:30;background:#F7EBDC;padding:10px 16px 8px;display:flex;justify-content:center}
+.site-nav{width:max-content;max-width:100%;background:#FFFFFF;border-radius:999px;padding:4px 8px;display:flex;align-items:center;justify-content:center;gap:2px}
+.site-nav a{display:inline-flex;align-items:center;min-height:40px;padding:6px 10px;border-radius:999px;color:#231F20;text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap}
+.site-nav a:hover{color:#682E3F;background:rgba(104,46,63,.06)}
+#steps,#topics,#team,#faq{scroll-margin-top:72px}
+@media (max-width:768px){
+  .site-header header{padding:6px 12px}
+  .site-nav{width:100%}
+  .site-nav a{font-size:12px;padding:6px 8px}
+}
 .care-orbit{container-type:inline-size;width:min(640px,100%);aspect-ratio:1;position:relative;margin:24px auto 32px;overflow:visible;background:radial-gradient(circle at 50% 50%, rgba(247,235,220,.72) 0 14%, rgba(247,235,220,.2) 34%, rgba(247,235,220,0) 62%)}
 .care-orbit-spokes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
 .care-orbit-spokes .ring{fill:none;stroke:#E7DDD3;stroke-width:1.25;stroke-dasharray:2 8}
@@ -83,13 +96,30 @@ a{color:#682E3F}a:hover{color:#4F1F2E}
 .care-orbit.is-inview .care-orbit-spokes .flow{animation:spoke-flow 2.2s ease-in infinite;animation-delay:4.8s}
 .care-orbit-spokes .node{fill:#4CAAB9;transform-box:fill-box;transform-origin:center;opacity:0}
 .care-orbit.is-inview .care-orbit-spokes .node{animation:node-pop .3s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:4.15s}
-.care-orbit-center{box-sizing:border-box;position:absolute;left:50%;top:50%;width:30cqi;height:30cqi;min-width:96px;min-height:96px;max-width:158px;max-height:158px;border-radius:50%;background:#682E3F;color:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-align:center;padding:10px 12px;z-index:2;box-shadow:0 14px 36px rgba(104,46,63,.24);opacity:0}
+.care-orbit-center{box-sizing:border-box;position:absolute;left:50%;top:50%;width:32cqi;height:32cqi;min-width:108px;min-height:108px;max-width:176px;max-height:176px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#FFFFFF 0 54%,#F7EBDC 55% 68%,#FFFFFF 69%);color:#231F20;border:1px solid rgba(104,46,63,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;padding:12px 14px;z-index:2;box-shadow:0 18px 42px rgba(104,46,63,.14);opacity:0}
 .care-orbit.is-inview .care-orbit-center{animation:hub-in .4s cubic-bezier(.2,.8,.2,1) both;animation-delay:4.5s}
-.care-orbit-center::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1.5px solid rgba(104,46,63,.3);pointer-events:none}
+.care-orbit-center::before{content:"";position:absolute;inset:-11px;border-radius:50%;border:1px dashed rgba(76,170,185,.7);pointer-events:none}
+.care-orbit.is-inview .care-orbit-center::before{animation:hub-spin 28s linear infinite}
+.care-orbit-center::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(76,170,185,.35);pointer-events:none}
 .care-orbit.is-inview .care-orbit-center::after{animation:hub-pulse 4.2s ease-out infinite}
-.care-orbit-center svg{display:block;width:clamp(20px,5.2cqi,28px);height:clamp(20px,5.2cqi,28px);margin-bottom:2px}
-.care-orbit-center b{font-size:clamp(10px,2.2cqi,14px);font-weight:700;line-height:1.15;color:#FFFFFF;white-space:nowrap}
-.care-orbit-center span{font-size:clamp(7.5px,1.65cqi,11px);font-weight:500;color:rgba(255,255,255,.82);line-height:1.2;max-width:12em}
+.care-orbit-center svg{display:block;box-sizing:content-box;width:clamp(16px,4.2cqi,22px);height:clamp(16px,4.2cqi,22px);padding:clamp(6px,1.4cqi,8px);margin-bottom:3px;border-radius:50%;background:#682E3F;color:#FFFFFF}
+.care-orbit-center b{font-size:clamp(11px,2.4cqi,15px);font-weight:700;line-height:1.15;color:#682E3F;white-space:nowrap}
+.care-orbit-center span{display:block;margin-top:2px;padding-top:3px;border-top:1px solid rgba(104,46,63,.16);font-size:clamp(8px,1.7cqi,11px);font-weight:500;color:#6B6467;line-height:1.2;max-width:11em}
+.orbit-float{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible}
+.orbit-float img{position:absolute;width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:center 18%;border:2px solid rgba(247,235,220,.95);filter:grayscale(.8) sepia(.4) saturate(.35) brightness(1.14);opacity:0}
+.care-orbit.is-inview .orbit-float img{animation:avatar-drift 7s ease-in-out infinite alternate;opacity:.42}
+.orbit-float img:nth-child(1){left:-56px;top:6%}
+.orbit-float img:nth-child(2){left:-34px;top:24%}
+.orbit-float img:nth-child(3){left:-62px;top:46%}
+.orbit-float img:nth-child(4){left:-30px;top:68%}
+.orbit-float img:nth-child(5){left:-54px;top:86%}
+.orbit-float img:nth-child(6){right:-56px;top:8%}
+.orbit-float img:nth-child(7){right:-32px;top:28%}
+.orbit-float img:nth-child(8){right:-60px;top:50%}
+.orbit-float img:nth-child(9){right:-28px;top:70%}
+.orbit-float img:nth-child(10){right:-52px;top:88%}
+.care-orbit.is-inview .orbit-float img:nth-child(even){animation-direction:reverse}
+@media (max-width:900px){.orbit-float{display:none}}
 .care-orbit-item{box-sizing:border-box;position:absolute;left:50%;top:50%;width:22cqi;height:21cqi;transform:translate(-50%,-50%) rotate(calc(var(--i)*45deg)) translateY(-36.5cqi) rotate(calc(var(--i)*-45deg));z-index:1;font-size:clamp(8px,2.05cqi,12px);font-weight:600;color:#231F20;line-height:1.3;text-align:center}
 .care-orbit-card{box-sizing:border-box;height:100%;background:#FFFFFF;border:1px solid #F2EBE4;border-radius:18px;box-shadow:0 10px 26px rgba(35,31,32,.07);padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;opacity:0}
 .care-orbit.is-inview .care-orbit-card{animation:card-in .32s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.08s + var(--i)*.52s)}
@@ -110,10 +140,14 @@ button.care-orbit-card{appearance:none;width:100%;margin:0;font:inherit;color:in
 @keyframes spoke-flow{0%{stroke-dashoffset:0;opacity:0}8%{opacity:1}58%{stroke-dashoffset:-100;opacity:1}72%,100%{stroke-dashoffset:-100;opacity:0}}
 @keyframes node-pop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
 @keyframes hub-in{from{opacity:0;transform:translate(-50%,-50%) scale(.7)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-@keyframes hub-pulse{0%{transform:scale(.92);opacity:.55}100%{transform:scale(1.38);opacity:0}}
+@keyframes hub-pulse{0%{transform:scale(.92);opacity:.45}100%{transform:scale(1.38);opacity:0}}
+@keyframes hub-spin{to{transform:rotate(360deg)}}
 @keyframes card-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes avatar-drift{from{transform:translateY(-10px)}to{transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){
-  .care-orbit .care-orbit-spokes .spoke,.care-orbit .care-orbit-spokes .flow,.care-orbit .care-orbit-spokes .node,.care-orbit .care-orbit-center,.care-orbit .care-orbit-center::after,.care-orbit .care-orbit-card,.care-orbit.is-inview .care-orbit-spokes .spoke,.care-orbit.is-inview .care-orbit-spokes .flow,.care-orbit.is-inview .care-orbit-spokes .node,.care-orbit.is-inview .care-orbit-center,.care-orbit.is-inview .care-orbit-center::after,.care-orbit.is-inview .care-orbit-card{animation:none}
+  html{scroll-behavior:auto}
+  .care-orbit .care-orbit-spokes .spoke,.care-orbit .care-orbit-spokes .flow,.care-orbit .care-orbit-spokes .node,.care-orbit .care-orbit-center,.care-orbit .care-orbit-center::before,.care-orbit .care-orbit-center::after,.care-orbit .care-orbit-card,.care-orbit.is-inview .care-orbit-spokes .spoke,.care-orbit.is-inview .care-orbit-spokes .flow,.care-orbit.is-inview .care-orbit-spokes .node,.care-orbit.is-inview .care-orbit-center,.care-orbit.is-inview .care-orbit-center::before,.care-orbit.is-inview .care-orbit-center::after,.care-orbit.is-inview .care-orbit-card,.orbit-float,.orbit-float img,.care-orbit.is-inview .orbit-float,.care-orbit.is-inview .orbit-float img{animation:none}
+  .orbit-float{opacity:0}
   .care-orbit .care-orbit-spokes .spoke{stroke-dashoffset:0}
   .care-orbit .care-orbit-spokes .flow{opacity:0}
   .care-orbit .care-orbit-spokes .node,.care-orbit .care-orbit-card{opacity:1;transform:none}
@@ -126,11 +160,15 @@ button.care-orbit-card{appearance:none;width:100%;margin:0;font:inherit;color:in
   [style*="grid-template-columns: repeat(3, minmax(0, 1fr))"]{grid-template-columns: repeat(2, minmax(0, 1fr)) !important;}
 }
 @media (max-width: 600px){
-  [style*="grid-template-columns: repeat(4, minmax(0, 1fr))"],
+  [style*="grid-template-columns: repeat(4, minmax(0, 1fr))"]:not(.team-grid),
   [style*="grid-template-columns: repeat(3, minmax(0, 1fr))"]{grid-template-columns: repeat(1, minmax(0, 1fr)) !important;}
   h1{font-size: 32px !important;}
   h2{font-size: 28px !important;}
-  nav{display: none !important;}
+}
+@media (max-width: 768px){
+  .team-grid{display:flex !important;flex-wrap:nowrap;gap:14px !important;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;padding-bottom:16px}
+  .team-grid::-webkit-scrollbar{display:none}
+  .team-grid > div{flex:0 0 78%;scroll-snap-align:start;scroll-snap-stop:always}
 }
 </style>
 <style>
@@ -158,8 +196,42 @@ button.care-orbit-card{appearance:none;width:100%;margin:0;font:inherit;color:in
 .ph-typing i{width:.45em;height:.45em;border-radius:50%;background:#8A8285;opacity:.6}
 .ph-input{margin:.2em 1em 1.3em;border:1px solid #E7DDD3;border-radius:999px;padding:.55em .55em .55em 1em;display:flex;align-items:center;justify-content:space-between;font-size:.82em;color:#A39B9E}
 .ph-send{width:2.2em;height:2.2em;border-radius:50%;background:#682E3F;color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center}
-@media (max-width: 600px){.ph-group{zoom:.82}}
-@media (max-width: 420px){.ph-group{zoom:.7}}
+html,body{overflow-x:clip;max-width:100%}
+.hero-avatars{display:block;overflow:hidden;width:156px;max-width:100%;margin-top:10px;direction:ltr;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 12px),transparent);mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}
+.hero-avatars-track{display:flex;width:max-content;animation:hero-avatars-slide 18s linear infinite}
+.hero-avatars-set{display:flex;align-items:center;flex-shrink:0}
+.hero-avatars-set + .hero-avatars-set{margin-left:-9px}
+.hero-avatars img{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:center 18%;border:2px solid #F7EBDC;margin-left:-9px;background:#F7EBDC;flex-shrink:0}
+.hero-avatars-set img:first-child{margin-left:0}
+@keyframes hero-avatars-slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-1 * var(--avatar-shift,190px)),0,0)}}
+@media (prefers-reduced-motion:reduce){.hero-avatars-track{animation:none}}
+.steps-mobile-copy{display:none}
+.hero-stats > div:not(.hero-stat-rule){position:relative}
+@media (max-width: 768px){
+  .hero-layout{flex-direction:column !important;align-items:stretch !important;gap:22px !important;padding:36px 20px 28px !important}
+  .hero-copy-col{display:contents !important}
+  .hero-lead{display:block !important;order:0;margin:0 0 8px !important;text-align:center;font-size:32px !important;line-height:1.4 !important;color:#231F20}
+  .hero-copy{display:none !important}
+  .hero-stats{order:1;margin-top:0 !important;width:100%;flex-direction:column !important;align-items:center !important;gap:26px !important}
+  .hero-stats > div:not(.hero-stat-rule){background:transparent;padding:0;width:100%;align-items:center;text-align:center}
+  .hero-stats > div:not(.hero-stat-rule)::after{content:"";width:42px;height:3px;border-radius:999px;margin-top:12px;background:linear-gradient(90deg,#682E3F,#4CAAB9)}
+  .hero-stats > div:not(.hero-stat-rule) > span:first-child{font-size:28px !important;line-height:1.25 !important;color:#682E3F !important}
+  .hero-stats > div:not(.hero-stat-rule) > span:last-child{font-size:15px !important;line-height:1.6 !important;max-width:none !important;margin-top:6px !important;color:#5C5658 !important}
+  .hero-stat-rule{display:none !important}
+  .hero-cta{order:2;display:flex;justify-content:center;margin-top:6px}
+  #top .ph-group{display:none !important}
+  .steps-section{gap:0 !important}
+  .steps-head,.steps-row,.steps-col{display:contents !important}
+  .steps-section h2{order:1}
+  .steps-item{order:2}
+  .steps-intro{display:none !important}
+  .steps-mobile-copy{display:block !important;order:3;margin:28px 0 8px !important}
+  .steps-phones{order:4;width:100%;max-width:100%;margin:120px 0 48px !important;overflow:visible}
+  .steps-phones .ph{margin-left:0 !important;margin-right:0 !important}
+  .steps-cta{order:5;display:flex;justify-content:center}
+}
+@media (max-width: 600px){.ph-group{zoom:.82}.steps-phones{zoom:.64}}
+@media (max-width: 420px){.ph-group{zoom:.7}.steps-phones{zoom:.58}}
 </style>
 <style>
 .faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-weight:600;font-size:16px;color:#231F20;min-height:44px}
@@ -228,41 +300,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div dir="ltr" style="font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif; color: #231F20; background: #FFFFFF; line-height: 1.6; width: 100%;">
 
   <!-- HEADER -->
-  <div style="padding: 12px 16px 0; background: #F7EBDC;">
-    <header style="max-width: 1220px; margin: 0 auto; background: #FFFFFF; border-radius: 999px; padding: 10px 24px 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+  <div class="site-header">
+    <header>
       <a href="#top" aria-label="Daleela — Home" style="display: inline-flex; align-items: center; width: 132px; min-height: 44px;">
         <svg fill="#682E3F" role="img" aria-label="Daleela" style="width: 100%; height: auto;" viewBox="0 0 121 33" xmlns="http://www.w3.org/2000/svg"><path d="M22.8597 0.0285015C20.7895 0.31312 19.2471 1.59391 18.4172 3.71965C17.9888 4.80476 17.7948 6.21451 17.8985 7.45083C18.1782 10.8084 19.9281 12.9653 22.7514 13.4412C23.0852 13.499 23.3648 13.5079 23.9376 13.4901C24.587 13.4723 24.7584 13.4501 25.2049 13.3344C26.1295 13.0898 26.9052 12.7207 27.6675 12.1559C29.1107 11.0886 30.1796 9.53655 30.599 7.90889C31.0906 6.0055 30.608 4.1955 29.1829 2.59007C28.1049 1.37155 26.4407 0.428746 24.808 0.117445C24.2623 0.0107126 23.3062 -0.0337591 22.8597 0.0285015Z"></path><path d="M8.69344 1.95865C6.72703 2.25661 3.88566 3.48848 3.00168 4.43128C2.72656 4.72479 2.52812 5.09391 2.40183 5.54307C2.29359 5.92998 2.28908 6.97951 2.40183 7.45091C2.51008 7.92231 2.71754 8.51378 2.90246 8.874C3.16855 9.40322 3.12345 9.5055 2.43792 9.85683C1.86062 10.1503 1.65767 10.4527 1.42765 11.3422C1.28784 11.8758 1.32843 12.5785 1.52236 13.1433C1.72983 13.757 1.95533 14.1528 2.27104 14.4641C2.63185 14.8243 2.92501 14.9399 3.48877 14.9399C4.39079 14.9399 5.47773 14.3974 5.69873 13.837C5.77991 13.6236 5.88364 13.5791 6.00992 13.7081C6.14072 13.8326 6.09111 14.0505 5.82501 14.5797C5.61754 14.9933 5.51381 15.1401 5.25223 15.398C4.97711 15.6693 4.8373 15.7582 4.23294 16.0606C2.68146 16.8389 1.78846 17.5994 0.940558 18.849C0.552688 19.4271 0.390324 19.8096 0.164818 20.6857C-0.1554 21.9576 -0.0110761 23.1761 0.61583 24.3724C1.01272 25.1329 1.5404 25.7377 2.37928 26.3959C3.75036 27.4721 6.68193 29.3621 7.91319 29.9714C9.2978 30.6562 11.6566 31.5101 14.7505 32.444C16.532 32.9821 16.5952 32.9955 17.0642 32.9999C17.7813 33.0088 18.2504 32.7509 18.769 32.066C19.2832 31.3945 21.6239 27.3387 23.5498 23.7898C25.0651 21.0014 25.3989 20.6323 27.4375 19.4672C27.8344 19.2404 28.3124 18.9424 28.4973 18.8045C29.4986 18.0752 30.1526 17.1102 30.8201 15.3713C31.244 14.2818 31.262 13.9171 30.9057 13.7481C30.6847 13.6458 30.5224 13.7081 29.918 14.1172C29.5211 14.3885 29.2099 14.6642 28.3846 15.4825C27.3202 16.5409 27.1218 16.7055 26.6437 16.9278C26.2739 17.0968 25.9852 17.128 25.3177 17.0612C24.4202 16.9767 24.0323 17.1013 23.5227 17.6394C23.2386 17.9373 23.0491 18.2353 22.4899 19.2626C22.12 19.943 21.7502 20.5034 21.2135 21.1749C20.6768 21.8553 15.9096 27.2897 15.7518 27.4054C15.3459 27.6944 14.9625 27.7211 14.1462 27.5165C11.8911 26.9384 9.54134 25.6932 7.16451 23.8032C6.57369 23.3362 5.67167 22.5624 5.69422 22.5446C5.72579 22.5135 7.39002 23.0738 8.05752 23.3362C9.16249 23.772 9.8796 24.1634 11.0207 24.955C11.8325 25.5198 12.5225 25.8088 13.9071 26.1735L14.7595 26.4003L14.9896 26.2491C15.3504 26.0089 15.6165 25.7555 16.0855 25.2085C16.4779 24.746 17.1905 23.9588 18.07 23.0205L18.3857 22.6869L18.2053 22.4423C17.5919 21.6151 17.1183 20.8013 16.523 19.5517C15.9998 18.4577 15.4676 17.4393 15.2376 17.1057C14.8678 16.5632 14.4393 16.2874 13.7808 16.154C13.3704 16.0695 11.9362 16.0562 11.0658 16.1318C10.7501 16.1585 10.484 16.1674 10.4704 16.154C10.4524 16.1362 10.732 14.4374 10.8448 13.8993L10.8673 13.7792L11.1244 13.8593C11.6746 14.0283 12.8878 14.1706 13.7899 14.1706C14.1777 14.1706 14.2995 14.1528 14.4529 14.0772C14.8092 13.9082 14.9129 13.5747 14.7641 13.0855C14.728 12.9654 14.6964 12.7831 14.6964 12.6808C14.6964 12.4896 14.7595 12.4051 15.0256 12.245C15.1655 12.156 15.188 11.9603 15.0798 11.7513C15.0166 11.6357 15.0211 11.6179 15.1023 11.5156C15.2466 11.3333 15.2196 11.1376 15.0121 10.9019C14.8903 10.764 14.8317 10.6529 14.8317 10.5684C14.8317 10.386 15.0211 10.1859 15.2782 10.1014C15.5894 10.0036 15.6661 9.9013 15.6661 9.60779V9.36319L15.2511 8.97184C14.9039 8.64275 14.8046 8.52268 14.6648 8.22916C14.5025 7.89563 14.4934 7.8556 14.5025 7.47759C14.507 7.21966 14.534 7.00619 14.5836 6.87722C14.6287 6.76604 14.6739 6.56147 14.6829 6.42361C14.7009 6.20125 14.6829 6.1212 14.5385 5.80101C14.4438 5.59644 14.2634 5.18285 14.1281 4.876C13.7763 4.06216 13.5508 3.63968 13.3208 3.35506C12.8337 2.7458 11.9543 2.25217 10.9575 2.02536C10.4524 1.90973 9.24819 1.87416 8.69344 1.95865Z"></path><path d="M49.8238 7.08339C49.7517 7.10563 49.6434 7.16789 49.5848 7.2257C49.3367 7.45251 49.3458 7.35022 49.3458 10.3521V13.136L49.1112 12.9626C47.8619 12.0642 46.2969 11.6328 44.7003 11.7529C43.3293 11.8552 42.2468 12.2154 41.1779 12.9136C40.6367 13.2694 39.8114 14.0788 39.437 14.6213C38.093 16.5825 37.7863 19.1575 38.6162 21.4789C38.959 22.4395 39.4731 23.2355 40.2353 23.9871C41.2546 24.9921 42.4498 25.6014 43.9156 25.8549C44.6237 25.975 45.7061 25.9883 46.3465 25.8771C47.2485 25.7215 48.2769 25.3168 48.9669 24.8498L49.3232 24.6097L49.3458 24.9076C49.3773 25.3346 49.5216 25.5303 49.8644 25.6236C50.0989 25.6859 51.7496 25.6859 51.9842 25.6236C52.1871 25.5703 52.3811 25.4102 52.4532 25.2323C52.4893 25.1522 52.4983 22.5551 52.4938 16.2801L52.4803 7.44361L52.3224 7.28351C52.2367 7.19902 52.0969 7.10563 52.0067 7.08339C51.8128 7.03003 50.0042 7.03003 49.8238 7.08339ZM46.4503 14.6881C48.4437 15.1506 49.7336 17.0895 49.5216 19.2953C49.4675 19.8823 49.3458 20.336 49.1248 20.8074C48.543 22.0259 47.438 22.8442 46.0849 23.0532C45.6745 23.1199 44.7319 23.0754 44.3395 22.9776C43.9336 22.8797 43.2887 22.5684 42.9504 22.3149C42.3055 21.8347 41.7958 20.9941 41.5568 20.0158C41.4936 19.7623 41.4756 19.5043 41.4756 18.8462C41.4756 18.1168 41.4891 17.9478 41.5793 17.6098C41.9131 16.3068 42.6708 15.3685 43.7758 14.8882C44.5199 14.5635 45.5618 14.4835 46.4503 14.6881Z"></path><path d="M68.7844 7.13682C68.6761 7.19464 68.5454 7.29692 68.4957 7.36363L68.401 7.48815L68.3875 16.2802L68.3785 25.0723L68.4777 25.2724C68.6671 25.6326 68.7303 25.6504 69.9796 25.6504C71.1928 25.6504 71.2559 25.637 71.4589 25.3169L71.5581 25.1612V16.3558C71.5581 7.59933 71.5581 7.55041 71.4679 7.39476C71.4138 7.30137 71.292 7.19908 71.1747 7.13682C70.9853 7.04343 70.9222 7.03899 69.9796 7.03899C69.037 7.03899 68.9738 7.04343 68.7844 7.13682Z"></path><path d="M103.963 7.25698C103.878 7.30145 103.76 7.41708 103.706 7.51047L103.603 7.68391L103.616 16.4982L103.625 25.3125L103.72 25.4326C103.95 25.7394 103.95 25.7394 105.15 25.7528C106.372 25.7661 106.458 25.7483 106.656 25.4548L106.76 25.3036V16.4715C106.76 7.73727 106.76 7.63943 106.669 7.49268C106.62 7.41263 106.516 7.31034 106.435 7.26143C106.295 7.18138 106.205 7.17248 105.204 7.17248C104.234 7.17248 104.103 7.18138 103.963 7.25698Z"></path><path d="M59.7687 11.7574C58.0638 11.9442 56.4267 12.5846 55.3713 13.4651C55.0511 13.7364 54.9383 13.9187 54.9383 14.1633C54.9428 14.399 55.0195 14.5147 55.6464 15.2396C56.1606 15.8355 56.2688 15.9333 56.4267 15.9778C56.6837 16.0445 56.9228 15.9689 57.1889 15.7376C58.0052 15.0216 59.2951 14.5547 60.4362 14.5547C61.6945 14.5591 62.583 15.1506 62.8536 16.1779C62.8897 16.3247 62.9212 16.5159 62.9212 16.6048V16.7649L61.8523 16.7916C57.0626 16.9206 54.8075 18.0724 54.2573 20.6696C54.1761 21.0476 54.1896 22.1505 54.2753 22.5418C54.6903 24.3607 56.0208 25.4814 58.2442 25.8772C58.7358 25.9661 59.701 25.975 60.2467 25.8994C61.2841 25.7527 62.0959 25.428 62.8716 24.8454L63.1828 24.6097L63.2009 24.9611C63.2144 25.2857 63.2279 25.3257 63.3497 25.4503C63.5436 25.6415 63.8413 25.6815 64.9463 25.6637C66.0107 25.6504 66.0963 25.6237 66.2677 25.3035L66.3715 25.1167V20.6696C66.3715 15.7465 66.376 15.8755 66.0738 14.9772C65.501 13.2828 64.1029 12.1888 62.0327 11.8197C61.5547 11.7307 60.2918 11.6996 59.7687 11.7574ZM62.9483 19.9491C62.9032 20.5717 62.8085 20.9408 62.5875 21.3811C62.2402 22.066 61.8343 22.4662 61.1397 22.8042C60.6391 23.0488 60.3144 23.1377 59.7641 23.1689C59.2139 23.2 58.7764 23.1288 58.3705 22.9376C57.9691 22.7464 57.7166 22.5196 57.5407 22.186C57.4144 21.9459 57.3963 21.8703 57.3963 21.559C57.3963 21.1365 57.4775 20.9586 57.8068 20.6384C58.4923 19.9713 60.1565 19.5711 62.3755 19.5444L62.9799 19.5355L62.9483 19.9491Z"></path><path d="M79.5775 11.7529C76.4024 12.0198 73.9128 14.2967 73.3355 17.472C73.2182 18.1035 73.1957 19.3843 73.2859 19.958C73.7549 22.8575 75.7349 25.0678 78.459 25.7348C79.1716 25.9083 79.5775 25.9528 80.3758 25.9528C82.0355 25.9439 83.5374 25.468 84.728 24.5697C85.3955 24.0627 86.2389 23.1599 86.3201 22.8575C86.3787 22.6485 86.3201 22.4217 86.1577 22.2483C85.9232 21.9992 84.6378 21.0475 84.4755 21.0031C84.1688 20.9186 83.8891 21.0564 83.6456 21.4211C83.2893 21.9548 82.4685 22.5907 81.8235 22.8397C80.935 23.1822 79.8165 23.1777 78.919 22.8353C78.1929 22.5596 77.4307 21.9281 77.0428 21.2832C76.8624 20.9853 76.6324 20.4205 76.5647 20.127L76.5331 19.9802L81.4537 19.9713C86.3336 19.958 86.3697 19.958 86.4915 19.8646C86.5591 19.8157 86.6583 19.6956 86.708 19.5978C86.7937 19.4377 86.8027 19.3487 86.7982 18.5794C86.7937 17.9256 86.7711 17.601 86.6899 17.1563C86.2389 14.5369 84.6423 12.6869 82.2384 11.9975C81.5123 11.793 80.3713 11.6862 79.5775 11.7529ZM81.2282 14.6925C81.7784 14.817 82.1843 15.0394 82.5902 15.4485C82.8744 15.7287 82.9781 15.8666 83.1675 16.249C83.2938 16.5025 83.4246 16.8227 83.4607 16.9561L83.5193 17.2007L80.0916 17.2141C78.2064 17.2185 76.6549 17.2141 76.6414 17.2007C76.6098 17.1696 76.8398 16.6537 77.0293 16.3335C77.2457 15.9733 77.6968 15.493 78.0531 15.2395C78.3643 15.0216 78.8874 14.7726 79.1986 14.6881C79.7669 14.5413 80.5697 14.5413 81.2282 14.6925Z"></path><path d="M94.7311 11.753C93.0985 11.8909 91.6327 12.5624 90.4781 13.7053C89.4723 14.697 88.8499 15.8533 88.5342 17.312C88.444 17.7167 88.4305 17.9124 88.4305 18.8018C88.426 19.6957 88.4395 19.8869 88.5297 20.3227C88.9717 22.4707 90.2842 24.2407 92.1333 25.1746C94.1989 26.2197 96.8238 26.2241 98.912 25.1835C99.6156 24.8321 100.441 24.1829 101.023 23.5291C101.555 22.9243 101.618 22.7642 101.438 22.4084C101.37 22.2706 101.172 22.0927 100.621 21.6702C99.7779 21.0254 99.7193 20.9898 99.4668 20.9942C99.2097 20.9942 99.0338 21.1099 98.8444 21.39C98.3843 22.0749 97.4327 22.7509 96.6299 22.9688C96.3367 23.0444 96.1428 23.0622 95.552 23.0666C94.9296 23.0711 94.7807 23.0577 94.4741 22.9688C93.4999 22.6931 92.6475 22.0349 92.1604 21.1855C91.9845 20.8786 91.7409 20.2427 91.7409 20.0781V19.9803H96.6073H101.469L101.618 19.878C101.929 19.6734 101.956 19.5756 101.956 18.5794C101.956 17.6055 101.911 17.2053 101.708 16.4314C101.248 14.6748 100.148 13.274 98.5918 12.4646C97.5319 11.9176 96.0526 11.6418 94.7311 11.753ZM95.8812 14.6037C97.0358 14.7282 97.8476 15.2663 98.3437 16.2402C98.479 16.4982 98.6865 17.0763 98.6865 17.183C98.6865 17.2053 97.2342 17.223 95.2363 17.223H91.786L91.9033 16.9251C92.3588 15.7243 93.572 14.7638 94.8349 14.6037C95.2769 14.5503 95.3896 14.5503 95.8812 14.6037Z"></path><path d="M114.025 11.7574C112.988 11.873 111.928 12.1621 111.049 12.5801C110.201 12.9803 109.385 13.5674 109.258 13.8742C109.182 14.0477 109.177 14.3056 109.245 14.4346C109.303 14.5413 110.102 15.4974 110.363 15.7687C110.674 16.0889 111.053 16.08 111.446 15.7376C112.262 15.0216 113.552 14.5546 114.693 14.5546C115.951 14.5591 116.84 15.1506 117.11 16.1779C117.146 16.3246 117.178 16.5158 117.178 16.6048V16.7649L116.132 16.7916C114.517 16.8316 113.475 16.9517 112.357 17.2274C110.133 17.7699 108.916 18.8373 108.541 20.5628C108.293 21.7101 108.514 23.0665 109.087 23.9159C109.177 24.0538 109.357 24.2806 109.484 24.414C110.453 25.4635 112.321 26.0861 114.053 25.9394C115.342 25.8282 116.244 25.508 117.128 24.8454L117.44 24.6097L117.458 24.961C117.471 25.2857 117.485 25.3257 117.606 25.4502C117.8 25.6414 118.098 25.6815 119.203 25.6637C120.267 25.6503 120.353 25.6236 120.525 25.3034L120.628 25.1167V20.6695C120.628 16.5603 120.624 16.1912 120.547 15.8221C120.371 14.9549 120.146 14.3901 119.753 13.8297C119.023 12.7891 117.827 12.0954 116.29 11.8196C115.811 11.7307 114.549 11.6996 114.025 11.7574ZM117.205 19.9446C117.155 20.585 117.065 20.9452 116.835 21.4033C116.659 21.7546 116.556 21.8925 116.235 22.2082C115.911 22.5284 115.775 22.6262 115.419 22.7952C114.891 23.0532 114.576 23.1377 114.021 23.1688C113.471 23.1999 113.033 23.1288 112.627 22.9376C112.226 22.7463 111.955 22.4973 111.784 22.1726C111.676 21.9503 111.653 21.8613 111.653 21.5589C111.653 21.1364 111.739 20.9497 112.059 20.6339C112.74 19.9757 114.422 19.571 116.632 19.5444L117.237 19.5355L117.205 19.9446Z"></path></svg>
       </a>
       <a class="lang-switch" href="daleela-care" hreflang="ar" lang="ar" title="العربية">عربي</a>
     </header>
   </div>
+  <div class="section-nav">
+    <nav class="site-nav" aria-label="Page sections">
+      <a href="#steps">How it works</a>
+      <a href="#topics">Specializations</a>
+      <a href="#team">Medical team</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
 
   <!-- HERO -->
   <section id="top" style="background: #F7EBDC;">
-    <div style="max-width: 1220px; margin: 0 auto; padding: 64px 24px 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
-      <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
-        <h1 style="margin: 0; font-size: 40px; line-height: 1.3; font-weight: 700; color: #231F20;">Tell us how you feel, and your medical team will take it from there</h1>
-        <p style="margin: 0; font-size: 16px; line-height: 1.8; color: #5C5658; max-width: 560px;">Tell us your symptoms and health history. A team of specialist doctors reviews your case together and connects every symptom, so you get an accurate diagnosis and one clear treatment plan. One doctor is responsible for your care and stays with you for any question, until you feel better.</p>
-        <div>
+    <div class="hero-layout" style="max-width: 1220px; margin: 0 auto; padding: 64px 24px 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
+      <div class="hero-copy-col" style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+        <h1 class="hero-lead" style="margin: 0; font-size: 40px; line-height: 1.3; font-weight: 700; color: #231F20;">Share your symptoms, and our medical team will guide your care.</h1>
+        <p class="hero-copy" style="margin: 0; font-size: 16px; line-height: 1.8; color: #5C5658; max-width: 560px;">Tell us your symptoms and health history. A team of specialist doctors reviews your case together and connects every symptom, so you get an accurate diagnosis and one clear treatment plan. One doctor is responsible for your care and stays with you for any question, until you feel better.</p>
+        <div class="hero-cta">
           <a href="https://go.daleela.app/care-en-hero" target="_blank" rel="noopener" data-cta="hero" style="text-decoration: none; background: #682E3F; color: #FFFFFF; padding: 8px 8px 8px 24px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;">
-            <span>Understand your symptoms</span>
+            <span>Get Your Consultation</span>
             <span style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #231F20; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
-        <div style="margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 28px;">
+        <div class="hero-stats" style="margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 28px;">
           <div style="display: flex; flex-direction: column;">
             <span style="font-weight: 700; font-size: 30px; line-height: 1; color: #231F20;">A specialist team</span>
+            <span class="hero-avatars" aria-hidden="true"><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgUsNKDugUZsl8tkWCaWh%2Fprofile.jpg?alt=media&token=145e3ae8-941e-4d3c-85c9-4432e4395bc8" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgN7RCskOlzT3mJcx4h6Y%2Fprofile.jpg?alt=media&token=92ccffac-1868-4b67-b13b-31415c5a9881" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2Fykb7uznsG9rE4xmAt96w%2Fprofile.jpg?alt=media&token=32814e4b-85c7-4a51-a041-4cf7e5173583" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FloFhatZcHKNIB0hsouVb%2Fprofile.jpg?alt=media&token=3c90f76e-b001-4c5a-9a2d-9626281c63b3" alt=""></span>
             <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">working on your case together</span>
           </div>
-          <div style="width: 1px; height: 56px; background: #D9CBBC;"></div>
+          <div class="hero-stat-rule" style="width: 1px; height: 56px; background: #D9CBBC;"></div>
           <div style="display: flex; flex-direction: column;">
-            <span style="font-weight: 700; font-size: 30px; line-height: 1; color: #231F20;">One plan</span>
-            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">clear for all your concerns together</span>
-          </div>
-          <div style="width: 1px; height: 56px; background: #D9CBBC;"></div>
-          <div style="display: flex; flex-direction: column;">
-            <span style="font-weight: 700; font-size: 30px; line-height: 1; color: #231F20;">With you</span>
-            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">your doctor is there for any question until you feel better</span>
+            <span style="font-weight: 700; font-size: 30px; line-height: 1; color: #231F20;">One treatment plan</span>
+            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">clear for all your concerns</span>
           </div>
         </div>
       </div>
@@ -306,14 +382,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section style="background: #FFFFFF;">
-    <div style="max-width: 1220px; margin: 0 auto; padding: 56px 24px 80px; display: flex; flex-direction: column; gap: 40px;">
-      <div style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
+  <section id="steps" style="background: #FFFFFF;">
+    <div class="steps-section" style="max-width: 1220px; margin: 0 auto; padding: 56px 24px 80px; display: flex; flex-direction: column; gap: 40px;">
+      <div class="steps-head" style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">Your care in 3 simple steps</h2>
-        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">You don’t need to know who to see. Tell us how you feel, and we’ll take it from there.</p>
+        <p class="steps-intro" style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">You don’t need to know who to see. Explain your symptoms, and we’ll take it from there.</p>
       </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
-        <div class="ph-group" style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; gap: 16px; align-items: flex-end;">
+      <div class="steps-row" style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
+        <div class="ph-group steps-phones" style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; gap: 16px; align-items: flex-end;">
           <div class="ph" aria-hidden="true" style="width: 230px; height: 460px; border-radius: 32px; font-size: 11.5px; transform: rotate(6deg);">
             <span class="ph-island"></span>
             <div class="ph-status"><span class="ph-battery"></span><span>9:41</span></div>
@@ -342,39 +418,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="ph-input"><span>Type a message…</span><span class="ph-send"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span></div>
           </div>
         </div>
-        <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; max-width: 540px;">
-          <div style="display: flex; gap: 14px;">
+        <div class="steps-col" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; max-width: 540px;">
+          <div class="steps-item" style="display: flex; gap: 14px;">
             <div style="display: flex; flex-direction: column; align-items: center; width: 48px; flex-shrink: 0;">
               <span style="width: 44px; height: 44px; border-radius: 50%; background: #4CAAB9; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg></span>
               <span style="width: 1px; flex: 1; min-height: 16px; border-right: 1px dashed #4CAAB9; margin-top: 4px; opacity: 0.5;"></span>
             </div>
             <div style="padding: 8px 0 32px; display: flex; flex-direction: column; gap: 6px;">
               <span style="font-weight: 600; font-size: 16px; color: #231F20;">Tell us your symptoms and health history</span>
-              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">In a short chat, tell us everything you’re feeling and your health history (add photos if you need to). We look at the full picture, not one symptom at a time.</span>
+              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">We look at the full picture, not one symptom at a time.</span>
             </div>
           </div>
-          <div style="display: flex; gap: 14px;">
+          <div class="steps-item" style="display: flex; gap: 14px;">
             <div style="display: flex; flex-direction: column; align-items: center; width: 48px; flex-shrink: 0;">
               <span style="width: 44px; height: 44px; border-radius: 50%; background: #4CAAB9; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center;"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5H4.5C3.94772 3.5 3.5 3.94772 3.5 4.5V8C3.5 11.0376 5.96243 13.5 9 13.5C12.0376 13.5 14.5 11.0376 14.5 8V4.5C14.5 3.94772 14.0523 3.5 13.5 3.5H11.5"/><path d="M18.5 15.5V16.75C18.5 19.3734 16.3734 21.5 13.75 21.5C11.1266 21.5 9 19.3734 9 16.75V13.5"/><path d="M11.5 2.5V4.5"/><path d="M6.5 2.5V4.5"/><path d="M20.5 13.5C20.5 14.6046 19.6046 15.5 18.5 15.5C17.3954 15.5 16.5 14.6046 16.5 13.5C16.5 12.3954 17.3954 11.5 18.5 11.5C19.6046 11.5 20.5 12.3954 20.5 13.5Z"/></svg></span>
               <span style="width: 1px; flex: 1; min-height: 16px; border-right: 1px dashed #4CAAB9; margin-top: 4px; opacity: 0.5;"></span>
             </div>
             <div style="padding: 8px 0 32px; display: flex; flex-direction: column; gap: 6px;">
               <span style="font-weight: 600; font-size: 16px; color: #231F20;">Your medical team reviews your case together</span>
-              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">Gynecology, dermatology, endocrinology, and nutrition doctors look at your case together, connect different symptoms, and request only the tests that are needed, so the diagnosis is right.</span>
+              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">Gynecology, dermatology, endocrinology, and nutrition doctors look at your case together and connect different symptoms.</span>
             </div>
           </div>
-          <div style="display: flex; gap: 14px;">
+          <div class="steps-item" style="display: flex; gap: 14px;">
             <div style="display: flex; flex-direction: column; align-items: center; width: 48px; flex-shrink: 0;">
               <span style="width: 44px; height: 44px; border-radius: 50%; background: #4CAAB9; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span>
             </div>
             <div style="padding: 8px 0 0; display: flex; flex-direction: column; gap: 6px;">
               <span style="font-weight: 600; font-size: 16px; color: #231F20;">One treatment plan, and your doctor stays with you</span>
-              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">You get one clear treatment plan for all your concerns together, and one doctor responsible for your case that you can ask anything, anytime, until you feel better.</span>
+              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">You get one clear treatment plan for all your concerns, and one doctor responsible for your case that you can ask anything, anytime.</span>
             </div>
           </div>
-          <div style="margin-top: 36px;">
+          <div class="steps-cta" style="margin-top: 36px;">
             <a href="https://go.daleela.app/care-en-steps" target="_blank" rel="noopener" data-cta="steps" style="text-decoration: none; background: #682E3F; color: #FFFFFF; padding: 8px 8px 8px 24px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;">
-              <span>Understand your symptoms</span>
+              <span>Get Your Consultation</span>
               <span style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #231F20; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
             </a>
           </div>
@@ -384,13 +460,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- CONDITIONS -->
-  <section style="background: #FFFFFF;">
+  <section id="topics" style="background: #FFFFFF;">
     <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 40px;">
       <div style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">What can your medical team help with?</h2>
-        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">You don’t have to pick a specialty. Tell us how you feel, and the team will decide what you need.</p>
+        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">You don’t have to pick a specialty. Explain your symptoms, and the team will decide what you need.</p>
       </div>
       <div class="care-orbit" aria-label="How consultations connect around your case">
+        <div class="orbit-float" aria-hidden="true"><img alt="" style="--i:0;--r:15cqi;--dur:22s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8"><img alt="" style="--i:1;--r:22cqi;--dur:28s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273"><img alt="" style="--i:2;--r:28cqi;--dur:18s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgUsNKDugUZsl8tkWCaWh%2Fprofile.jpg?alt=media&token=145e3ae8-941e-4d3c-85c9-4432e4395bc8"><img alt="" style="--i:3;--r:18cqi;--dur:26s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68"><img alt="" style="--i:4;--r:32cqi;--dur:32s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe"><img alt="" style="--i:5;--r:24cqi;--dur:20s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgN7RCskOlzT3mJcx4h6Y%2Fprofile.jpg?alt=media&token=92ccffac-1868-4b67-b13b-31415c5a9881"><img alt="" style="--i:6;--r:16cqi;--dur:24s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df"><img alt="" style="--i:7;--r:30cqi;--dur:30s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10"><img alt="" style="--i:8;--r:20cqi;--dur:19s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2Fykb7uznsG9rE4xmAt96w%2Fprofile.jpg?alt=media&token=32814e4b-85c7-4a51-a041-4cf7e5173583"><img alt="" style="--i:9;--r:26cqi;--dur:27s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FloFhatZcHKNIB0hsouVb%2Fprofile.jpg?alt=media&token=3c90f76e-b001-4c5a-9a2d-9626281c63b3"></div>
         <svg class="care-orbit-spokes" viewBox="0 0 560 560" aria-hidden="true">
           <circle class="ring" cx="280" cy="280" r="116"></circle>
           <g class="spokes">
@@ -444,7 +521,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       <div class="care-unsure">
           <span style="font-weight: 600; font-size: 16px; color: #682E3F;">Not sure what the problem is?</span>
-          <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">That’s completely normal. Tell us how you feel, and the team will decide what you need.</span>
+          <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">That’s completely normal. Explain your symptoms, and the team will decide what you need.</span>
       </div>
       <p style="margin: 0 auto; text-align: center; font-size: 13px; color: #8A8285; font-weight: 500;">Licensed doctors <span style="margin: 0 8px; color: #CFC7C9;">•</span> Privacy and safety <span style="margin: 0 8px; color: #CFC7C9;">•</span> One clear treatment plan</p>
     </div>
@@ -461,13 +538,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- TEAM -->
-  <section style="background: #FFFFFF;">
+  <section id="team" style="background: #FFFFFF;">
     <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 36px;">
       <div style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">Your medical team</h2>
         <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">Licensed doctors from different specialties, working on your case together.</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+      <div class="team-grid" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
         <div style="display: flex; flex-direction: column;">
           <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8" alt="Dr. Amina Azzam" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
           <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
@@ -541,7 +618,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div id="start" style="display: flex; justify-content: center;">
         <a href="https://go.daleela.app/care-en-team" target="_blank" rel="noopener" data-cta="team" style="text-decoration: none; background: #682E3F; color: #FFFFFF; padding: 8px 8px 8px 24px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;">
-          <span>Understand your symptoms</span>
+          <span>Get Your Consultation</span>
           <span style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #231F20; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
         </a>
       </div>
@@ -549,7 +626,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- FAQ -->
-  <section style="background: #FFFFFF;">
+  <section id="faq" style="background: #FFFFFF;">
     <div style="max-width: 820px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 36px;">
       <div style="text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">Frequently asked questions</h2>
@@ -562,11 +639,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>Do I need to know which specialty I need?</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>Not at all. You don’t have to pick a specialty or know who to see. Tell us how you feel, and the team decides what you need.</p>
+          <p>Not at all. You don’t have to pick a specialty or know who to see. Explain your symptoms, and the team decides what you need.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>How is this different from seeing several doctors?</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>When you see several doctors, each one treats a single symptom, and you retell your story from the start every time. At Daleela, gynecology, dermatology, endocrinology, and nutrition doctors see your case together, so connected issues are treated with one plan.</p>
+          <p>When you see several doctors, each one treats a single symptom, and you retell your story from the start every time. At Daleela, gynecology, dermatology, endocrinology, and nutrition doctors see your case together, so connected issues are treated with one treatment plan.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>Which doctors will follow my case?</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -586,7 +663,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>What if I notice a new symptom after treatment starts?</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>Your doctor stays with you for any question or new symptom throughout your treatment, until you feel better.</p>
+          <p>Your doctor stays with you for any question or new symptom throughout your treatment.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>Is Daleela for emergencies?</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -594,12 +671,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>How do I start?</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>Download the Daleela app from the button below, start the chat, and tell us how you feel.</p>
+          <p>Download the Daleela app from the button below, start the chat, and explain your symptoms.</p>
         </details>
       </div>
       <div style="display: flex; justify-content: center;">
         <a href="https://go.daleela.app/care-en-faq" target="_blank" rel="noopener" data-cta="faq" style="text-decoration: none; background: #682E3F; color: #FFFFFF; padding: 8px 8px 8px 24px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;">
-          <span>Understand your symptoms</span>
+          <span>Get Your Consultation</span>
           <span style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #231F20; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
         </a>
       </div>
@@ -709,6 +786,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     onDomReady(function() {
       var doc = document;
 
+      doc.querySelectorAll('.hero-avatars').forEach(function(root) {
+        if (root.querySelector('.hero-avatars-track')) return;
+        var track = doc.createElement('span');
+        track.className = 'hero-avatars-track';
+        var set = doc.createElement('span');
+        set.className = 'hero-avatars-set';
+        while (root.firstChild) set.appendChild(root.firstChild);
+        track.appendChild(set);
+        track.appendChild(set.cloneNode(true));
+        root.appendChild(track);
+        var shift = set.offsetWidth - 9;
+        if (shift > 0) root.style.setProperty('--avatar-shift', shift + 'px');
+      });
+
       ga4Event('care_lp_en_view', { visible: true });
       if (typeof fbq !== 'undefined') fbq('trackCustom', 'care_lp_en_view');
       if (typeof clarity === 'function') clarity('event', 'care_lp_en_view');
@@ -739,7 +830,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           ga4Event('app_download_click', {
             event_category: 'engagement',
             event_label: 'download_daleela_app',
-            button_text: (button.textContent || '').trim().slice(0, 80) || 'Understand your symptoms',
+            button_text: (button.textContent || '').trim().slice(0, 80) || 'Get Your Consultation',
             button_location: buttonLocation,
             cta_location: buttonLocation,
             button_href: button.href || '',
