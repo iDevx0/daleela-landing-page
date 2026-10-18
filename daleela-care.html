@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>دليلة كير — دكتورة واحدة، حالة واحدة، وخطة علاج واحدة</title>
+<title>دليلة كير — دكتور رعاية عامة، حالة واحدة، وخطة علاج واحدة</title>
 <link rel="alternate" hreflang="en" href="daleela-care-en">
 <link rel="alternate" hreflang="ar" href="daleela-care">
 
@@ -91,20 +91,20 @@ html{scroll-behavior:smooth}
 .care-orbit-spokes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
 .care-orbit-spokes .ring{fill:none;stroke:#E7DDD3;stroke-width:1.25;stroke-dasharray:2 8}
 .care-orbit-spokes .spoke{stroke:#D4C4B4;stroke-width:1.75;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100}
-.care-orbit.is-inview .care-orbit-spokes .spoke{animation:spoke-draw .5s ease forwards;animation-delay:4.15s}
+.care-orbit.is-inview .care-orbit-spokes .spoke{animation:spoke-draw .4s cubic-bezier(.22,1,.36,1) forwards;animation-delay:.95s}
 .care-orbit-spokes .flow{stroke:#4CAAB9;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:14 86;opacity:0}
-.care-orbit.is-inview .care-orbit-spokes .flow{animation:spoke-flow 2.2s ease-in infinite;animation-delay:4.8s}
+.care-orbit.is-inview .care-orbit-spokes .flow{animation:spoke-flow 1.4s ease-in-out infinite;animation-delay:1.45s}
 .care-orbit-spokes .node{fill:#4CAAB9;transform-box:fill-box;transform-origin:center;opacity:0}
-.care-orbit.is-inview .care-orbit-spokes .node{animation:node-pop .3s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:4.15s}
-.care-orbit-center{box-sizing:border-box;position:absolute;left:50%;top:50%;width:32cqi;height:32cqi;min-width:108px;min-height:108px;max-width:176px;max-height:176px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#FFFFFF 0 54%,#F7EBDC 55% 68%,#FFFFFF 69%);color:#231F20;border:1px solid rgba(104,46,63,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;padding:12px 14px;z-index:2;box-shadow:0 18px 42px rgba(104,46,63,.14);opacity:0}
-.care-orbit.is-inview .care-orbit-center{animation:hub-in .4s cubic-bezier(.2,.8,.2,1) both;animation-delay:4.5s}
-.care-orbit-center::before{content:"";position:absolute;inset:-11px;border-radius:50%;border:1px dashed rgba(76,170,185,.7);pointer-events:none}
-.care-orbit.is-inview .care-orbit-center::before{animation:hub-spin 28s linear infinite}
-.care-orbit-center::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(76,170,185,.35);pointer-events:none}
-.care-orbit.is-inview .care-orbit-center::after{animation:hub-pulse 4.2s ease-out infinite}
-.care-orbit-center svg{display:block;box-sizing:content-box;width:clamp(16px,4.2cqi,22px);height:clamp(16px,4.2cqi,22px);padding:clamp(6px,1.4cqi,8px);margin-bottom:3px;border-radius:50%;background:#682E3F;color:#FFFFFF}
-.care-orbit-center b{font-size:clamp(11px,2.4cqi,15px);font-weight:700;line-height:1.15;color:#682E3F;white-space:nowrap}
-.care-orbit-center span{display:block;margin-top:2px;padding-top:3px;border-top:1px solid rgba(104,46,63,.16);font-size:clamp(8px,1.7cqi,11px);font-weight:500;color:#6B6467;line-height:1.2;max-width:11em}
+.care-orbit.is-inview .care-orbit-spokes .node{animation:node-pop .24s cubic-bezier(.16,1,.3,1) forwards;animation-delay:.95s}
+.care-orbit-center{box-sizing:border-box;position:absolute;left:50%;top:50%;width:34cqi;height:34cqi;min-width:124px;min-height:124px;max-width:188px;max-height:188px;border-radius:50%;background:#FFFFFF;color:#231F20;border:1.5px solid rgba(104,46,63,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center;padding:10px 14px;z-index:2;box-shadow:0 0 0 6px #FFFFFF,0 0 0 7.5px rgba(76,170,185,.55),0 16px 34px rgba(104,46,63,.14);opacity:0}
+.care-orbit.is-inview .care-orbit-center{animation:hub-in .4s cubic-bezier(.16,1,.3,1) both;animation-delay:1.2s}
+.care-orbit-center::before{content:"";position:absolute;inset:-16px;border-radius:50%;border:1.5px dashed rgba(76,170,185,.65);pointer-events:none}
+.care-orbit.is-inview .care-orbit-center::before{animation:hub-spin 22s linear infinite}
+.care-orbit-center::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px solid rgba(76,170,185,.28);pointer-events:none}
+.care-orbit.is-inview .care-orbit-center::after{animation:hub-pulse 3.4s ease-out infinite}
+.care-orbit-center svg{display:block;box-sizing:content-box;width:clamp(14px,3.2cqi,18px);height:clamp(14px,3.2cqi,18px);padding:6px;margin-bottom:5px;border-radius:50%;background:#682E3F;color:#FFFFFF;box-shadow:0 6px 14px rgba(104,46,63,.22)}
+.care-orbit-center b{font-size:clamp(11px,2.15cqi,13px);font-weight:700;line-height:1.25;color:#682E3F;max-width:8em}
+.care-orbit-center span{display:inline-block;margin-top:6px;padding:3px 8px;border-radius:999px;background:rgba(76,170,185,.16);font-size:clamp(8px,1.55cqi,11px);font-weight:600;color:#2F6E78;line-height:1.25;max-width:10em}
 .orbit-float{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible}
 .orbit-float img{position:absolute;width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:center 18%;border:2px solid rgba(247,235,220,.95);filter:grayscale(.8) sepia(.4) saturate(.35) brightness(1.14);opacity:0}
 .care-orbit.is-inview .orbit-float img{animation:avatar-drift 7s ease-in-out infinite alternate;opacity:.42}
@@ -122,7 +122,7 @@ html{scroll-behavior:smooth}
 @media (max-width:900px){.orbit-float{display:none}}
 .care-orbit-item{box-sizing:border-box;position:absolute;left:50%;top:50%;width:22cqi;height:21cqi;transform:translate(-50%,-50%) rotate(calc(var(--i)*45deg)) translateY(-36.5cqi) rotate(calc(var(--i)*-45deg));z-index:1;font-size:clamp(8px,2.05cqi,12px);font-weight:600;color:#231F20;line-height:1.3;text-align:center}
 .care-orbit-card{box-sizing:border-box;height:100%;background:#FFFFFF;border:1px solid #F2EBE4;border-radius:18px;box-shadow:0 10px 26px rgba(35,31,32,.07);padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;opacity:0}
-.care-orbit.is-inview .care-orbit-card{animation:card-in .32s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.08s + var(--i)*.52s)}
+.care-orbit.is-inview .care-orbit-card{animation:card-in .28s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.02s + var(--i)*.1s)}
 button.care-orbit-card{appearance:none;width:100%;margin:0;font:inherit;color:inherit;cursor:pointer}
 .care-orbit-card:focus-visible{outline:2px solid #682E3F;outline-offset:2px}
 .care-orbit-item:hover .care-orbit-card,.care-orbit-item:active .care-orbit-card,.care-orbit-item.is-open .care-orbit-card{box-shadow:0 16px 32px rgba(104,46,63,.16);border-color:#682E3F}
@@ -139,10 +139,10 @@ button.care-orbit-card{appearance:none;width:100%;margin:0;font:inherit;color:in
 @keyframes spoke-draw{to{stroke-dashoffset:0}}
 @keyframes spoke-flow{0%{stroke-dashoffset:0;opacity:0}8%{opacity:1}58%{stroke-dashoffset:-100;opacity:1}72%,100%{stroke-dashoffset:-100;opacity:0}}
 @keyframes node-pop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
-@keyframes hub-in{from{opacity:0;transform:translate(-50%,-50%) scale(.7)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-@keyframes hub-pulse{0%{transform:scale(.92);opacity:.45}100%{transform:scale(1.38);opacity:0}}
+@keyframes hub-in{from{opacity:0;transform:translate(-50%,-50%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes hub-pulse{0%{transform:scale(.96);opacity:.35}100%{transform:scale(1.28);opacity:0}}
 @keyframes hub-spin{to{transform:rotate(360deg)}}
-@keyframes card-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes card-in{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes avatar-drift{from{transform:translateY(-10px)}to{transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -215,8 +215,8 @@ html,body{overflow-x:clip;max-width:100%}
   .hero-stats{order:1;margin-top:0 !important;width:100%;flex-direction:column !important;align-items:center !important;gap:26px !important}
   .hero-stats > div:not(.hero-stat-rule){background:transparent;padding:0;width:100%;align-items:center;text-align:center}
   .hero-stats > div:not(.hero-stat-rule)::after{content:"";width:42px;height:3px;border-radius:999px;margin-top:12px;background:linear-gradient(90deg,#682E3F,#4CAAB9)}
-  .hero-stats > div:not(.hero-stat-rule) > span:first-child{font-size:28px !important;line-height:1.25 !important;color:#682E3F !important}
-  .hero-stats > div:not(.hero-stat-rule) > span:last-child{font-size:15px !important;line-height:1.6 !important;max-width:none !important;margin-top:6px !important;color:#5C5658 !important}
+  .hero-stats > div:not(.hero-stat-rule) > span:first-child{font-size:16px !important;line-height:1.3 !important;color:#682E3F !important}
+  .hero-stats > div:not(.hero-stat-rule) > span:last-child{font-size:13px !important;line-height:1.6 !important;max-width:none !important;margin-top:6px !important;color:#5C5658 !important}
   .hero-stat-rule{display:none !important}
   .hero-cta{order:2;display:flex;justify-content:center;margin-top:6px}
   #top .ph-group{display:none !important}
@@ -322,7 +322,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-layout" style="max-width: 1220px; margin: 0 auto; padding: 64px 24px 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
       <div class="hero-copy-col" style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
         <h1 class="hero-lead" style="margin: 0; font-size: 40px; line-height: 1.3; font-weight: 700; color: #231F20;">اشرحي أعراضك، وفريقك الطبي هيتولى الباقي</h1>
-        <p class="hero-copy" style="margin: 0; font-size: 16px; line-height: 1.8; color: #5C5658; max-width: 560px;">احكيلنا أعراضك وتاريخك الصحي، وفريق من الدكاترة المتخصصين هيبصوا على حالتك مع بعض ويربطوا بين كل الأعراض، عشان تطلعي بتشخيص صح وخطة علاج واحدة واضحة. ودكتورة واحدة مسؤولة عن حالتك ومعاكي تسأليها أي حاجة لحد ما تبقي أحسن.</p>
+        <p class="hero-copy" style="margin: 0; font-size: 16px; line-height: 1.8; color: #5C5658; max-width: 560px;">دليلة كير بتديكي دكتور رعاية عامة مسؤول عن حالتك، وبيستشير فريق المتخصصين في طب الأسرة والنسا والجلدية والتغذية والغدد وتخصصات تانية. مع بعض، بيعالجوا الصورة كلها، مش عرَض واحد في المرة.</p>
         <div class="hero-cta">
           <a href="https://go.daleela.app/care-hero" target="_blank" rel="noopener" data-cta="hero" style="text-decoration: none; background: #682E3F; color: #FFFFFF; padding: 8px 24px 8px 8px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;">
             <span>احصلي على استشارتك</span>
@@ -331,14 +331,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="hero-stats" style="margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 28px;">
           <div style="display: flex; flex-direction: column;">
-            <span style="font-weight: 700; font-size: 30px; line-height: 1; color: #231F20;">فريق متخصصين</span>
-            <span class="hero-avatars" aria-hidden="true"><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgUsNKDugUZsl8tkWCaWh%2Fprofile.jpg?alt=media&token=145e3ae8-941e-4d3c-85c9-4432e4395bc8" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgN7RCskOlzT3mJcx4h6Y%2Fprofile.jpg?alt=media&token=92ccffac-1868-4b67-b13b-31415c5a9881" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2Fykb7uznsG9rE4xmAt96w%2Fprofile.jpg?alt=media&token=32814e4b-85c7-4a51-a041-4cf7e5173583" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FloFhatZcHKNIB0hsouVb%2Fprofile.jpg?alt=media&token=3c90f76e-b001-4c5a-9a2d-9626281c63b3" alt=""></span>
-            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">بيشتغلوا على حالتك مع بعض</span>
+            <span style="font-weight: 700; font-size: 16px; line-height: 1.3; color: #231F20;">دكتور رعاية عامة</span>
+            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">مسؤول عن حالتك، وبيستشير المتخصصين</span>
           </div>
           <div class="hero-stat-rule" style="width: 1px; height: 56px; background: #D9CBBC;"></div>
           <div style="display: flex; flex-direction: column;">
-            <span style="font-weight: 700; font-size: 30px; line-height: 1; color: #231F20;">خطة علاج واحدة</span>
-            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">واضحة لكل مشاكلك</span>
+            <span style="font-weight: 700; font-size: 16px; line-height: 1.3; color: #231F20;">فريق متخصصين</span>
+            <span class="hero-avatars" aria-hidden="true"><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgUsNKDugUZsl8tkWCaWh%2Fprofile.jpg?alt=media&token=145e3ae8-941e-4d3c-85c9-4432e4395bc8" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgN7RCskOlzT3mJcx4h6Y%2Fprofile.jpg?alt=media&token=92ccffac-1868-4b67-b13b-31415c5a9881" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2Fykb7uznsG9rE4xmAt96w%2Fprofile.jpg?alt=media&token=32814e4b-85c7-4a51-a041-4cf7e5173583" alt=""><img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FloFhatZcHKNIB0hsouVb%2Fprofile.jpg?alt=media&token=3c90f76e-b001-4c5a-9a2d-9626281c63b3" alt=""></span>
+            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">بيستشيرهم دكتور رعاية عامة</span>
+          </div>
+          <div class="hero-stat-rule" style="width: 1px; height: 56px; background: #D9CBBC;"></div>
+          <div style="display: flex; flex-direction: column;">
+            <span style="font-weight: 700; font-size: 16px; line-height: 1.3; color: #231F20;">خطة علاج متكاملة</span>
+            <span style="font-size: 13px; color: #6B6467; font-weight: 500; margin-top: 6px;">بتراعي كل جوانب صحتك</span>
           </div>
         </div>
       </div>
@@ -349,7 +354,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="ph-head"><span class="ph-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span><span class="ph-title">دليلة</span><span class="ph-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span></div>
           <div class="ph-chat">
             <div class="ph-from">دليلة</div>
-            <div class="ph-q">إيه اللي جابك النهارده؟</div>
+            <div class="ph-q">إيه الأعراض اللي بتشتكي منها؟</div>
             <div class="ph-a">عندي انتفاخ على طول، ووزني بيزيد من غير سبب واضح</div>
             <div class="ph-card">
               <b>هنبص على إيه؟</b>
@@ -378,7 +383,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </div>
-    <svg aria-hidden="true" viewBox="0 0 1440 46" preserveAspectRatio="none" style="display: block; width: 100%; height: 46px;" xmlns="http://www.w3.org/2000/svg"><path fill="#FFFFFF" d="M0 35.0373C568.071 -10.4328 880.78 -12.9098 1440 35.0384V45.04H0V35.0373Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 1440 46" preserveAspectRatio="none" style="display: block; width: 100%; height: 46px;" xmlns="http://www.w3.org/2000/svg"><path fill="#FFFFFF" d="M0 35.0373C568.071 -10.4328 880.78 -12.9098 1440 35.0384V46H0V35.0373Z"></path><path fill="none" stroke="#FFFFFF" stroke-width="2" vector-effect="non-scaling-stroke" d="M0 35.0373C568.071 -10.4328 880.78 -12.9098 1440 35.0384"></path></svg>
   </section>
 
   <!-- HOW IT WORKS -->
@@ -386,7 +391,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="steps-section" style="max-width: 1220px; margin: 0 auto; padding: 56px 24px 80px; display: flex; flex-direction: column; gap: 40px;">
       <div class="steps-head" style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">رعايتك الصحية في 3 خطوات بسيطة</h2>
-        <p class="steps-intro" style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">مش محتاجة تعرفي تروحي لمين. اشرحي أعراضك، والباقي علينا.</p>
+        <p class="steps-intro" style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">مش محتاجة تعرفي تروحي لمين. دكتور رعاية عامة مسؤول عن حالتك، وبيستشير المتخصصين.</p>
       </div>
       <div class="steps-row" style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
         <div class="ph-group steps-phones" style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; gap: 16px; align-items: flex-end;">
@@ -426,7 +431,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div style="padding: 8px 0 32px; display: flex; flex-direction: column; gap: 6px;">
               <span style="font-weight: 600; font-size: 16px; color: #231F20;">احكيلنا أعراضك وتاريخك الصحي</span>
-              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">هنبص على كل حاجة، مش على عرَض واحد بس.</span>
+              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">هنراجع كل حاجة، مش بس عرَض واحد، عشان دكتور الرعاية العامة يشوف الصورة كلها.</span>
             </div>
           </div>
           <div class="steps-item" style="display: flex; gap: 14px;">
@@ -435,8 +440,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span style="width: 1px; flex: 1; min-height: 16px; border-right: 1px dashed #4CAAB9; margin-top: 4px; opacity: 0.5;"></span>
             </div>
             <div style="padding: 8px 0 32px; display: flex; flex-direction: column; gap: 6px;">
-              <span style="font-weight: 600; font-size: 16px; color: #231F20;">فريقك الطبي بيراجع حالتك مع بعض</span>
-              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">دكاترة النسا والجلدية والغدد والتغذية بيبصوا على حالتك مع بعض، بيربطوا بين الأعراض المختلفة.</span>
+              <span style="font-weight: 600; font-size: 16px; color: #231F20;">دكتور رعاية عامة بيستشير المتخصصين</span>
+              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">طب الأسرة والنسا والجلدية والتغذية والغدد وتخصصات تانية بيراجعوا حالتك مع بعض، وبيعالجوا الصورة كلها.</span>
             </div>
           </div>
           <div class="steps-item" style="display: flex; gap: 14px;">
@@ -444,8 +449,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span style="width: 44px; height: 44px; border-radius: 50%; background: #4CAAB9; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span>
             </div>
             <div style="padding: 8px 0 0; display: flex; flex-direction: column; gap: 6px;">
-              <span style="font-weight: 600; font-size: 16px; color: #231F20;">خطة علاج واحدة، ودكتورتك معاكي</span>
-              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">بتوصلك خطة علاج واحدة واضحة لكل مشاكلك، ودكتورة واحدة مسؤولة عن حالتك تسأليها أي حاجة في أي وقت.</span>
+              <span style="font-weight: 600; font-size: 16px; color: #231F20;">خطة علاج واحدة، ودكتور رعاية عامة معاكي</span>
+              <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">بتوصلك خطة علاج واحدة واضحة، ودكتور رعاية عامة مسؤول عن حالتك موجود لأي سؤال في أي وقت.</span>
             </div>
           </div>
           <div class="steps-cta" style="margin-top: 36px;">
@@ -464,7 +469,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 40px;">
       <div style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">فريقك الطبي بيتابع معاكي إيه؟</h2>
-        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">مش لازم تختاري تخصص. اشرحي أعراضك، والفريق هيحدد إنتي محتاجة إيه.</p>
+        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">مش لازم تختاري تخصص. دكتور رعاية عامة مسؤول عن حالتك وبيستشير المتخصصين، وبيعالجوا أعراضك كلها.</p>
       </div>
       <div class="care-orbit" aria-label="الاستشارات مربوطة بحالتك">
         <div class="orbit-float" aria-hidden="true"><img alt="" style="--i:0;--r:15cqi;--dur:22s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8"><img alt="" style="--i:1;--r:22cqi;--dur:28s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273"><img alt="" style="--i:2;--r:28cqi;--dur:18s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgUsNKDugUZsl8tkWCaWh%2Fprofile.jpg?alt=media&token=145e3ae8-941e-4d3c-85c9-4432e4395bc8"><img alt="" style="--i:3;--r:18cqi;--dur:26s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68"><img alt="" style="--i:4;--r:32cqi;--dur:32s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe"><img alt="" style="--i:5;--r:24cqi;--dur:20s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgN7RCskOlzT3mJcx4h6Y%2Fprofile.jpg?alt=media&token=92ccffac-1868-4b67-b13b-31415c5a9881"><img alt="" style="--i:6;--r:16cqi;--dur:24s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df"><img alt="" style="--i:7;--r:30cqi;--dur:30s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10"><img alt="" style="--i:8;--r:20cqi;--dur:19s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2Fykb7uznsG9rE4xmAt96w%2Fprofile.jpg?alt=media&token=32814e4b-85c7-4a51-a041-4cf7e5173583"><img alt="" style="--i:9;--r:26cqi;--dur:27s" src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FloFhatZcHKNIB0hsouVb%2Fprofile.jpg?alt=media&token=3c90f76e-b001-4c5a-9a2d-9626281c63b3"></div>
@@ -503,7 +508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </svg>
         <div class="care-orbit-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5H4.5C3.94772 3.5 3.5 3.94772 3.5 4.5V8C3.5 11.0376 5.96243 13.5 9 13.5C12.0376 13.5 14.5 11.0376 14.5 8V4.5C14.5 3.94772 14.0523 3.5 13.5 3.5H11.5"/><path d="M18.5 15.5V16.75C18.5 19.3734 16.3734 21.5 13.75 21.5C11.1266 21.5 9 19.3734 9 16.75V13.5"/><path d="M11.5 2.5V4.5"/><path d="M6.5 2.5V4.5"/><path d="M20.5 13.5C20.5 14.6046 19.6046 15.5 18.5 15.5C17.3954 15.5 16.5 14.6046 16.5 13.5C16.5 12.3954 17.3954 11.5 18.5 11.5C19.6046 11.5 20.5 12.3954 20.5 13.5Z"/></svg>
-          <b>دكتورة واحدة</b>
+          <b>دكتور رعاية عامة</b>
           <span>خطة علاج واحدة</span>
         </div>
         <div class="care-orbit-item" style="--i:0"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="الالتهابات والإفرازات" data-sub="نعرف السبب ونخلّصك من الالتهابات بأمان وبسرعة"><span class="care-orbit-icon"><img src="assets/care-topics/infections.svg" alt=""></span><span class="care-orbit-label">الالتهابات<br>والإفرازات</span></button></div>
@@ -521,19 +526,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="care-unsure">
         <span style="font-weight: 600; font-size: 16px; color: #682E3F;">مش عارفة المشكلة إيه بالظبط؟</span>
-        <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">ده طبيعي جدًا. اشرحي أعراضك، والفريق هيحدد إنتي محتاجة إيه.</span>
+        <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">ده طبيعي جدًا. دكتور رعاية عامة مسؤول عن حالتك، وبيستشير المتخصصين.</span>
       </div>
-      <p style="margin: 0 auto; text-align: center; font-size: 13px; color: #8A8285; font-weight: 500;">دكاترة معتمدين <span style="margin: 0 8px; color: #CFC7C9;">•</span> خصوصية وأمان <span style="margin: 0 8px; color: #CFC7C9;">•</span> خطة علاج واحدة واضحة</p>
-    </div>
-  </section>
-
-  <!-- WHY ONE DOCTOR (mirrors the "رعاية متخصصة في عدة مجالات" blurb) -->
-  <section style="background: #FFFFFF;">
-    <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px 80px;">
-      <div style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 14px;">
-        <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">فريق كامل على حالتك، بدل ما تلفي على دكاترة</h2>
-        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">أغلب مشاكل صحة الستات مرتبطة ببعض، بس إنتي بتتعالجي عرَض عرَض عند أكتر من دكتور، وبتعيدي حكايتك كل مرة من الأول. في دليلة، فريق من دكاترة النسا والجلدية والغدد والتغذية بيشوفوا حالتك مع بعض وبيربطوا بين مشاكلك المختلفة، عشان تطلعي بتشخيص صح وخطة علاج واحدة واضحة. ودكتورة واحدة مسؤولة عن حالتك ومرتاحة معاها، موجودة لأي سؤال أو عرَض جديد، لحد ما تبقي أحسن.</p>
-      </div>
+      <p style="margin: 0 auto; text-align: center; font-size: 13px; color: #8A8285; font-weight: 500;">دكتور رعاية عامة <span style="margin: 0 8px; color: #CFC7C9;">•</span> خصوصية وأمان <span style="margin: 0 8px; color: #CFC7C9;">•</span> خطة علاج واحدة واضحة</p>
     </div>
   </section>
 
@@ -542,42 +537,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="max-width: 1220px; margin: 0 auto; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 36px;">
       <div style="max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 12px;">
         <h2 style="margin: 0; font-size: 36px; line-height: 1.3; font-weight: 700; color: #231F20;">فريقك الطبي</h2>
-        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">دكاترة معتمدين من تخصصات مختلفة، بيشتغلوا على حالتك مع بعض.</p>
+        <p style="margin: 0; font-size: 16px; color: #5C5658; line-height: 1.8;">دكتور رعاية عامة مسؤول عن حالتك، وبيستشير المتخصصين دول.</p>
       </div>
       <div class="team-grid" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
-        <div style="display: flex; flex-direction: column;">
-          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8" alt="د. أمينة عزام" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
-          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
-            <span style="font-weight: 700; font-size: 13px;">د. أمينة عزام</span>
-            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">الأمراض الجلدية</span>
-          </div>
-        </div>
-        <div style="display: flex; flex-direction: column;">
-          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273" alt="د. أحمد شوقي" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
-          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
-            <span style="font-weight: 700; font-size: 13px;">د. أحمد شوقي</span>
-            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشاري أمراض النساء والتوليد</span>
-          </div>
-        </div>
         <div style="display: flex; flex-direction: column;">
           <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FgUsNKDugUZsl8tkWCaWh%2Fprofile.jpg?alt=media&token=145e3ae8-941e-4d3c-85c9-4432e4395bc8" alt="د. مونيك مجدي" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
           <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
             <span style="font-weight: 700; font-size: 13px;">د. مونيك مجدي</span>
             <span style="font-size: 12px; color: #6B6467; font-weight: 500;">أخصائية الصحة الجنسية والخصوبة</span>
-          </div>
-        </div>
-        <div style="display: flex; flex-direction: column;">
-          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68" alt="د. نيللي شمس" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
-          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
-            <span style="font-weight: 700; font-size: 13px;">د. نيللي شمس</span>
-            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشاري التغذية العلاجية والصحة العامة</span>
-          </div>
-        </div>
-        <div style="display: flex; flex-direction: column;">
-          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe" alt="د. محمد عزيز" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
-          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
-            <span style="font-weight: 700; font-size: 13px;">د. محمد عزيز</span>
-            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشاري أمراض النساء والتوليد</span>
           </div>
         </div>
         <div style="display: flex; flex-direction: column;">
@@ -588,17 +555,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div style="display: flex; flex-direction: column;">
-          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df" alt="د. آية فهيم" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F7rDzXxZ540PZCeiimCkG%2Fprofile.jpg?alt=media&token=66246f21-81b1-44ac-8437-d4395c9f0f68" alt="د. نيللي شمس" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
           <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
-            <span style="font-weight: 700; font-size: 13px;">د. آية فهيم</span>
-            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشارية الأمراض الجلدية والتجميل</span>
+            <span style="font-weight: 700; font-size: 13px;">د. نيللي شمس</span>
+            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشاري التغذية العلاجية والصحة العامة</span>
           </div>
         </div>
         <div style="display: flex; flex-direction: column;">
-          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10" alt="د. مي ضياء سرحان" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FPQTXIiR2L3Env2PG5Uj3%2Fprofile.jpg?alt=media&token=3f05ac85-f37d-4396-8ff8-6a8c5c005273" alt="د. أحمد شوقي" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
           <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
-            <span style="font-weight: 700; font-size: 13px;">د. مي ضياء سرحان</span>
-            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">أستاذ مساعد طب الأسرة وأخصائية التغذية الإكلينيكية</span>
+            <span style="font-weight: 700; font-size: 13px;">د. أحمد شوقي</span>
+            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشاري أمراض النساء والتوليد</span>
           </div>
         </div>
         <div style="display: flex; flex-direction: column;">
@@ -609,10 +576,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div style="display: flex; flex-direction: column;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FWizEzkxoDeE1OtqSJ7eI%2Fprofile.jpg?alt=media&token=8905ec29-2f30-46ac-8715-5891703f95df" alt="د. آية فهيم" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
+          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
+            <span style="font-weight: 700; font-size: 13px;">د. آية فهيم</span>
+            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشارية الأمراض الجلدية والتجميل</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FO6VxPTMtXDpf9LKrAFnm%2Fprofile.jpg?alt=media&token=842463bc-232b-4b20-bdcb-7385932e72fe" alt="د. محمد عزيز" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
+          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
+            <span style="font-weight: 700; font-size: 13px;">د. محمد عزيز</span>
+            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">استشاري أمراض النساء والتوليد</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FVm33Y27kjXtWinTldB2k%2Fprofile.jpg?alt=media&token=af77e536-4a5a-4b60-b3c3-c0ca26f20e10" alt="د. مي ضياء سرحان" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
+          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
+            <span style="font-weight: 700; font-size: 13px;">د. مي ضياء سرحان</span>
+            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">أستاذ مساعد طب الأسرة وأخصائية التغذية الإكلينيكية</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
           <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2FloFhatZcHKNIB0hsouVb%2Fprofile.jpg?alt=media&token=3c90f76e-b001-4c5a-9a2d-9626281c63b3" alt="د. سمايا ناصر" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
           <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
             <span style="font-weight: 700; font-size: 13px;">د. سمايا ناصر</span>
             <span style="font-size: 12px; color: #6B6467; font-weight: 500;">طب الأسرة وأخصائية التغذية الإكلينيكية</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/motherbeing-multiregion.appspot.com/o/doctors_profiles%2F0CthuIpWSm7EoIjoTslP%2Fprofile.jpg?alt=media&token=33a8dbd0-fcbc-4179-bf61-dcecd80aaed8" alt="د. أمينة عزام" loading="lazy" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; border-radius: 16px; background: #F7EBDC; border: 1px solid #F2EBE4;">
+          <div style="margin: -32px 16px 0; background: #FFFFFF; border-radius: 12px; padding: 14px 18px; box-shadow: 0 10px 30px rgba(35,31,32,0.08); display: flex; flex-direction: column; gap: 3px;">
+            <span style="font-weight: 700; font-size: 13px;">د. أمينة عزام</span>
+            <span style="font-size: 12px; color: #6B6467; font-weight: 500;">الأمراض الجلدية</span>
           </div>
         </div>
       </div>
@@ -635,19 +630,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>دليلة بتشتغل إزاي؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>بتحكيلنا أعراضك وتاريخك الصحي في شات قصير، وفريق من الدكاترة المتخصصين بيبصوا على حالتك مع بعض ويربطوا بين كل الأعراض. بعدها بتوصلك خطة علاج واحدة واضحة، ودكتورة واحدة مسؤولة عن حالتك بتتابع معاكي لحد ما تبقي أحسن.</p>
+          <p>بتحكيلنا أعراضك وتاريخك الصحي. دكتور رعاية عامة مسؤول عن حالتك وبيستشير المتخصصين في طب الأسرة والنسا والجلدية والتغذية والغدد وتخصصات تانية. مع بعض، بيعالجوا الصورة كلها، مش عرَض واحد في المرة، وبتوصلك خطة علاج واحدة واضحة.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>لازم أعرف أنا محتاجة دكتور تخصص إيه؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>لأ خالص. مش لازم تختاري تخصص ولا تعرفي تروحي لمين. اشرحي أعراضك، والفريق هو اللي هيحدد إنتي محتاجة إيه.</p>
+          <p>لأ خالص. دكتور رعاية عامة مسؤول عن حالتك وبيستشير المتخصصين المناسبين. اشرحي أعراضك، وهما هيحددوا إنتي محتاجة إيه.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>إيه الفرق بين ده وإني أروح لأكتر من دكتور؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>لما بتروحي لأكتر من دكتور، كل واحد بيعالج عرَض لوحده، وبتعيدي حكايتك كل مرة من الأول. في دليلة، دكاترة النسا والجلدية والغدد والتغذية بيشوفوا حالتك مع بعض، عشان مشاكلك المرتبطة ببعض تتعالج بخطة علاج واحدة.</p>
+          <p>لما بتروحي لأكتر من دكتور، كل واحد بيعالج عرَض لوحده، وبتعيدي حكايتك كل مرة من الأول. في دليلة، دكتور رعاية عامة مسؤول عن حالتك وبيستشير متخصصين في طب الأسرة والنسا والجلدية والتغذية والغدد وتخصصات تانية، عشان يعالجوا الصورة كلها بخطة علاج واحدة.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>مين الدكاترة اللي هيتابعوا حالتي؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>دكاترة معتمدين من تخصصات مختلفة: النسا والتوليد، والجلدية، والغدد، والتغذية. وتقدري تتعرفي عليهم في قسم «فريقك الطبي» فوق.</p>
+          <p>دكتور رعاية عامة مسؤول عن حالتك، وبيستشير دكاترة معتمدين في طب الأسرة والنسا والجلدية والتغذية والغدد وتخصصات تانية. وتقدري تتعرفي عليهم في قسم «فريقك الطبي» فوق.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>هحتاج أعمل تحاليل؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -663,7 +658,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>لو حسيت بعرَض جديد بعد ما بدأت العلاج؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <p>دكتورتك موجودة معاكي لأي سؤال أو عرَض جديد طول فترة علاجك.</p>
+          <p>دكتور رعاية عامة موجود معاكي لأي سؤال أو عرَض جديد طول فترة علاجك.</p>
         </details>
         <details class="faq-item" style="border-radius: 16px; background: #F7EBDC;">
           <summary><span>دليلة مناسبة للحالات الطارئة؟</span><span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
