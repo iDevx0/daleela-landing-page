@@ -441,19 +441,13 @@
       .step p { max-width: none; }
     }
 
-    .hero-symptoms { list-style: none; margin: 0 0 32px; padding: 0; width: 100%; max-width: 28rem; border-top: 1px solid rgba(104, 46, 63, 0.12); }
-    .symptom { position: relative; padding: 13px 0; padding-inline-start: 22px; border-bottom: 1px solid rgba(104, 46, 63, 0.12); color: var(--ink); font-size: 17px; font-weight: 500; line-height: 1.55; cursor: default; user-select: text; }
-    .symptom::before { content: ""; position: absolute; inset-inline-start: 2px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--dark); opacity: .75; }
     .hero-copy:has(.hero-symptoms) .stats { margin-top: 48px; }
     .hero-grid { grid-template-columns: minmax(0, 1fr); }
     .hero-copy { max-width: 640px; }
-    @media (max-width: 1100px) { .hero-symptoms { margin-inline: auto; text-align: start; } }
     @media (max-width: 720px) {
       .hero:has(.hero-symptoms) { padding: 12px 0 28px; }
       .hero-copy:has(.hero-symptoms) { align-items: stretch; text-align: start; }
       .hero-copy:has(.hero-symptoms) h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; max-width: none; }
-      .hero-symptoms { max-width: none; margin: 0 0 26px; }
-      .symptom { font-size: 16px; padding-block: 12px; }
       .hero-copy .cta { width: 100%; justify-content: space-between; min-height: 54px; font-size: 15px; }
       .stats { flex-direction: row; justify-content: space-between; align-items: center; gap: 0; margin-top: 24px; width: 100%; }
       .hero-copy:has(.hero-symptoms) .stats { margin-top: 24px; }
@@ -482,12 +476,25 @@
       .footer { padding-bottom: 120px; }
     }
 
-    h1.pain-h1 { font-size: 50px; font-weight: 800; line-height: 1.22; letter-spacing: -0.5px; margin: 0 0 26px; max-width: 13em; }
-    .pain-h1 .h1-lead { display: block; color: var(--ink); }
-    .pain-h1 .h1-accent { display: inline; color: var(--dark); background-image: linear-gradient(transparent 62%, rgba(224, 154, 148, 0.32) 62%, rgba(224, 154, 148, 0.32) 92%, transparent 92%); padding-inline: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-    @media (max-width: 1100px) { h1.pain-h1 { font-size: 42px; } }
-    @media (max-width: 720px) { .hero-copy:has(.hero-symptoms) h1.pain-h1 { font-size: 34px; line-height: 1.25; margin: 4px 0 22px; } }
-    @media (max-width: 360px) { .hero-copy:has(.hero-symptoms) h1.pain-h1 { font-size: 30px; } }
+    .rx-card { width: 100%; max-width: 30rem; margin: 0 0 30px; text-align: start; cursor: default; }
+    .rx-card .hero-symptoms { list-style: none; margin: 0; padding: 0; width: 100%; max-width: none; border-top: 1px solid rgba(104, 46, 63, 0.14); }
+    .rx-card .symptom { margin: 0; padding: 14px 0; border-bottom: 1px solid rgba(104, 46, 63, 0.14); font-family: inherit; font-size: 19px; font-weight: 500; line-height: 1.55; color: var(--eggplant); }
+    .rx-card .symptom::before { content: none; display: none; }
+    @media (min-width: 1101px) {
+      .hero-copy:has(.hero-symptoms) .rx-card { grid-column: 2; grid-row: 1 / 5; align-self: center; max-width: none; margin: 0; }
+      .rx-card .symptom { font-size: 21px; padding-block: 18px; }
+    }
+    @media (max-width: 720px) {
+      .rx-card { max-width: none; margin: 0 0 24px; }
+      .rx-card .symptom { font-size: 18px; padding-block: 13px; }
+    }
+    .trust-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; }
+    .trust-chips span { display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; line-height: 1; color: var(--green); background: rgba(84, 142, 145, 0.10); border-radius: 999px; padding: 7px 11px; }
+    h1.pain-h1 { font-size: 44px; font-weight: 700; line-height: 1.3; letter-spacing: 0; color: var(--ink); margin: 0 0 28px; max-width: 16em; text-wrap: balance; }
+    h1.pain-h1 .h1-accent { display: block; color: var(--eggplant); }
+    @media (max-width: 1100px) { h1.pain-h1 { font-size: 38px; } }
+    @media (max-width: 720px) { .hero-copy:has(.hero-symptoms) h1.pain-h1 { font-size: 29px; line-height: 1.35; margin: 0 0 18px; max-width: none; } .trust-chips { margin-bottom: 14px; } }
+    @media (max-width: 360px) { .hero-copy:has(.hero-symptoms) h1.pain-h1 { font-size: 26px; } .trust-chips span { font-size: 11px; padding: 6px 9px; } }
     .hero-copy:has(.hero-symptoms) { width: 100%; max-width: none; align-items: flex-start; text-align: start; }
     .hero-copy:has(.hero-symptoms) h1.pain-h1, .hero-copy:has(.hero-symptoms) .hero-symptoms { margin-inline: 0; }
     .hero-copy:has(.hero-symptoms) .stats { justify-content: flex-start; }
@@ -495,14 +502,12 @@
     .hero-copy:has(.hero-symptoms) .stat strong { justify-content: flex-start; }
     @media (min-width: 1101px) {
       .hero:has(.hero-symptoms) { padding: 72px 0 96px; }
-      .hero-copy:has(.hero-symptoms) { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); grid-template-rows: auto auto 1fr; column-gap: 80px; align-items: start; }
-      .hero-copy:has(.hero-symptoms) h1.pain-h1 { grid-column: 1; grid-row: 1; margin-bottom: 32px; }
-      .hero-copy:has(.hero-symptoms) .cta { grid-column: 1; grid-row: 2; justify-self: start; padding-inline-start: 32px; font-size: 16px; }
+      .hero-copy:has(.hero-symptoms) { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); grid-template-rows: auto auto auto 1fr; column-gap: 80px; align-items: start; }
+      .hero-copy:has(.hero-symptoms) .trust-chips { grid-column: 1; grid-row: 1; }
+      .hero-copy:has(.hero-symptoms) h1.pain-h1 { grid-column: 1; grid-row: 2; margin-bottom: 32px; }
+      .hero-copy:has(.hero-symptoms) .cta { grid-column: 1; grid-row: 3; justify-self: start; padding-inline-start: 32px; font-size: 16px; }
       .hero-copy:has(.hero-symptoms) .cta i { width: 44px; height: 44px; }
-      .hero-copy:has(.hero-symptoms) .stats { grid-column: 1; grid-row: 3; margin-top: 48px; align-self: start; }
-      .hero-copy:has(.hero-symptoms) .hero-symptoms { grid-column: 2; grid-row: 1 / 4; align-self: center; max-width: none; margin: 0; background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(104, 46, 63, 0.08); border-radius: 20px; padding: 8px 28px; border-top: 1px solid rgba(104, 46, 63, 0.08); }
-      .hero-copy:has(.hero-symptoms) .symptom { font-size: 18px; padding-block: 18px; }
-      .hero-copy:has(.hero-symptoms) .symptom:last-child { border-bottom: 0; }
+      .hero-copy:has(.hero-symptoms) .stats { grid-column: 1; grid-row: 4; margin-top: 48px; align-self: start; }
     }
     @media (max-width: 720px) {
       .hero-copy:has(.hero-symptoms) { align-items: stretch; }
@@ -552,8 +557,8 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           
-          <h1 class="pain-h1"><span class="h1-lead">مشاكل البشرة</span> <span class="h1-accent">بتشخيص من طبيبة جلدية</span></h1>
-          <ul class="hero-symptoms"><li class="symptom">حبوب وبثور متكررة</li><li class="symptom">آثار وبقع داكنة</li><li class="symptom">حساسية واحمرار</li><li class="symptom">عدم وضوح نوع البشرة والروتين المناسب</li></ul>
+          <div class="trust-chips"><span>أطباء معتمدون</span><span>سرية تامة</span><span>رد خلال 24 ساعة</span></div><h1 class="pain-h1">تشخيص مشاكل البشرة <span class="h1-accent">بإشراف طبيبة جلدية</span></h1>
+          <div class="rx-card" aria-label="الأعراض"><ul class="hero-symptoms"><li class="symptom">حبوب وبثور متكررة</li><li class="symptom">آثار وبقع داكنة</li><li class="symptom">حساسية واحمرار</li><li class="symptom">عدم وضوح نوع البشرة والروتين المناسب</li></ul></div>
           <a class="cta" href="https://motherbeing.com/ar/subscribe/consultation?utm_source=consultations_landing&utm_medium=web&utm_campaign=consult_skin&utm_content=hero" target="_blank" rel="noopener" data-cta="hero">استشيري طبيبة على دليلة <i aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25"><path d="M9 6.65C9 6.65 15.94 6.11 16.92 7.08C17.89 8.06 17.35 15 17.35 15M16.5 7.5L6.5 17.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
           <div class="stats" aria-label="إحصاءات الاستشارات">
             <div class="stat"><strong><span class="count-up" data-to="10600">10600</span>+</strong><span>استشارات مكتملة</span></div>
