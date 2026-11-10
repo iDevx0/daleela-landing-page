@@ -476,45 +476,39 @@
       .footer { padding-bottom: 120px; }
     }
 
-    .rx-card { width: 100%; max-width: 30rem; margin: 0 0 30px; text-align: start; cursor: default; }
-    .rx-card .hero-symptoms { list-style: none; margin: 0; padding: 0; width: 100%; max-width: none; border-top: 1px solid rgba(104, 46, 63, 0.14); }
-    .rx-card .symptom { margin: 0; padding: 14px 0; border-bottom: 1px solid rgba(104, 46, 63, 0.14); font-family: inherit; font-size: 19px; font-weight: 500; line-height: 1.55; color: var(--eggplant); }
-    .rx-card .symptom::before { content: none; display: none; }
-    @media (min-width: 1101px) {
-      .hero-copy:has(.hero-symptoms) .rx-card { grid-column: 2; grid-row: 1 / 5; align-self: center; max-width: none; margin: 0; }
-      .rx-card .symptom { font-size: 21px; padding-block: 18px; }
-    }
-    @media (max-width: 720px) {
-      .rx-card { max-width: none; margin: 0 0 24px; }
-      .rx-card .symptom { font-size: 18px; padding-block: 13px; }
-    }
-    .trust-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; }
-    .trust-chips span { display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; line-height: 1; color: var(--green); background: rgba(84, 142, 145, 0.10); border-radius: 999px; padding: 7px 11px; }
-    h1.pain-h1 { font-size: 44px; font-weight: 700; line-height: 1.3; letter-spacing: 0; color: var(--ink); margin: 0 0 28px; max-width: 16em; text-wrap: balance; }
-    h1.pain-h1 .h1-accent { display: block; color: var(--eggplant); }
-    @media (max-width: 1100px) { h1.pain-h1 { font-size: 38px; } }
-    @media (max-width: 720px) { .hero-copy:has(.hero-symptoms) h1.pain-h1 { font-size: 29px; line-height: 1.35; margin: 0 0 18px; max-width: none; } .trust-chips { margin-bottom: 14px; } }
-    @media (max-width: 360px) { .hero-copy:has(.hero-symptoms) h1.pain-h1 { font-size: 26px; } .trust-chips span { font-size: 11px; padding: 6px 9px; } }
-    .hero-copy:has(.hero-symptoms) { width: 100%; max-width: none; align-items: flex-start; text-align: start; }
-    .hero-copy:has(.hero-symptoms) h1.pain-h1, .hero-copy:has(.hero-symptoms) .hero-symptoms { margin-inline: 0; }
-    .hero-copy:has(.hero-symptoms) .stats { justify-content: flex-start; }
+    .hero-copy:has(.hero-symptoms) { width: 100%; max-width: none; align-items: stretch; text-align: start; }
+    .hero .hero-copy h1.pain-kicker { margin: 0 0 14px; font-size: 15px; letter-spacing: 0; font-weight: 700; line-height: 1.5; color: var(--green); max-width: none; }
+    .hero-copy .hero-symptoms { list-style: none; margin: 0; padding: 0; width: 100%; border-top: 1px solid rgba(104, 46, 63, 0.14); cursor: default; }
+    .hero-copy .hero-symptoms li { margin: 0; padding: 13px 0; border-bottom: 1px solid rgba(104, 46, 63, 0.14); font-size: 28px; font-weight: 800; line-height: 1.35; letter-spacing: -0.2px; color: var(--eggplant); }
+    .pain-res { display: flex; gap: 10px; align-items: flex-start; margin: 20px 0 24px; padding: 14px 16px; border-radius: 14px; background: rgba(84, 142, 145, 0.10); color: #2f5f62; font-size: 15px; font-weight: 600; line-height: 1.65; }
+    .pain-res svg { flex: none; width: 20px; height: 20px; margin-top: 3px; }
+    .hero-copy:has(.hero-symptoms) .stats { justify-content: flex-start; margin-top: 40px; }
     .hero-copy:has(.hero-symptoms) .stat { text-align: start; }
     .hero-copy:has(.hero-symptoms) .stat strong { justify-content: flex-start; }
     @media (min-width: 1101px) {
-      .hero:has(.hero-symptoms) { padding: 72px 0 96px; }
-      .hero-copy:has(.hero-symptoms) { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); grid-template-rows: auto auto auto 1fr; column-gap: 80px; align-items: start; }
-      .hero-copy:has(.hero-symptoms) .trust-chips { grid-column: 1; grid-row: 1; }
-      .hero-copy:has(.hero-symptoms) h1.pain-h1 { grid-column: 1; grid-row: 2; margin-bottom: 32px; }
-      .hero-copy:has(.hero-symptoms) .cta { grid-column: 1; grid-row: 3; justify-self: start; padding-inline-start: 32px; font-size: 16px; }
+      .hero:has(.hero-symptoms) { padding: 64px 0 88px; }
+      .hero-copy:has(.hero-symptoms) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 80px; align-items: start; }
+      .hero-copy:has(.hero-symptoms) .pain-kicker { grid-column: 1; grid-row: 1; }
+      .hero-copy:has(.hero-symptoms) .hero-symptoms { grid-column: 1; grid-row: 2; }
+      .hero-copy:has(.hero-symptoms) .hero-symptoms li { font-size: 34px; padding-block: 16px; }
+      .hero-copy:has(.hero-symptoms) .hero-side { grid-column: 2; grid-row: 1 / 3; align-self: center; display: flex; flex-direction: column; align-items: flex-start; }
+      .hero-copy:has(.hero-symptoms) .pain-res { margin-top: 0; font-size: 16px; padding: 18px 20px; }
+      .hero-copy:has(.hero-symptoms) .cta { padding-inline-start: 32px; font-size: 16px; }
       .hero-copy:has(.hero-symptoms) .cta i { width: 44px; height: 44px; }
-      .hero-copy:has(.hero-symptoms) .stats { grid-column: 1; grid-row: 4; margin-top: 48px; align-self: start; }
+    }
+    @media (min-width: 721px) and (max-width: 1100px) {
+      .hero-copy .hero-symptoms li { font-size: 30px; }
+      .hero-side { display: flex; flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 720px) {
-      .hero-copy:has(.hero-symptoms) { align-items: stretch; }
-      .hero-copy:has(.hero-symptoms) .stats { justify-content: space-between; }
+      .hero:has(.hero-symptoms) { padding: 16px 0 28px; }
+      .hero-copy .hero-symptoms li { font-size: 24px; padding-block: 12px; }
+      .pain-res { margin: 18px 0 22px; }
+      .hero-copy:has(.hero-symptoms) .stats { justify-content: space-between; margin-top: 24px; }
       .hero-copy:has(.hero-symptoms) .stat { text-align: center; }
       .hero-copy:has(.hero-symptoms) .stat strong { justify-content: center; }
     }
+    @media (max-width: 360px) { .hero-copy .hero-symptoms li { font-size: 22px; } }
     .stat strong .count-up { display: inline-block; margin: 0; font: inherit; color: inherit; letter-spacing: inherit; font-variant-numeric: tabular-nums; }
     .stat:has(.count-up) strong { gap: 2px; }
     .stat:has(.count-up) strong { font-size: 44px; color: var(--dark); letter-spacing: -0.5px; }
