@@ -532,7 +532,81 @@
       .car-nav { gap: 12px; }
       .car-nav .car-dots { gap: 5px; }
     }
-  </style>
+  
+    /* Daleela Care map */
+.care-orbit{container-type:inline-size;width:min(640px,100%);aspect-ratio:1;position:relative;margin:24px auto 32px;overflow:visible;background:radial-gradient(circle at 50% 50%, rgba(247,235,220,.72) 0 14%, rgba(247,235,220,.2) 34%, rgba(247,235,220,0) 62%)}
+.care-orbit-spokes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.care-orbit-spokes .ring{fill:none;stroke:#E7DDD3;stroke-width:1.25;stroke-dasharray:2 8}
+.care-orbit-spokes .spoke{stroke:#D4C4B4;stroke-width:1.75;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100}
+.care-orbit.is-inview .care-orbit-spokes .spoke{animation:spoke-draw .4s cubic-bezier(.22,1,.36,1) forwards;animation-delay:.95s}
+.care-orbit-spokes .flow{stroke:#548e91;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:14 86;opacity:0}
+.care-orbit.is-inview .care-orbit-spokes .flow{animation:spoke-flow 1.4s ease-in-out infinite;animation-delay:1.45s}
+.care-orbit-spokes .node{fill:#548e91;transform-box:fill-box;transform-origin:center;opacity:0}
+.care-orbit.is-inview .care-orbit-spokes .node{animation:node-pop .24s cubic-bezier(.16,1,.3,1) forwards;animation-delay:.95s}
+.care-orbit-center{box-sizing:border-box;position:absolute;left:50%;top:50%;width:34cqi;height:34cqi;min-width:124px;min-height:124px;max-width:188px;max-height:188px;border-radius:50%;background:#FFFFFF;color:#231F20;border:1.5px solid rgba(104,46,63,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center;padding:10px 14px;z-index:2;box-shadow:0 0 0 6px #FFFFFF,0 0 0 7.5px rgba(84,142,145,.55),0 16px 34px rgba(104,46,63,.14);opacity:0}
+.care-orbit.is-inview .care-orbit-center{animation:hub-in .4s cubic-bezier(.16,1,.3,1) both;animation-delay:1.2s}
+.care-orbit-center::before{content:"";position:absolute;inset:-16px;border-radius:50%;border:1.5px dashed rgba(84,142,145,.65);pointer-events:none}
+.care-orbit.is-inview .care-orbit-center::before{animation:hub-spin 22s linear infinite}
+.care-orbit-center::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px solid rgba(84,142,145,.28);pointer-events:none}
+.care-orbit.is-inview .care-orbit-center::after{animation:hub-pulse 3.4s ease-out infinite}
+.care-orbit-center svg{display:block;box-sizing:content-box;width:clamp(14px,3.2cqi,18px);height:clamp(14px,3.2cqi,18px);padding:6px;margin-bottom:5px;border-radius:50%;background:#682E3F;color:#FFFFFF;box-shadow:0 6px 14px rgba(104,46,63,.22)}
+.care-orbit-center b{font-size:clamp(11px,2.15cqi,13px);font-weight:700;line-height:1.25;color:#682E3F;max-width:8em}
+.care-orbit-center span{display:inline-block;margin-top:6px;padding:3px 8px;border-radius:999px;background:rgba(84,142,145,.16);font-size:clamp(8px,1.55cqi,11px);font-weight:600;color:#2f5f62;line-height:1.25;max-width:10em}
+.orbit-float{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible}
+.orbit-float img{position:absolute;width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:center 18%;border:2px solid rgba(247,235,220,.95);filter:grayscale(.8) sepia(.4) saturate(.35) brightness(1.14);opacity:0}
+.care-orbit.is-inview .orbit-float img{animation:avatar-drift 7s ease-in-out infinite alternate;opacity:.42}
+.orbit-float img:nth-child(1){left:-56px;top:6%}
+.orbit-float img:nth-child(2){left:-34px;top:24%}
+.orbit-float img:nth-child(3){left:-62px;top:46%}
+.orbit-float img:nth-child(4){left:-30px;top:68%}
+.orbit-float img:nth-child(5){left:-54px;top:86%}
+.orbit-float img:nth-child(6){right:-56px;top:8%}
+.orbit-float img:nth-child(7){right:-32px;top:28%}
+.orbit-float img:nth-child(8){right:-60px;top:50%}
+.orbit-float img:nth-child(9){right:-28px;top:70%}
+.orbit-float img:nth-child(10){right:-52px;top:88%}
+.care-orbit.is-inview .orbit-float img:nth-child(even){animation-direction:reverse}
+@media (max-width:900px){.orbit-float{display:none}}
+.care-orbit-item{box-sizing:border-box;position:absolute;left:50%;top:50%;width:22cqi;height:21cqi;transform:translate(-50%,-50%) rotate(calc(var(--i)*45deg)) translateY(-36.5cqi) rotate(calc(var(--i)*-45deg));z-index:1;font-size:clamp(8px,2.05cqi,12px);font-weight:600;color:#231F20;line-height:1.3;text-align:center}
+.care-orbit-card{box-sizing:border-box;height:100%;background:#FFFFFF;border:1px solid #F2EBE4;border-radius:18px;box-shadow:0 10px 26px rgba(35,31,32,.07);padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;opacity:0}
+.care-orbit.is-inview .care-orbit-card{animation:card-in .28s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.02s + var(--i)*.1s)}
+button.care-orbit-card{appearance:none;width:100%;margin:0;font:inherit;color:inherit;cursor:pointer}
+.care-orbit-card:focus-visible{outline:2px solid #682E3F;outline-offset:2px}
+.care-orbit-item:hover .care-orbit-card,.care-orbit-item:active .care-orbit-card,.care-orbit-item.is-open .care-orbit-card{box-shadow:0 16px 32px rgba(104,46,63,.16);border-color:#682E3F}
+.care-orbit-item.is-open{z-index:4}
+.care-orbit-item.is-open .care-orbit-icon{box-shadow:0 0 0 2px #682E3F}
+.care-orbit-detail{max-width:460px;margin:4px auto 0;border-radius:16px;background:#FFFFFF;border:1px solid #F2EBE4;box-shadow:0 10px 26px rgba(35,31,32,.07);padding:16px 20px;display:none;flex-direction:column;gap:4px;text-align:center}
+.care-orbit-detail.is-open{display:flex}
+.care-orbit-detail strong{font-size:15px;font-weight:700;color:#682E3F}
+.care-orbit-detail p{margin:0;color:#5C5658;font-size:13px;line-height:1.7}
+.care-orbit-icon{width:8.5cqi;height:8.5cqi;flex-shrink:0;border-radius:50%;background:#F7EBDC;display:flex;align-items:center;justify-content:center}
+.care-orbit-icon img{width:auto;height:68%;display:block}
+.care-orbit-label{display:flex;align-items:center;justify-content:center;width:100%;min-height:2.6em}
+.care-unsure{max-width:420px;margin:12px auto 0;border-radius:16px;background:#FFFFFF;border:1px dashed #D9CBBC;padding:20px 24px;display:flex;flex-direction:column;gap:6px;text-align:center}
+@keyframes spoke-draw{to{stroke-dashoffset:0}}
+@keyframes spoke-flow{0%{stroke-dashoffset:0;opacity:0}8%{opacity:1}58%{stroke-dashoffset:-100;opacity:1}72%,100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes node-pop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@keyframes hub-in{from{opacity:0;transform:translate(-50%,-50%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes hub-pulse{0%{transform:scale(.96);opacity:.35}100%{transform:scale(1.28);opacity:0}}
+@keyframes hub-spin{to{transform:rotate(360deg)}}
+@keyframes card-in{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes avatar-drift{from{transform:translateY(-10px)}to{transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){
+  
+  .care-orbit .care-orbit-spokes .spoke,.care-orbit .care-orbit-spokes .flow,.care-orbit .care-orbit-spokes .node,.care-orbit .care-orbit-center,.care-orbit .care-orbit-center::before,.care-orbit .care-orbit-center::after,.care-orbit .care-orbit-card,.care-orbit.is-inview .care-orbit-spokes .spoke,.care-orbit.is-inview .care-orbit-spokes .flow,.care-orbit.is-inview .care-orbit-spokes .node,.care-orbit.is-inview .care-orbit-center,.care-orbit.is-inview .care-orbit-center::before,.care-orbit.is-inview .care-orbit-center::after,.care-orbit.is-inview .care-orbit-card,.orbit-float,.orbit-float img,.care-orbit.is-inview .orbit-float,.care-orbit.is-inview .orbit-float img{animation:none}
+  .orbit-float{opacity:0}
+  .care-orbit .care-orbit-spokes .spoke{stroke-dashoffset:0}
+  .care-orbit .care-orbit-spokes .flow{opacity:0}
+  .care-orbit .care-orbit-spokes .node,.care-orbit .care-orbit-card{opacity:1;transform:none}
+  .care-orbit .care-orbit-center{opacity:1;transform:translate(-50%,-50%)}
+}
+
+    /* hero pain points: read as text, not as tappable rows */
+    .hero-copy .hero-symptoms, .hero-copy:has(.hero-symptoms) .hero-symptoms { border: 0; border-inline-start: 2px solid rgba(104, 46, 63, 0.22); border-radius: 0; background: none; padding: 2px 0; padding-inline-start: 18px; }
+    .hero-copy .symptom, .hero-copy:has(.hero-symptoms) .symptom { border-bottom: 0; padding: 5px 0; padding-inline-start: 0; -webkit-tap-highlight-color: transparent; }
+    .hero-copy .symptom::before { content: none; }
+    @media (min-width: 1101px) { .hero-copy:has(.hero-symptoms) .symptom { font-size: 19px; padding-block: 7px; } .hero-copy:has(.hero-symptoms) .hero-symptoms { padding-inline-start: 24px; } }
+</style>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -597,6 +671,72 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="care-map">
+      <div class="wrap">
+        <div class="center">
+          <h2>فريقك الطبي بيتابع معاكي إيه؟</h2>
+          <p class="sub">مش لازم تختاري تخصص. دكتورك مسؤول عن حالتك وبيستشير المتخصصين، وبيعالجوا أعراضك كلها.</p>
+        </div>
+      <div class="care-orbit" aria-label="الاستشارات مربوطة بحالتك">
+        <svg class="care-orbit-spokes" viewBox="0 0 560 560" aria-hidden="true">
+          <circle class="ring" cx="280" cy="280" r="116"></circle>
+          <g class="spokes">
+            <line class="spoke" pathLength="100" style="--d:0" x1="280" y1="134.4" x2="280" y2="192"></line>
+            <line class="spoke" pathLength="100" style="--d:1" x1="365.7" y1="194.3" x2="342.2" y2="217.8"></line>
+            <line class="spoke" pathLength="100" style="--d:2" x1="422.8" y1="280" x2="368" y2="280"></line>
+            <line class="spoke" pathLength="100" style="--d:3" x1="365.7" y1="365.7" x2="342.2" y2="342.2"></line>
+            <line class="spoke" pathLength="100" style="--d:4" x1="280" y1="425.6" x2="280" y2="368"></line>
+            <line class="spoke" pathLength="100" style="--d:5" x1="194.3" y1="365.7" x2="217.8" y2="342.2"></line>
+            <line class="spoke" pathLength="100" style="--d:6" x1="137.2" y1="280" x2="192" y2="280"></line>
+            <line class="spoke" pathLength="100" style="--d:7" x1="194.3" y1="194.3" x2="217.8" y2="217.8"></line>
+          </g>
+          <g class="flows">
+            <line class="flow" pathLength="100" style="--d:0" x1="280" y1="134.4" x2="280" y2="192"></line>
+            <line class="flow" pathLength="100" style="--d:1" x1="365.7" y1="194.3" x2="342.2" y2="217.8"></line>
+            <line class="flow" pathLength="100" style="--d:2" x1="422.8" y1="280" x2="368" y2="280"></line>
+            <line class="flow" pathLength="100" style="--d:3" x1="365.7" y1="365.7" x2="342.2" y2="342.2"></line>
+            <line class="flow" pathLength="100" style="--d:4" x1="280" y1="425.6" x2="280" y2="368"></line>
+            <line class="flow" pathLength="100" style="--d:5" x1="194.3" y1="365.7" x2="217.8" y2="342.2"></line>
+            <line class="flow" pathLength="100" style="--d:6" x1="137.2" y1="280" x2="192" y2="280"></line>
+            <line class="flow" pathLength="100" style="--d:7" x1="194.3" y1="194.3" x2="217.8" y2="217.8"></line>
+          </g>
+          <g>
+            <circle class="node" style="--d:0" cx="280" cy="134.4" r="4.5"></circle>
+            <circle class="node" style="--d:1" cx="365.7" cy="194.3" r="4.5"></circle>
+            <circle class="node" style="--d:2" cx="422.8" cy="280" r="4.5"></circle>
+            <circle class="node" style="--d:3" cx="365.7" cy="365.7" r="4.5"></circle>
+            <circle class="node" style="--d:4" cx="280" cy="425.6" r="4.5"></circle>
+            <circle class="node" style="--d:5" cx="194.3" cy="365.7" r="4.5"></circle>
+            <circle class="node" style="--d:6" cx="137.2" cy="280" r="4.5"></circle>
+            <circle class="node" style="--d:7" cx="194.3" cy="194.3" r="4.5"></circle>
+          </g>
+        </svg>
+        <div class="care-orbit-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5H4.5C3.94772 3.5 3.5 3.94772 3.5 4.5V8C3.5 11.0376 5.96243 13.5 9 13.5C12.0376 13.5 14.5 11.0376 14.5 8V4.5C14.5 3.94772 14.0523 3.5 13.5 3.5H11.5"/><path d="M18.5 15.5V16.75C18.5 19.3734 16.3734 21.5 13.75 21.5C11.1266 21.5 9 19.3734 9 16.75V13.5"/><path d="M11.5 2.5V4.5"/><path d="M6.5 2.5V4.5"/><path d="M20.5 13.5C20.5 14.6046 19.6046 15.5 18.5 15.5C17.3954 15.5 16.5 14.6046 16.5 13.5C16.5 12.3954 17.3954 11.5 18.5 11.5C19.6046 11.5 20.5 12.3954 20.5 13.5Z"/></svg>
+          <b>دكتورك</b>
+          <span>خطة علاج واحدة</span>
+        </div>
+        <div class="care-orbit-item" style="--i:0"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="الالتهابات والإفرازات" data-sub="نعرف السبب ونخلّصك من الالتهابات بأمان وبسرعة"><span class="care-orbit-icon"><img src="../assets/care-topics/infections.svg" alt=""></span><span class="care-orbit-label">الالتهابات<br>والإفرازات</span></button></div>
+        <div class="care-orbit-item" style="--i:1"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="حقن تخسيس الوزن" data-sub="نشوف إن كانت الحقن مناسبة ليكي، مع توجيه للاستخدام الآمن"><span class="care-orbit-icon"><img src="../assets/care-topics/weight.svg" alt=""></span><span class="care-orbit-label">حقن تخسيس<br>الوزن</span></button></div>
+        <div class="care-orbit-item" style="--i:2"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="وسائل منع الحمل" data-sub="نلاقي أنسب وسيلة ليكي من الطرق المتاحة"><span class="care-orbit-icon"><img src="../assets/care-topics/contraception.svg" alt=""></span><span class="care-orbit-label">وسائل منع<br>الحمل</span></button></div>
+        <div class="care-orbit-item" style="--i:3"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="الخصوبة والحمل" data-sub="نفهم دورتك وخصوبتك عشان نزود فرص الحمل"><span class="care-orbit-icon"><img src="../assets/care-topics/fertility.svg" alt=""></span><span class="care-orbit-label">الخصوبة<br>والحمل</span></button></div>
+        <div class="care-orbit-item" style="--i:4"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="مشاكل الشعر" data-sub="مساعدة متخصصة لكل مشاكل الشعر وفروة الرأس"><span class="care-orbit-icon"><img src="../assets/care-topics/hair.svg" alt=""></span><span class="care-orbit-label">مشاكل الشعر</span></button></div>
+        <div class="care-orbit-item" style="--i:5"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="مشاكل البشرة" data-sub="استشارة طبية لعلاج مشاكل بشرتك بشكل فعال"><span class="care-orbit-icon"><img src="../assets/care-topics/skin.svg" alt=""></span><span class="care-orbit-label">مشاكل البشرة</span></button></div>
+        <div class="care-orbit-item" style="--i:6"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="الصحة الجنسية" data-sub="استشارة متخصصة من غير أحكام لحياة جنسية أصح"><span class="care-orbit-icon"><img src="../assets/care-topics/sexual.svg" alt=""></span><span class="care-orbit-label">الصحة الجنسية</span></button></div>
+        <div class="care-orbit-item" style="--i:7"><button type="button" class="care-orbit-card" aria-expanded="false" data-title="صحة الدورة" data-sub="استشيري دكتورة في كل اللي يخص دورتك الشهرية"><span class="care-orbit-icon"><img src="../assets/care-topics/period.svg" alt=""></span><span class="care-orbit-label">صحة الدورة</span></button></div>
+      </div>
+      <div class="care-orbit-detail" aria-live="polite">
+        <strong></strong>
+        <p></p>
+      </div>
+      <div class="care-unsure">
+        <span style="font-weight: 600; font-size: 16px; color: #682E3F;">مش عارفة المشكلة إيه بالظبط؟</span>
+        <span style="color: #5C5658; font-size: 13px; line-height: 1.7;">ده طبيعي جدًا. دكتورك مسؤول عن حالتك، وبيستشير المتخصصين.</span>
+      </div>
+      <p style="margin: 0 auto; text-align: center; font-size: 13px; color: #8A8285; font-weight: 500;">دكتورك <span style="margin: 0 8px; color: #CFC7C9;">•</span> خصوصية وأمان <span style="margin: 0 8px; color: #CFC7C9;">•</span> خطة علاج واحدة واضحة</p>
       </div>
     </section>
 
@@ -888,5 +1028,26 @@
     });
   })();
   </script>
+<script>
+(function(){
+  document.querySelectorAll('.care-orbit').forEach(function(orbit){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { orbit.classList.add('is-inview'); }
+    else { var ob = new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting) return; orbit.classList.add('is-inview'); ob.disconnect(); }); }, {threshold:0.4}); ob.observe(orbit); }
+    var detail = orbit.parentElement.querySelector('.care-orbit-detail'); if (!detail) return;
+    var t = detail.querySelector('strong'), p = detail.querySelector('p');
+    orbit.addEventListener('click', function(e){
+      var btn = e.target.closest('.care-orbit-card'); if (!btn || !orbit.contains(btn)) return;
+      var item = btn.closest('.care-orbit-item'), wasOpen = item.classList.contains('is-open');
+      orbit.querySelectorAll('.care-orbit-item.is-open').forEach(function(el){ el.classList.remove('is-open'); var b = el.querySelector('.care-orbit-card'); if (b) b.setAttribute('aria-expanded','false'); });
+      if (wasOpen) { detail.classList.remove('is-open'); return; }
+      item.classList.add('is-open'); btn.setAttribute('aria-expanded','true');
+      t.textContent = btn.getAttribute('data-title') || ''; p.textContent = btn.getAttribute('data-sub') || '';
+      detail.classList.add('is-open');
+      if (typeof dataLayer !== 'undefined') dataLayer.push({event:'care_map_topic_open', topic: btn.getAttribute('data-title')});
+    });
+  });
+})();
+</script>
 </body>
 </html>
