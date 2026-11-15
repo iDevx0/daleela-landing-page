@@ -215,7 +215,7 @@ html,body{overflow-x:clip;max-width:100%}
   .hero-layout{flex-direction:column !important;align-items:center !important;gap:16px !important;padding:24px 20px 28px !important}
   .hero-copy-col{display:contents !important}
   .hero-lead{display:block !important;order:0;margin:0 !important;text-align:center;font-size:32px !important;line-height:1.35 !important;color:#231F20}
-  .hero-copy{display:none !important}
+  .hero-copy{display:block !important;order:0;margin:0 !important;text-align:center;font-size:15px !important;line-height:1.8 !important}
   .hero-cta{order:1;display:flex;justify-content:center;margin:0}
   #top .ph-side{display:none !important}
   #top .ph-main{width:200px !important;height:380px !important;margin:0 !important;font-size:11px !important;border-radius:28px !important;flex:0 0 auto}
@@ -409,12 +409,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="top" style="background: #F7EBDC;">
     <div class="hero-layout" style="max-width: 1220px; margin: 0 auto; padding: 64px 24px 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
       <div class="hero-copy-col" style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
-        <span class="soon-badge"><i aria-hidden="true"></i>قريبًا</span>
-        <h1 class="hero-lead" style="margin: 0; font-size: 40px; line-height: 1.3; font-weight: 700; color: #231F20;">اشرحي أعراضك، وفريقك الطبي يتكفّل بالباقي</h1>
-        <p class="hero-copy" style="margin: 0; font-size: 16px; line-height: 1.8; color: #5C5658; max-width: 560px;">دليلة كير جاية قريب: دكتور رعاية عامة مسؤول عن حالتك، ويستشير فريق المتخصصين في طب الأسرة والنسائية والجلدية والتغذية والغدد وتخصصات ثانية. مع بعض، يعالجون الصورة كاملة، مو عرَض واحد كل مرة.</p>
+        <span class="soon-badge"><i aria-hidden="true"></i>قريبًا مع دليلة</span>
+        <h1 class="hero-lead" style="margin: 0; font-size: 40px; line-height: 1.3; font-weight: 700; color: #231F20;">رعاية تبدأ بفهمك، وتكمل معك كل يوم</h1>
+        <p class="hero-copy" style="margin: 0; font-size: 16px; line-height: 1.8; color: #5C5658; max-width: 560px;">مع دليلة كير، يبدأ فريقك الطبي بالتعرّف على أعراضك وتاريخك الصحي. بعدها يوضح لك الخطوات المناسبة لحالتك، ويتابع معك يوميًا بالتعاون مع المختصين.</p>
         <div class="hero-cta">
           <a href="#waitlist" data-cta="hero" style="text-decoration: none; background: #682E3F; color: #FFFFFF; padding: 8px 24px 8px 8px; border-radius: 999px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;">
-            <span>سجّلي في قائمة الانتظار</span>
+            <span>انضمي لقائمة الانتظار</span>
             <span style="width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #231F20; display: inline-flex; align-items: center; justify-content: center;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg></span>
           </a>
         </div>
@@ -444,9 +444,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="waitlist" class="wl-section" aria-labelledby="wl-title">
     <div class="wl-wrap">
       <div class="wl-copy">
-        <span class="soon-badge"><i aria-hidden="true"></i>قريبًا</span>
         <h2 id="wl-title">كوني من أوائل اللي يجربون دليلة كير</h2>
-        <p>اتركي رقم جوالك أو إيميلك، وبنعلمك أول ما تنطلق دليلة كير.</p>
         <ul class="wl-perks">
           <li><span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>بنعلمك أول ما نطلق</li>
           <li><span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>التسجيل مجاني وبدون أي التزام</li>
@@ -457,9 +455,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="wl-card">
         <form id="wl-form" class="wl-form" novalidate>
           <div class="wl-head">
-            <strong>سجّلي في قائمة الانتظار</strong>
-            <span>تاخذ منك أقل من دقيقة</span>
-          </div>
+            <strong>سجّلي في قائمة الانتظار</strong>          </div>
 
           <div class="wl-field">
             <label for="wl-contact">رقم جوالك أو إيميلك</label>
