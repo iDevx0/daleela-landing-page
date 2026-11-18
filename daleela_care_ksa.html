@@ -35,7 +35,7 @@ window.TRACK = {
   sticky: 'care_lp_sticky_bar',
   waitlist: 'daleela_care',
   // Paste the Google Apps Script web-app URL here (see waitlist-apps-script.gs) so every signup is saved to a Google Sheet.
-  waitlistEndpoint: ''
+  waitlistEndpoint: 'https://script.google.com/macros/s/AKfycbwiSqKdCDYyZADcUll5ipavoNEnZztke6aC0_92q4SQ4qw6h-aXqVTqWhHST0N8gBCW/exec'
 };
 window.dataLayer = window.dataLayer || [];
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -1058,6 +1058,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var submitBtn = form.querySelector('.wl-submit');
         var started = false;
         var STORE_KEY = 'daleela_care_waitlist';
+        var WL_LOADED_AT = Date.now();
         var HINT_DEFAULT = hintEl.textContent;
         var ICON_DEFAULT = iconEl.innerHTML;
         var ICON_PHONE = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>';
@@ -1237,7 +1238,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             page_url: window.location.href.split('#')[0],
             referrer: doc.referrer || '',
             user_agent: navigator.userAgent,
-            submitted_at: new Date().toISOString()
+            submitted_at: new Date().toISOString(),
+            elapsed_ms: Date.now() - WL_LOADED_AT,
+            company: ''
           };
           for (var k in params) record[k] = params[k];
           record.masked = phone ? maskPhone(phone) : maskEmail(email);
